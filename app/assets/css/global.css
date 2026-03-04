@@ -1,0 +1,31 @@
+body {
+  padding: 0 !important;
+  background-color: black;
+  color: white;
+}
+
+.iconfont {
+  line-height: calc(1 / 1) !important;
+}
+
+.ellipsis-single-line {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-multiline-2 {
+  display: -webkit-box;            /* 必须 */
+  -webkit-box-orient: vertical;    /* 必须 */
+  -webkit-line-clamp: 2;           /* 重点：限制显示的行数，比如 3 行 */
+  overflow: hidden;                /* 必须：超出隐藏 */
+  text-overflow: ellipsis;         /* 必须：超出部分显示省略号 */
+}
+
+.ellipsis-multiline-3 {
+  display: -webkit-box;            /* 必须 */
+  -webkit-box-orient: vertical;    /* 必须 */
+  -webkit-line-clamp: 3;           /* 重点：限制显示的行数，比如 3 行 */
+  overflow: hidden;                /* 必须：超出隐藏 */
+  text-overflow: ellipsis;         /* 必须：超出部分显示省略号 */
+}

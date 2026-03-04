@@ -1,0 +1,44 @@
+{
+  "id": "5060299",
+  "name": "251107-web-comp",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "167214",
+      "name": "totop",
+      "font_class": "totop",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "712408",
+      "name": "right",
+      "font_class": "right",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "1115023",
+      "name": "play",
+      "font_class": "play",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "10333707",
+      "name": "menu",
+      "font_class": "menu",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "40051829",
+      "name": "search",
+      "font_class": "search",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    }
+  ]
+}

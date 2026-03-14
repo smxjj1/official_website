@@ -65,37 +65,43 @@
         <h2 class="features-title">Why Choose Waja Baby</h2>
         <div class="features-grid">
           <div class="feature">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
+            <div class="feature-header">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3 class="feature-title">Safety First</h3>
             </div>
-            <h3 class="feature-title">Safety First</h3>
             <p class="feature-text">All products are BPA-free, non-toxic, and tested to meet international safety
               standards.</p>
           </div>
           <div class="feature">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path
-                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
+            <div class="feature-header">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                </svg>
+              </div>
+              <h3 class="feature-title">Thoughtful Design</h3>
             </div>
-            <h3 class="feature-title">Thoughtful Design</h3>
             <p class="feature-text">Every product is designed with real parents and babies in mind, ensuring comfort and
               usability.</p>
           </div>
           <div class="feature">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
+            <div class="feature-header">
+              <div class="feature-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <h3 class="feature-title">Built to Last</h3>
             </div>
-            <h3 class="feature-title">Built to Last</h3>
             <p class="feature-text">Durable materials and quality construction mean our products grow with your family.
             </p>
           </div>
@@ -527,17 +533,25 @@ const getGridStyle = (index: number): string => {
   padding: @spacing-lg;
 }
 
+.feature-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: @spacing-sm;
+  margin-bottom: @spacing-sm;
+}
+
 .feature-icon {
   color: white;
-  margin-bottom: @spacing-md;
   opacity: 0.9;
+  flex-shrink: 0;
 }
 
 .feature-title {
   font-size: 1.25rem;
   font-weight: 600;
   color: white;
-  margin: 0 0 @spacing-sm;
+  margin: 0;
 }
 
 .feature-text {

@@ -289,7 +289,7 @@ const getGridStyle = (index: number): string => {
 
 .section-2,
 .section-4 {
-  background: @background-color;
+  background: @devide-background;
 }
 
 .section-inner {

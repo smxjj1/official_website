@@ -166,7 +166,7 @@ onUnmounted(() => {
 @import '~/assets/css/variables.less';
 
 .benefits-carousel {
-  background: @card-background;
+  background: @devide-background;
   padding: 100px 0;
   overflow: hidden;
 
@@ -365,8 +365,8 @@ onUnmounted(() => {
   background: @background-color;
   border: 1px solid @border-color;
   color: @text-color;
-  width: 48px;
-  height: 48px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;

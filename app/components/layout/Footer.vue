@@ -42,7 +42,7 @@ const currentYear = new Date().getFullYear()
 @import '~/assets/css/variables.less';
 
 .footer {
-  background: @primary-color;
+  background: #000000;
   color: @card-background;
   margin-top: auto;
 }

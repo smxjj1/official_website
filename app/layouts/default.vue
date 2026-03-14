@@ -1,17 +1,27 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <div class="default-layout">
-    <FrameHead class="h-12" />
-    <main class="container mx-auto min-h-[calc(100vh-96px)] py-4 md:py-6 lg:py-8">
+  <div class="layout">
+    <LayoutHeader />
+    <main class="main">
       <slot />
     </main>
-    <FrameFoot class="h-12" />
+    <LayoutFooter />
   </div>
 </template>
 
-<style scoped>
+<script setup lang="ts">
+</script>
 
+<style lang="less" scoped>
+@import '~/assets/css/variables.less';
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1;
+  padding-top: 60px;
+}
 </style>

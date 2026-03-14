@@ -1,21 +1,12 @@
 <script setup lang="ts">
-// 这里实现动态的主题色和Title以及Favicon
+// 全局默认设置 - 仅 favicon 和基础配置
+// SEO 设置由各页面通过 useSeo composable 自行管理
 useHead({
-  title: 'Nuxt4 Template',
-  meta: [{ name: 'description', content: 'This is my Nuxt4 application' }],
   link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-  // 这里style属性的优先级高于css中的，这里定义的主题色优先级高于/assets/css/theme.css中的样式
-  // style: [
-  //   {
-  //     innerHTML: `:root {\n
-  //                     --color-brand: ${brandColor.value} !important;\n
-  //                     @media (prefers-color-scheme: dark) {\n
-  //                       --color-brand: #3B82F6;\n
-  //                       }\n
-  //                     }`,
-  //   },
-  // ],
-});
+  htmlAttrs: {
+    lang: 'en',
+  },
+})
 </script>
 
 <template>

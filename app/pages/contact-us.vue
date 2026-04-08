@@ -169,7 +169,7 @@
               </div>
               <div class="info-content">
                 <h4>Email</h4>
-                <p>info@wajababy.com</p>
+                <p>zoey@yjgm.net</p>
               </div>
             </div>
 
@@ -180,8 +180,8 @@
                 </svg>
               </div>
               <div class="info-content">
-                <h4>Phone</h4>
-                <p>+86 139 2527 8649</p>
+                <h4>WhatsApp</h4>
+                <p>+86 153 7212 2988</p>
               </div>
             </div>
 

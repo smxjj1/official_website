@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "web": "nuxt start",
+    "start": "nuxt start",
     "build": "nuxt build --dotenv .env.production",
     "build:local": "nuxt build --dotenv .env.local",
     "build:dev": "nuxt build --dotenv .env.development",

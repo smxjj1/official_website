@@ -12,7 +12,7 @@ export function useSeo(options: SeoOptions) {
   const route = useRoute()
   const config = useRuntimeConfig()
 
-  const siteName = config.public.siteName || 'Waja Baby'
+  const siteName = config.public.siteName || 'Oya Plastic Factory'
   const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
 
   const canonicalUrl = options.canonicalPath
@@ -45,7 +45,7 @@ export function useProductCategorySeo(category: ProductCategory) {
   const route = useRoute()
   const config = useRuntimeConfig()
 
-  const siteName = config.public.siteName || 'Waja Baby'
+  const siteName = config.public.siteName || 'Oya Plastic Factory'
   const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
 
   const canonicalUrl = `${siteUrl}${route.path}`
@@ -88,12 +88,12 @@ export function useProductCategorySeo(category: ProductCategory) {
 
 export function useHomeSeo() {
   const config = useRuntimeConfig()
-  const siteName = config.public.siteName || 'Waja Baby'
+  const siteName = config.public.siteName || 'Oya Plastic Factory'
   const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
 
   useSeo({
     title: 'Premium Baby Products | Feeding, Bath & More',
-    description: 'Discover Waja Baby\'s collection of safe, high-quality baby products. Feeding bottles, water cups, tableware, bath essentials, and accessories for your little one.',
+    description: 'Discover Oya Plastic Factory\'s collection of safe, high-quality baby products. Feeding bottles, water cups, tableware, bath essentials, and accessories for your little one.',
     canonicalPath: '/',
   })
 
@@ -119,7 +119,7 @@ export function useHomeSeo() {
 export function useProductsPageSeo() {
   useSeo({
     title: 'Our Products | Baby Feeding & Care Essentials',
-    description: 'Explore Waja Baby\'s complete range of baby products. Feeding bottles, water cups, tableware, bath products, and accessories designed for your baby\'s safety and comfort.',
+    description: 'Explore Oya Plastic Factory\'s complete range of baby products. Feeding bottles, water cups, tableware, bath products, and accessories designed for your baby\'s safety and comfort.',
     canonicalPath: '/products',
   })
 }

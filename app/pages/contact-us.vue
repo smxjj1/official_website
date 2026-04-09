@@ -235,8 +235,8 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'Contact Us | Waja Baby',
-  description: 'Get in touch with Waja Baby for premium baby products. Request a quote and we will respond within 24 hours.',
+  title: 'Contact Us | Oya Plastic Factory',
+  description: 'Get in touch with Oya Plastic Factory for premium baby products. Request a quote and we will respond within 24 hours.',
 })
 
 const categories = getAllCategories()

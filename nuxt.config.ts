@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: 'https://yourdomain.com',
-      siteName: 'Waja Baby',
+      siteName: 'Oya Plastic Factory',
     },
   },
   eslint: {

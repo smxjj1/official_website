@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header-container">
       <NuxtLink to="/" class="logo">
-        <span class="logo-text">Waja Baby</span>
+        <span class="logo-text">Oya Plastic Factory</span>
       </NuxtLink>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
         <NuxtLink

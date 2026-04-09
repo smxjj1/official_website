@@ -62,7 +62,7 @@
     <!-- Features Section -->
     <section class="features-section">
       <div class="features-container">
-        <h2 class="features-title">Why Choose Waja Baby</h2>
+        <h2 class="features-title">Why Choose Oya Plastic Factory</h2>
         <div class="features-grid">
           <div class="feature">
             <div class="feature-header">

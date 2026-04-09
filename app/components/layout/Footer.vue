@@ -3,7 +3,7 @@
     <div class="footer-container">
       <div class="footer-content">
         <div class="footer-brand">
-          <span class="brand-name">Waja Baby</span>
+          <span class="brand-name">Oya Plastic Factory</span>
           <p class="brand-tagline">Quality baby products for happy families</p>
         </div>
         <div class="footer-links">
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} Waja Baby. All rights reserved.</p>
+        <p>&copy; {{ currentYear }} Oya Plastic Factory. All rights reserved.</p>
       </div>
     </div>
   </footer>

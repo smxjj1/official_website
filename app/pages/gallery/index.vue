@@ -174,7 +174,7 @@ definePageMeta({
 })
 
 useSeo({
-  title: 'Product Gallery | Waja Baby',
+  title: 'Product Gallery | Oya Plastic Factory',
   description: 'Browse our complete collection of baby products organized by category',
 })
 

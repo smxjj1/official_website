@@ -5,6 +5,9 @@
         <span class="logo-text">Oya Plastic Factory</span>
       </NuxtLink>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
+        <NuxtLink to="/product" class="nav-link" @click="closeMenu">
+          Products
+        </NuxtLink>
         <NuxtLink
           v-for="category in categories"
           :key="category.slug"

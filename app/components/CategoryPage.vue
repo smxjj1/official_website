@@ -6,7 +6,7 @@
         <h1 class="hero-title">{{ pageTitle }}</h1>
         <p class="hero-subtitle">{{ pageDescription }}</p>
         <div class="hero-stats">
-          <span class="stat">{{ totalProducts }} Products</span>
+          <span class="stat">{{ $t('products.productCount', { count: totalProducts }) }}</span>
         </div>
       </div>
     </section>
@@ -43,7 +43,7 @@
               <!-- Subcategory header -->
               <div v-if="group.subcategory" class="subcategory-header">
                 <h3 class="subcategory-title">{{ group.subcategory }}</h3>
-                <span class="subcategory-count">{{ group.products.length }} items</span>
+                <span class="subcategory-count">{{ $t('products.itemsCount', { count: group.products.length }) }}</span>
               </div>
 
               <!-- Product Grid -->
@@ -87,8 +87,8 @@
                 <polyline points="21 15 16 10 5 21"/>
               </svg>
             </div>
-            <h3>Coming Soon</h3>
-            <p>Products in this category will be added soon. Please check back later.</p>
+            <h3>{{ $t('products.comingSoon') }}</h3>
+            <p>{{ $t('products.comingSoonText') }}</p>
           </div>
         </div>
       </div>
@@ -148,64 +148,64 @@
               <!-- Product Info -->
               <div class="detail-info">
                 <h2 class="detail-name">{{ currentProduct?.name }}</h2>
-                <p class="detail-item-no">Item No: {{ currentProduct?.itemNo }}</p>
+                <p class="detail-item-no">{{ $t('products.itemNo', { itemNo: currentProduct?.itemNo }) }}</p>
 
                 <div v-if="currentProduct?.description" class="detail-desc">
-                  <h4>Description</h4>
+                  <h4>{{ $t('products.description') }}</h4>
                   <p>{{ currentProduct.description }}</p>
                 </div>
 
                 <!-- Specs Table -->
                 <div class="detail-specs">
-                  <h4>Specifications</h4>
+                  <h4>{{ $t('products.specifications') }}</h4>
                   <table class="specs-table">
                     <tbody>
                       <tr v-if="currentProduct?.capacity">
-                        <td>Capacity</td>
+                        <td>{{ $t('products.capacity') }}</td>
                         <td>{{ currentProduct.capacity }}</td>
                       </tr>
                       <tr v-if="currentProduct?.material">
-                        <td>Material</td>
+                        <td>{{ $t('products.material') }}</td>
                         <td>{{ currentProduct.material }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.pcsPerCtn">
-                        <td>Pcs/Carton</td>
+                        <td>{{ $t('products.pcsPerCtn') }}</td>
                         <td>{{ currentProduct.specs.pcsPerCtn }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.ctnSize">
-                        <td>Carton Size (cm)</td>
+                        <td>{{ $t('products.ctnSize') }}</td>
                         <td>{{ currentProduct.specs.ctnSize }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.nw">
-                        <td>N.W. (kgs)</td>
+                        <td>{{ $t('products.nw') }}</td>
                         <td>{{ currentProduct.specs.nw }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.gw">
-                        <td>G.W. (kgs)</td>
+                        <td>{{ $t('products.gw') }}</td>
                         <td>{{ currentProduct.specs.gw }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.pcs20gp">
-                        <td>Pcs/20GP</td>
+                        <td>{{ $t('products.pcs20gp') }}</td>
                         <td>{{ currentProduct.specs.pcs20gp.toLocaleString() }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.pcs40hq">
-                        <td>Pcs/40HQ</td>
+                        <td>{{ $t('products.pcs40hq') }}</td>
                         <td>{{ currentProduct.specs.pcs40hq.toLocaleString() }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.moq">
-                        <td>MOQ</td>
+                        <td>{{ $t('products.moq') }}</td>
                         <td>{{ currentProduct.specs.moq.toLocaleString() }}</td>
                       </tr>
                       <tr v-if="currentProduct?.specs.hsCode">
-                        <td>H.S. Code</td>
+                        <td>{{ $t('products.hsCode') }}</td>
                         <td>{{ currentProduct.specs.hsCode }}</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
 
-                <NuxtLink to="/contact-us" class="detail-cta">
-                  Contact for Inquiry
+                <NuxtLink :to="getLocalePath('/contact-us')" class="detail-cta">
+                  {{ $t('products.contactInquiry') }}
                 </NuxtLink>
               </div>
             </div>
@@ -228,6 +228,8 @@ const props = defineProps<{
 definePageMeta({
   layout: 'default',
 })
+
+const { $t, getLocalePath } = useI18n()
 
 interface ProductSpecs {
   pcsPerCtn: number | null
@@ -688,6 +690,48 @@ onUnmounted(() => {
   }
 }
 
+// Back to Top Button
+.back-to-top {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 48px;
+  height: 48px;
+  background: @primary-color;
+  color: @card-background;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all @transition-fast;
+  z-index: 900;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: @breakpoint-tablet) {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -908,47 +952,5 @@ onUnmounted(() => {
   .modal-content {
     transform: scale(0.95);
   }
-}
-
-// Back to Top Button
-.back-to-top {
-  position: fixed;
-  bottom: 40px;
-  right: 40px;
-  width: 48px;
-  height: 48px;
-  background: @primary-color;
-  color: @card-background;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: all @transition-fast;
-  z-index: 900;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: @breakpoint-tablet) {
-    bottom: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-  }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

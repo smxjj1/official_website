@@ -1,0 +1,165 @@
+{
+  "siteName": "Oya Plastic Factory",
+  "nav": {
+    "products": "產品中心",
+    "about": "關於我們",
+    "feedingBottles": "奶瓶",
+    "sippyCups": "學飲杯",
+    "tableware": "餐具",
+    "bathPotty": "洗浴盆",
+    "milkPowderBox": "奶粉盒",
+    "accessories": "配件",
+    "contact": "聯繫我們"
+  },
+  "home": {
+    "heroTitle": "優質嬰童產品 成就幸福家庭",
+    "heroSubtitle": "安全、精心設計的產品，陪伴寶寶成長，讓育兒更輕鬆。",
+    "exploreProducts": "瀏覽產品",
+    "viewGallery": "查看圖冊",
+    "products": "款產品",
+    "collections": "個系列",
+    "viewAll": "查看全部",
+    "whyChoose": "選擇歐亞塑料的理由",
+    "safetyFirst": "安全第一",
+    "safetyFirstText": "所有產品均不含BPA、無毒害，通過國際安全標準檢測。",
+    "thoughtfulDesign": "精心設計",
+    "thoughtfulDesignText": "每款產品都從父母和寶寶的實際需求出發，確保舒適與實用。",
+    "builtToLast": "經久耐用",
+    "builtToLastText": "優質材料與精湛工藝，讓我們的產品陪伴您的家庭成長。",
+    "readyToExplore": "準備探索了嗎？",
+    "readyToExploreText": "瀏覽我們的完整產品系列，為您的寶寶找到最合適的產品。",
+    "viewAllProducts": "查看全部產品"
+  },
+  "about": {
+    "title": "關於台州市黃岩歐亞塑料制品廠",
+    "subtitle": "20餘年嬰兒餵養解決方案的專業製造商",
+    "intro": "台州市黃岩歐亞塑料制品廠成立於{year}年，是一家專業生產嬰兒奶瓶、學飲杯、餐具及相關嬰童用品的製造商。憑藉超過{experience}年的行業經驗，我們已精通注塑工藝，尤其擅長{materials}材質產品的開發。我們對質量與創新的承諾，使我們成為全球品牌信賴的合作夥伴。",
+    "materials": "PP、PPSU、Tritan和矽膠",
+    "strengthsTitle": "我們的優勢",
+    "strengths": {
+      "experience": {
+        "number": "20+",
+        "title": "年行業經驗",
+        "desc": "自2001年起，專注嬰童產品質量"
+      },
+      "factory": {
+        "number": "20,000",
+        "title": "平方米廠房",
+        "desc": "現代化生產基地"
+      },
+      "global": {
+        "number": "60+",
+        "title": "出口國家",
+        "desc": "遍布全球的出口網絡"
+      }
+    },
+    "manufacturingTitle": "自主製造與品質保障",
+    "manufacturingText": "所有生產與包裝流程均在廠內完成，確保為客戶提供高品質產品。一體化生產方式使我們能夠在每個環節實施嚴格的質量管控——從原材料檢測到最終成品包裝。",
+    "oem": "為知名品牌提供代工製造服務",
+    "odm": "提供定製產品設計與開發服務",
+    "certificationsTitle": "認證資質與安全保障",
+    "certificationsIntro": "我們的產品符合國際質量標準，以下認證彰顯我們對卓越品質的承諾。",
+    "iso": "質量管理體系認證",
+    "bsci": "商業社會合規倡議認證",
+    "ctaTitle": "歡迎蒞臨參觀",
+    "ctaText": "我們誠摯歡迎客戶親臨工廠實地考察與驗廠。親自體驗我們的生產實力，了解為何我們是嬰童產品值得信賴的選擇。",
+    "ctaClosing": "期待成為您的合作夥伴！",
+    "contactButton": "聯繫我們"
+  },
+  "products": {
+    "feedingBottles": {
+      "title": "嬰兒奶瓶",
+      "description": "專為安全舒適餵養設計的高品質奶瓶。採用BPA-free材質，配備防脹氣技術，呵護寶寶健康。"
+    },
+    "sippyCups": {
+      "title": "學飲杯",
+      "description": "安全耐用的學飲杯，助力寶寶學習自主飲水。多種材質與款式可選。"
+    },
+    "tableware": {
+      "title": "嬰童餐具",
+      "description": "兒童友好型餐盤、碗勺套裝，打造安全愉悅的用餐體驗。"
+    },
+    "bathPotty": {
+      "title": "洗浴盆",
+      "description": "舒適安全的嬰兒洗浴與如廁訓練產品。"
+    },
+    "milkPowderContainer": {
+      "title": "奶粉盒",
+      "description": "便攜式奶粉盒與配方奶粉分裝器，方便外出餵養。多層設計，精准分裝。"
+    },
+    "accessories": {
+      "title": "其他配件",
+      "description": "嬰童護理必備配件，包括牙膠、安撫奶嘴、奶瓶刷、吸奶器等，完善您的嬰童護理套裝。"
+    },
+    "productCount": "{count} 件產品",
+    "itemsCount": "{count} 件",
+    "itemNo": "貨號：{itemNo}",
+    "description": "產品說明",
+    "specifications": "規格參數",
+    "capacity": "容量",
+    "material": "材質",
+    "pcsPerCtn": "裝箱數",
+    "ctnSize": "外箱尺寸 (cm)",
+    "nw": "淨重 (kg)",
+    "gw": "毛重 (kg)",
+    "pcs20gp": "20GP櫃裝載量",
+    "pcs40hq": "40HQ櫃裝載量",
+    "moq": "起訂量",
+    "hsCode": "海關編碼",
+    "contactInquiry": "諮詢產品",
+    "comingSoon": "敬請期待",
+    "comingSoonText": "該品類產品即將上線，請稍後再來查看。"
+  },
+  "contact": {
+    "heroTitle": "聯繫我們",
+    "heroSubtitle": "我們是一家專業的優質嬰童產品製造商，為您提供一站式商務解決方案。提交詢價，我們將在24小時內回覆。",
+    "formTitle": "詢價表單",
+    "formSubtitle": "填寫下方表單，我們的團隊將盡快回覆您。",
+    "name": "姓名",
+    "namePlaceholder": "您的姓名",
+    "nameRequired": "姓名為必填項",
+    "email": "郵箱",
+    "emailPlaceholder": "your@email.com",
+    "emailRequired": "郵箱為必填項",
+    "emailInvalid": "請輸入有效的郵箱地址",
+    "phone": "電話",
+    "phonePlaceholder": "+86 138 xxxx xxxx",
+    "company": "公司",
+    "companyPlaceholder": "您的公司名稱",
+    "address": "地址",
+    "addressPlaceholder": "您的地址",
+    "subject": "主題",
+    "subjectPlaceholder": "選擇主題",
+    "subjectQuote": "詢價",
+    "subjectCustomization": "產品定制",
+    "subjectPartnership": "商務合作",
+    "subjectSupport": "客戶支持",
+    "subjectOther": "其他",
+    "products": "所需產品",
+    "productsPlaceholder": "例如：奶瓶、學飲杯等",
+    "message": "留言",
+    "messagePlaceholder": "請描述您的需求...",
+    "messageRequired": "留言為必填項",
+    "sendButton": "發送消息",
+    "sendingButton": "發送中...",
+    "successMessage": "感謝您的留言！我們將在24小時內回覆您。",
+    "errorMessage": "發送失敗，請重試。",
+    "infoTitle": "聯繫方式",
+    "addressLabel": "地址",
+    "addressValue": "中國廣東省深圳市龍崗區南灣街道南新路",
+    "emailLabel": "郵箱",
+    "emailValue": "zoey@yjgm.net",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "+86 153 7212 2988",
+    "hoursLabel": "工作時間",
+    "hoursValue": "週一至週五：9:00 - 18:00，週六：9:00 - 12:00",
+    "missionTitle": "我們的使命",
+    "missionText": "我們致力於打造高品質、安全、創新的嬰童產品，服務全球家庭。我們對卓越品質的追求，促使我們交付符合國際最高安全標準的產品。",
+    "productsLinkTitle": "我們的產品"
+  },
+  "language": {
+    "en": "EN",
+    "zhCN": "簡",
+    "zhTW": "繁"
+  }
+}

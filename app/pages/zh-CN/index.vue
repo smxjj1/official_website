@@ -197,9 +197,6 @@ const getGridStyle = (index: number): string => {
   background: @background-color;
 }
 
-// ============================================
-// Hero Section
-// ============================================
 .hero {
   background: linear-gradient(135deg, @primary-color 0%, lighten(@primary-color, 15%) 100%);
   padding: 120px @spacing-md;
@@ -279,9 +276,6 @@ const getGridStyle = (index: number): string => {
   }
 }
 
-// ============================================
-// Category Sections
-// ============================================
 .category-section {
   padding: 100px 0;
   min-height: 80vh;
@@ -294,7 +288,6 @@ const getGridStyle = (index: number): string => {
   }
 }
 
-// Alternating backgrounds
 .section-1,
 .section-3,
 .section-5 {
@@ -321,24 +314,17 @@ const getGridStyle = (index: number): string => {
   }
 }
 
-// Layout variations
-.layout-left {
-  .section-inner {
-    flex-direction: row;
-  }
+.layout-left .section-inner {
+  flex-direction: row;
 }
 
-.layout-right {
-  .section-inner {
-    flex-direction: row-reverse;
-  }
+.layout-right .section-inner {
+  flex-direction: row-reverse;
 }
 
-.layout-center {
-  .section-inner {
-    flex-direction: column;
-    text-align: center;
-  }
+.layout-center .section-inner {
+  flex-direction: column;
+  text-align: center;
 
   .image-side {
     width: 100%;
@@ -490,9 +476,6 @@ const getGridStyle = (index: number): string => {
   }
 }
 
-// ============================================
-// Features Section
-// ============================================
 .features-section {
   padding: 100px 0;
   background: @primary-color;
@@ -569,9 +552,6 @@ const getGridStyle = (index: number): string => {
   margin: 0;
 }
 
-// ============================================
-// Final CTA
-// ============================================
 .final-cta {
   padding: 100px 0;
   background: @card-background;

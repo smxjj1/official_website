@@ -169,8 +169,8 @@ definePageMeta({
 const { $t, getLocalePath } = useI18n()
 
 useSeo({
-  title: 'About Us | Oya Plastic Factory',
-  description: 'Taizhou City Huangyan Oya Plastic Factory - Over 20 years of excellence in baby feeding solutions. ISO 9001 and BSCI certified manufacturer.',
+  title: '关于我们 | Oya Plastic Factory',
+  description: '台州市黄岩欧亚塑料制品厂 - 20余年婴儿喂养解决方案的专业制造商。ISO 9001和BSCI认证制造商。',
 })
 
 // Lightbox state

@@ -1,0 +1,165 @@
+{
+  "siteName": "Oya Plastic Factory",
+  "nav": {
+    "products": "Products",
+    "about": "About Us",
+    "feedingBottles": "Feeding Bottles",
+    "sippyCups": "Sippy Cups",
+    "tableware": "Tableware",
+    "bathPotty": "Bath & Potty",
+    "milkPowderBox": "Milk Powder Box",
+    "accessories": "Accessories",
+    "contact": "Contact Us"
+  },
+  "home": {
+    "heroTitle": "Quality Baby Products for Happy Families",
+    "heroSubtitle": "Safe, thoughtfully designed products that support your baby's growth and make parenting easier.",
+    "exploreProducts": "Explore Products",
+    "viewGallery": "View Gallery",
+    "products": "Products",
+    "collections": "Collections",
+    "viewAll": "View All",
+    "whyChoose": "Why Choose Oya Plastic Factory",
+    "safetyFirst": "Safety First",
+    "safetyFirstText": "All products are BPA-free, non-toxic, and tested to meet international safety standards.",
+    "thoughtfulDesign": "Thoughtful Design",
+    "thoughtfulDesignText": "Every product is designed with real parents and babies in mind, ensuring comfort and usability.",
+    "builtToLast": "Built to Last",
+    "builtToLastText": "Durable materials and quality construction mean our products grow with your family.",
+    "readyToExplore": "Ready to Explore?",
+    "readyToExploreText": "Browse our complete collection and find the perfect products for your little one.",
+    "viewAllProducts": "View All Products"
+  },
+  "about": {
+    "title": "About Taizhou City Huangyan Oya Plastic Factory",
+    "subtitle": "Over 20 Years of Excellence in Baby Feeding Solutions",
+    "intro": "Established in {year}, Taizhou City Huangyan Oya Plastic Factory is a professional manufacturer specializing in baby feeding bottles, sippy cups, tableware, and related baby products. With over {experience} years of experience, we have developed deep expertise in plastic injection molding, especially {materials} materials. Our commitment to quality and innovation has made us a trusted partner for brands worldwide.",
+    "materials": "PP, PPSU, Tritan, and Silicone",
+    "strengthsTitle": "Our Strengths",
+    "strengths": {
+      "experience": {
+        "number": "20+",
+        "title": "Years Experience",
+        "desc": "Since 2001, crafting quality baby products"
+      },
+      "factory": {
+        "number": "20,000",
+        "title": "Square Meters",
+        "desc": "Modern manufacturing facility"
+      },
+      "global": {
+        "number": "60+",
+        "title": "Countries",
+        "desc": "Global export network worldwide"
+      }
+    },
+    "manufacturingTitle": "In-House Manufacturing & Quality",
+    "manufacturingText": "All manufacturing and packaging processes are completed in-house, ensuring high-quality items for all clients. Our integrated production approach allows us to maintain strict quality control at every stage—from raw material inspection to final packaging.",
+    "oem": "Original Equipment Manufacturing for well-known brands",
+    "odm": "Original Design Manufacturing with custom product development",
+    "certificationsTitle": "Certified Quality & Safety",
+    "certificationsIntro": "Our products meet international quality standards. We are proud to hold the following certifications that demonstrate our commitment to excellence.",
+    "iso": "Quality Management System",
+    "bsci": "Business Social Compliance Initiative",
+    "ctaTitle": "Visit Our Factory",
+    "ctaText": "We warmly welcome customers to visit our factory for on-site audits and inspections. Experience our manufacturing capabilities firsthand and discover why we are the trusted choice for baby product solutions.",
+    "ctaClosing": "Looking forward to be your partner!",
+    "contactButton": "Contact Us"
+  },
+  "products": {
+    "feedingBottles": {
+      "title": "Baby Feeding Bottles",
+      "description": "Premium feeding bottles designed for safe, comfortable feeding. BPA-free materials with anti-colic technology for your baby's wellbeing."
+    },
+    "sippyCups": {
+      "title": "Baby Sippy Cups",
+      "description": "Safe and durable sippy cups for babies learning to drink independently. Available in various materials and designs."
+    },
+    "tableware": {
+      "title": "Baby Tableware",
+      "description": "Child-friendly plates, bowls, and utensils designed for safe and enjoyable mealtime experiences."
+    },
+    "bathPotty": {
+      "title": "Baby Bath & Potty",
+      "description": "Comfortable and safe bathing and potty training products for babies and toddlers."
+    },
+    "milkPowderContainer": {
+      "title": "Milk Powder Container",
+      "description": "Portable milk powder containers and formula dispensers for convenient feeding on-the-go. Multi-layer designs for accurate portioning."
+    },
+    "accessories": {
+      "title": "Other Accessories",
+      "description": "Essential baby care accessories including teethers, pacifiers, bottle brushes, breast pumps, and more to complete your baby care kit."
+    },
+    "productCount": "{count} Products",
+    "itemsCount": "{count} items",
+    "itemNo": "Item No: {itemNo}",
+    "description": "Description",
+    "specifications": "Specifications",
+    "capacity": "Capacity",
+    "material": "Material",
+    "pcsPerCtn": "Pcs/Carton",
+    "ctnSize": "Carton Size (cm)",
+    "nw": "N.W. (kgs)",
+    "gw": "G.W. (kgs)",
+    "pcs20gp": "Pcs/20GP",
+    "pcs40hq": "Pcs/40HQ",
+    "moq": "MOQ",
+    "hsCode": "H.S. Code",
+    "contactInquiry": "Contact for Inquiry",
+    "comingSoon": "Coming Soon",
+    "comingSoonText": "Products in this category will be added soon. Please check back later."
+  },
+  "contact": {
+    "heroTitle": "Get in Touch",
+    "heroSubtitle": "We're a dedicated manufacturer of premium baby products, offering one-stop solutions for your business needs. Request a quote and we'll respond within 24 hours.",
+    "formTitle": "Request a Quote",
+    "formSubtitle": "Fill out the form below and our team will get back to you promptly.",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "nameRequired": "Name is required",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Please enter a valid email",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+1 234 567 8900",
+    "company": "Company",
+    "companyPlaceholder": "Your company name",
+    "address": "Address",
+    "addressPlaceholder": "Your address",
+    "subject": "Subject",
+    "subjectPlaceholder": "Select a subject",
+    "subjectQuote": "Request a Quote",
+    "subjectCustomization": "Product Customization",
+    "subjectPartnership": "Business Partnership",
+    "subjectSupport": "Customer Support",
+    "subjectOther": "Other",
+    "products": "Products Required",
+    "productsPlaceholder": "e.g., Feeding bottles, Water cups, etc.",
+    "message": "Message",
+    "messagePlaceholder": "Tell us about your requirements...",
+    "messageRequired": "Message is required",
+    "sendButton": "Send Message",
+    "sendingButton": "Sending...",
+    "successMessage": "Thank you! We'll get back to you within 24 hours.",
+    "errorMessage": "Something went wrong. Please try again.",
+    "infoTitle": "Contact Information",
+    "addressLabel": "Address",
+    "addressValue": "Nanxin Road, Nanwan Street, Longgang District, Shenzhen, Guangdong, China",
+    "emailLabel": "Email",
+    "emailValue": "zoey@yjgm.net",
+    "whatsappLabel": "WhatsApp",
+    "whatsappValue": "+86 153 7212 2988",
+    "hoursLabel": "Business Hours",
+    "hoursValue": "Monday - Friday: 9:00 - 18:00, Saturday: 9:00 - 12:00",
+    "missionTitle": "Our Mission",
+    "missionText": "We are dedicated to crafting high-quality, safe, and innovative baby products that support families worldwide. Our commitment to excellence drives us to deliver products that meet the highest international safety standards.",
+    "productsLinkTitle": "Our Products"
+  },
+  "language": {
+    "en": "EN",
+    "zhCN": "简",
+    "zhTW": "繁"
+  }
+}

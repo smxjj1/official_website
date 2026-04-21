@@ -1,35 +1,47 @@
 <template>
   <header class="header">
     <div class="header-container">
-      <NuxtLink to="/" class="logo" :class="{ active: route.path === '/' }">
-        <span class="logo-text">Oya Plastic Factory</span>
+      <NuxtLink :to="getLocalePath('/')" class="logo">
+        <span class="logo-text">{{ $t('siteName') }}</span>
       </NuxtLink>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/baby-feeding-bottles" class="nav-link" :class="{ active: route.path === '/baby-feeding-bottles' }" @click="closeMenu">
-          Feeding Bottles
+        <!-- Products Dropdown -->
+        <div class="nav-dropdown" @mouseenter="showProductsMenu = true" @mouseleave="showProductsMenu = false">
+          <button class="nav-link nav-dropdown-trigger" :class="{ active: isProductPage }">
+            {{ $t('nav.products') }}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9" />
+            </svg>
+          </button>
+          <div class="nav-dropdown-menu" :class="{ 'dropdown-open': showProductsMenu }">
+            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.feedingBottles') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-sippy-cups')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.sippyCups') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-tableware')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.tableware') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-bath-potty')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.bathPotty') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-milk-powder-container')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.milkPowderBox') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/other-accessory')" class="dropdown-link" @click="closeMenu">
+              {{ $t('nav.accessories') }}
+            </NuxtLink>
+          </div>
+        </div>
+        <NuxtLink :to="getLocalePath('/about-us')" class="nav-link" :class="{ active: isActive('/about-us') }" @click="closeMenu">
+          {{ $t('nav.about') }}
         </NuxtLink>
-        <NuxtLink to="/baby-sippy-cups" class="nav-link" :class="{ active: route.path === '/baby-sippy-cups' }" @click="closeMenu">
-          Sippy Cups
-        </NuxtLink>
-        <NuxtLink to="/baby-tableware" class="nav-link" :class="{ active: route.path === '/baby-tableware' }" @click="closeMenu">
-          Tableware
-        </NuxtLink>
-        <NuxtLink to="/baby-bath-potty" class="nav-link" :class="{ active: route.path === '/baby-bath-potty' }" @click="closeMenu">
-          Bath & Potty
-        </NuxtLink>
-        <NuxtLink to="/baby-milk-powder-container" class="nav-link" :class="{ active: route.path === '/baby-milk-powder-container' }" @click="closeMenu">
-          Milk Powder Box
-        </NuxtLink>
-        <NuxtLink to="/other-accessory" class="nav-link" :class="{ active: route.path === '/other-accessory' }" @click="closeMenu">
-          Accessories
-        </NuxtLink>
-        <NuxtLink to="/about-us" class="nav-link" :class="{ active: route.path === '/about-us' }" @click="closeMenu">
-          About Us
-        </NuxtLink>
-        <NuxtLink to="/contact-us" class="nav-link nav-link-contact" :class="{ active: route.path === '/contact-us' }" @click="closeMenu">
-          Contact Us
+        <NuxtLink :to="getLocalePath('/contact-us')" class="nav-link nav-link-contact" :class="{ active: isActive('/contact-us') }" @click="closeMenu">
+          {{ $t('nav.contact') }}
         </NuxtLink>
       </nav>
+      <LanguageSwitcher />
       <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
         <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }" />
       </button>
@@ -39,7 +51,26 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const { $t, getLocalePath, locale } = useI18n()
 const isMenuOpen = ref(false)
+const showProductsMenu = ref(false)
+
+const isActive = (path: string) => {
+  const currentPath = route.path
+  // Strip locale prefix for comparison
+  let strippedPath = currentPath
+  if (currentPath.startsWith('/zh-CN')) {
+    strippedPath = currentPath.replace('/zh-CN', '') || '/'
+  } else if (currentPath.startsWith('/zh-TW')) {
+    strippedPath = currentPath.replace('/zh-TW', '') || '/'
+  }
+  return strippedPath === path || strippedPath.startsWith(path + '/') || strippedPath.startsWith(path)
+}
+
+const isProductPage = computed(() => {
+  const productPaths = ['/baby-feeding-bottles', '/baby-sippy-cups', '/baby-tableware', '/baby-bath-potty', '/baby-milk-powder-container', '/other-accessory']
+  return productPaths.some(path => isActive(path))
+})
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -47,6 +78,7 @@ const toggleMenu = () => {
 
 const closeMenu = () => {
   isMenuOpen.value = false
+  showProductsMenu.value = false
 }
 </script>
 
@@ -89,6 +121,7 @@ const closeMenu = () => {
 }
 
 .nav {
+  margin-left: auto;
   display: flex;
   gap: @spacing-lg;
 
@@ -113,6 +146,12 @@ const closeMenu = () => {
       opacity: 1;
       visibility: visible;
     }
+  }
+}
+
+.language-switcher {
+  @media (max-width: @breakpoint-tablet) {
+    display: none;
   }
 }
 
@@ -145,8 +184,26 @@ const closeMenu = () => {
     }
   }
 
-  &.nav-link-contact {
+  &.nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
 
+    svg {
+      transition: transform @transition-fast;
+    }
+
+    &:hover svg,
+    &.active svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  &.nav-link-contact {
     @media (max-width: @breakpoint-tablet) {
       margin-left: 0;
     }
@@ -162,6 +219,81 @@ const closeMenu = () => {
 
     &.active::after {
       display: none;
+    }
+  }
+}
+
+// Dropdown styles
+.nav-dropdown {
+  position: relative;
+
+  @media (max-width: @breakpoint-tablet) {
+    .nav-dropdown-trigger {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 180px;
+  background: @card-background;
+  border: 1px solid @border-color;
+  border-radius: @radius-md;
+  padding: @spacing-sm 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all @transition-fast;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+
+  &.dropdown-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  @media (max-width: @breakpoint-tablet) {
+    position: static;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transform: none;
+
+    &.dropdown-open {
+      max-height: 300px;
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.dropdown-link {
+  display: block;
+  padding: @spacing-sm @spacing-md;
+  color: @text-light;
+  text-decoration: none;
+  font-size: 0.85rem;
+  transition: all @transition-fast;
+
+  &:hover {
+    color: @primary-color;
+    background: rgba(@primary-color, 0.05);
+  }
+
+  @media (max-width: @breakpoint-tablet) {
+    padding: @spacing-sm @spacing-md;
+    border-bottom: 1px solid @border-color;
+
+    &:last-child {
+      border-bottom: none;
     }
   }
 }

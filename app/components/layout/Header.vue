@@ -23,6 +23,9 @@
         <NuxtLink to="/other-accessory" class="nav-link" :class="{ active: route.path === '/other-accessory' }" @click="closeMenu">
           Accessories
         </NuxtLink>
+        <NuxtLink to="/about-us" class="nav-link" :class="{ active: route.path === '/about-us' }" @click="closeMenu">
+          About Us
+        </NuxtLink>
         <NuxtLink to="/contact-us" class="nav-link nav-link-contact" :class="{ active: route.path === '/contact-us' }" @click="closeMenu">
           Contact Us
         </NuxtLink>
@@ -77,12 +80,6 @@ const closeMenu = () => {
 .logo {
   text-decoration: none;
   color: @primary-color;
-
-  &.active {
-    .logo-text {
-      border-bottom: 2px solid @primary-color;
-    }
-  }
 }
 
 .logo-text {
@@ -149,7 +146,6 @@ const closeMenu = () => {
   }
 
   &.nav-link-contact {
-    margin-left: @spacing-sm;
 
     @media (max-width: @breakpoint-tablet) {
       margin-left: 0;

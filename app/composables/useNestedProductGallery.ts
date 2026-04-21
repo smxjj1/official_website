@@ -5,11 +5,7 @@
  * Groups images by their immediate parent folder (subcategory).
  */
 
-export interface ProductImage {
-  src: string
-  alt: string
-  filename: string
-}
+import type { ProductImage } from '~/types/product'
 
 export interface SubcategoryGroup {
   id: string // slugified subcategory

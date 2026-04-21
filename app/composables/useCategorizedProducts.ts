@@ -5,11 +5,7 @@
  * Respects subdirectory hierarchy within each product category.
  */
 
-export interface ProductImage {
-  src: string
-  alt: string
-  filename: string
-}
+import type { ProductImage } from '~/types/product'
 
 export interface ProductGroup {
   groupName: string

@@ -38,7 +38,7 @@
             <span class="stat">{{ category.totalImages }} Products</span>
             <span class="stat">{{ category.subcategories.length }} Collections</span>
           </div>
-          <NuxtLink :to="`/products/${category.slug}`" class="category-cta">
+          <NuxtLink :to="getCategoryLink(category.slug)" class="category-cta">
             View All {{ category.name }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -126,7 +126,8 @@
 </template>
 
 <script setup lang="ts">
-import { useNestedProductGallery, type MainCategory, type ProductImage } from '~/composables/useNestedProductGallery'
+import { useNestedProductGallery, type MainCategory } from '~/composables/useNestedProductGallery'
+import type { ProductImage } from '~/types/product'
 
 definePageMeta({
   layout: 'default',
@@ -162,6 +163,18 @@ const getCategoryImages = (category: MainCategory, count: number): ProductImage[
 // Get category description
 const getCategoryDescription = (slug: string): string => {
   return categoryDescriptions[slug] || 'Quality baby products designed with care.'
+}
+
+// Get category link - map old slugs to new pages
+const getCategoryLink = (slug: string): string => {
+  const linkMap: Record<string, string> = {
+    'feeding-bottles': '/baby-feeding-bottles',
+    'water-cups': '/baby-sippy-cups',
+    'baby-tableware': '/baby-tableware',
+    'bath-potty': '/baby-bath-potty',
+    'accessories': '/other-accessory',
+  }
+  return linkMap[slug] || '/other-accessory'
 }
 
 // Get category label (01, 02, etc.)

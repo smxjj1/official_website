@@ -8,7 +8,7 @@
         @click="openLightbox(index)"
       >
         <img
-          :src="image.path"
+          :src="image.src"
           :alt="image.alt"
           loading="lazy"
         >
@@ -27,7 +27,7 @@
           <button class="lightbox-prev" @click="prevImage">&larr;</button>
           <button class="lightbox-next" @click="nextImage">&rarr;</button>
           <img
-            :src="currentImage?.path"
+            :src="currentImage?.src"
             :alt="currentImage?.alt"
             class="lightbox-image"
           >

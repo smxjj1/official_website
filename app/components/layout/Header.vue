@@ -1,23 +1,29 @@
 <template>
   <header class="header">
     <div class="header-container">
-      <NuxtLink to="/" class="logo">
+      <NuxtLink to="/" class="logo" :class="{ active: route.path === '/' }">
         <span class="logo-text">Oya Plastic Factory</span>
       </NuxtLink>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink to="/product" class="nav-link" @click="closeMenu">
-          Products
+        <NuxtLink to="/baby-feeding-bottles" class="nav-link" :class="{ active: route.path === '/baby-feeding-bottles' }" @click="closeMenu">
+          Feeding Bottles
         </NuxtLink>
-        <NuxtLink
-          v-for="category in categories"
-          :key="category.slug"
-          :to="`/products/${category.slug}`"
-          class="nav-link"
-          @click="closeMenu"
-        >
-          {{ category.name }}
+        <NuxtLink to="/baby-sippy-cups" class="nav-link" :class="{ active: route.path === '/baby-sippy-cups' }" @click="closeMenu">
+          Sippy Cups
         </NuxtLink>
-        <NuxtLink to="/contact-us" class="nav-link nav-link-contact" @click="closeMenu">
+        <NuxtLink to="/baby-tableware" class="nav-link" :class="{ active: route.path === '/baby-tableware' }" @click="closeMenu">
+          Tableware
+        </NuxtLink>
+        <NuxtLink to="/baby-bath-potty" class="nav-link" :class="{ active: route.path === '/baby-bath-potty' }" @click="closeMenu">
+          Bath & Potty
+        </NuxtLink>
+        <NuxtLink to="/baby-milk-powder-container" class="nav-link" :class="{ active: route.path === '/baby-milk-powder-container' }" @click="closeMenu">
+          Milk Powder Box
+        </NuxtLink>
+        <NuxtLink to="/other-accessory" class="nav-link" :class="{ active: route.path === '/other-accessory' }" @click="closeMenu">
+          Accessories
+        </NuxtLink>
+        <NuxtLink to="/contact-us" class="nav-link nav-link-contact" :class="{ active: route.path === '/contact-us' }" @click="closeMenu">
           Contact Us
         </NuxtLink>
       </nav>
@@ -29,9 +35,7 @@
 </template>
 
 <script setup lang="ts">
-import { getAllCategories } from '~/data/product-categories'
-
-const categories = getAllCategories()
+const route = useRoute()
 const isMenuOpen = ref(false)
 
 const toggleMenu = () => {
@@ -73,6 +77,12 @@ const closeMenu = () => {
 .logo {
   text-decoration: none;
   color: @primary-color;
+
+  &.active {
+    .logo-text {
+      border-bottom: 2px solid @primary-color;
+    }
+  }
 }
 
 .logo-text {
@@ -116,9 +126,26 @@ const closeMenu = () => {
   font-weight: 500;
   padding: @spacing-xs 0;
   transition: color @transition-fast;
+  position: relative;
 
   &:hover {
     color: @primary-color;
+  }
+
+  &.active {
+    color: @primary-color;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: @primary-color;
+      border-radius: 1px;
+    }
   }
 
   &.nav-link-contact {
@@ -135,6 +162,10 @@ const closeMenu = () => {
 
     &:last-child {
       border-bottom: none;
+    }
+
+    &.active::after {
+      display: none;
     }
   }
 }

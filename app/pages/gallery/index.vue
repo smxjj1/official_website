@@ -167,7 +167,8 @@
 </template>
 
 <script setup lang="ts">
-import { useNestedProductGallery, type SubcategoryGroup, type ProductImage } from '~/composables/useNestedProductGallery'
+import { useNestedProductGallery, type SubcategoryGroup } from '~/composables/useNestedProductGallery'
+import type { ProductImage } from '~/types/product'
 
 definePageMeta({
   layout: 'default',

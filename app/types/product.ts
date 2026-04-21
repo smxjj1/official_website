@@ -13,9 +13,9 @@ export interface HeroContent {
 }
 
 export interface ProductImage {
-  filename: string
-  path: string
+  src: string
   alt: string
+  filename: string
 }
 
 export function defineProductCategory(category: ProductCategory): ProductCategory {

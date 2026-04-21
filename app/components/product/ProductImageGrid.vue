@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import type { ProductImage } from '~/composables/useCategorizedProducts'
+import type { ProductImage } from '~/types/product'
 
 const props = withDefaults(defineProps<{
   groupName: string

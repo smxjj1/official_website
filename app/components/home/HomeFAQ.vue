@@ -1,8 +1,8 @@
 <template>
   <section class="home-faq">
     <div class="faq-container">
-      <h2 class="faq-title">Frequently Asked Questions</h2>
-      <p class="faq-subtitle">Find answers to common questions about our baby products</p>
+      <h2 class="faq-title">{{ $t('faq.title') }}</h2>
+      <p class="faq-subtitle">{{ $t('faq.subtitle') }}</p>
 
       <div class="faq-list">
         <div
@@ -33,9 +33,9 @@
       </div>
 
       <div class="faq-cta">
-        <p>Still have questions?</p>
-        <NuxtLink to="/contact" class="contact-link">
-          Contact Our Team
+        <p>{{ $t('faq.stillHaveQuestions') }}</p>
+        <NuxtLink :to="getLocalePath('/contact')" class="contact-link">
+          {{ $t('faq.contactTeam') }}
         </NuxtLink>
       </div>
     </div>
@@ -43,34 +43,21 @@
 </template>
 
 <script setup lang="ts">
+const { $t, getLocalePath } = useI18n()
+
 const openItems = ref<number[]>([])
 
-const faqItems = [
-  {
-    question: 'Are your products BPA-free and safe for babies?',
-    answer: 'Yes, all our products are made from BPA-free, non-toxic materials. We use food-grade PP, PPSU, and silicone that meet international safety standards including FDA, LFGB, and EN14350. Safety is our top priority for your little ones.',
-  },
-  {
-    question: 'What materials do you use for your feeding bottles?',
-    answer: 'We offer feeding bottles in three materials: PPSU (polyphenylsulfone) known for its durability and heat resistance, PP (polypropylene) for lightweight everyday use, and glass for parents who prefer natural materials. All are free from harmful chemicals.',
-  },
-  {
-    question: 'Do you ship internationally?',
-    answer: 'Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location. International orders typically arrive within 7-14 business days. You can view exact shipping costs at checkout before placing your order.',
-  },
-  {
-    question: 'What is your return and refund policy?',
-    answer: 'We offer a 30-day return policy for unused items in original packaging. If you receive a defective product, we will replace it free of charge. Please contact our customer service team to initiate a return or exchange.',
-  },
-  {
-    question: 'Are your products dishwasher and sterilizer safe?',
-    answer: 'Most of our products are dishwasher safe (top rack recommended) and compatible with standard sterilizers. However, we recommend checking the specific product instructions as some items may have special care requirements for optimal longevity.',
-  },
-  {
-    question: 'How do I choose the right product for my baby\'s age?',
-    answer: 'Each product page includes recommended age ranges and developmental milestones. Generally, newborns start with slow-flow nipples, transitioning to faster flows as they grow. Our sippy cups and tableware are designed for babies 6 months and older starting solids.',
-  },
-]
+// Get FAQ items from i18n
+const faqItems = computed(() => {
+  const items = $t('faq.items')
+  if (Array.isArray(items)) {
+    return items.map((item: any) => ({
+      question: item.question,
+      answer: item.answer,
+    }))
+  }
+  return []
+})
 
 const toggleItem = (index: number) => {
   const idx = openItems.value.indexOf(index)

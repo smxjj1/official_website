@@ -67,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+const { $t, locale, getLocalePath } = useI18n()
+
 // Load carousel images from assets/images/home/BenefitsCarousel/
 const carouselImages = import.meta.glob(
   '~/assets/images/home/BenefitsCarousel/*.{jpg,jpeg,png,webp}',
@@ -84,72 +86,56 @@ const getImage = (index: number): string => {
   return ''
 }
 
-// Benefits slides configuration
-const slides = [
+// Benefits slides configuration with i18n - use computed to react to locale changes
+const slides = computed(() => [
   {
-    badge: 'Safety First',
-    title: '100% Safe Materials',
-    description: 'Every product is crafted with your baby\'s health as our top priority. We use only certified safe materials.',
-    features: [
-      'BPA, PVC & Phthalate Free',
-      'Food-Grade Materials',
-      'FDA & EN14350 Certified',
-    ],
+    badge: $t('benefits.safetyFirst.badge') as string,
+    title: $t('benefits.safetyFirst.title') as string,
+    description: $t('benefits.safetyFirst.description') as string,
+    features: $t('benefits.safetyFirst.features') as string[],
     image: getImage(1),
-    link: '/baby-feeding-bottles',
-    ctaText: 'Explore Safe Products',
+    link: getLocalePath('/baby-feeding-bottles'),
+    ctaText: $t('benefits.safetyFirst.ctaText') as string,
   },
   {
-    badge: 'Smart Design',
-    title: 'Ergonomic & Practical',
-    description: 'Thoughtfully designed products that make parenting easier while ensuring baby\'s comfort during feeding and play.',
-    features: [
-      'Easy-Grip Handles',
-      'Anti-Colic Systems',
-      'Dishwasher Safe',
-    ],
+    badge: $t('benefits.smartDesign.badge') as string,
+    title: $t('benefits.smartDesign.title') as string,
+    description: $t('benefits.smartDesign.description') as string,
+    features: $t('benefits.smartDesign.features') as string[],
     image: getImage(2),
-    link: '/baby-sippy-cups',
-    ctaText: 'View Smart Solutions',
+    link: getLocalePath('/baby-sippy-cups'),
+    ctaText: $t('benefits.smartDesign.ctaText') as string,
   },
   {
-    badge: 'Quality Build',
-    title: 'Built to Last',
-    description: 'Premium materials and rigorous testing ensure our products grow with your family, lasting through multiple children.',
-    features: [
-      'Durable Construction',
-      'Heat Resistant',
-      'Long-lasting Colors',
-    ],
+    badge: $t('benefits.qualityBuild.badge') as string,
+    title: $t('benefits.qualityBuild.title') as string,
+    description: $t('benefits.qualityBuild.description') as string,
+    features: $t('benefits.qualityBuild.features') as string[],
     image: getImage(3),
-    link: '/baby-tableware',
-    ctaText: 'See Quality Products',
+    link: getLocalePath('/baby-tableware'),
+    ctaText: $t('benefits.qualityBuild.ctaText') as string,
   },
   {
-    badge: 'Complete Range',
-    title: 'Everything You Need',
-    description: 'From feeding to bath time, our comprehensive product line covers all your baby\'s needs with consistent quality.',
-    features: [
-      'Full Product Range',
-      'Compatible Systems',
-      'Growing with Baby',
-    ],
+    badge: $t('benefits.completeRange.badge') as string,
+    title: $t('benefits.completeRange.title') as string,
+    description: $t('benefits.completeRange.description') as string,
+    features: $t('benefits.completeRange.features') as string[],
     image: getImage(4),
-    link: '/baby-feeding-bottles',
-    ctaText: 'Browse All Products',
+    link: getLocalePath('/baby-feeding-bottles'),
+    ctaText: $t('benefits.completeRange.ctaText') as string,
   },
-]
+])
 
 // Carousel state
 const currentSlide = ref(0)
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null
 
 const nextSlide = () => {
-  currentSlide.value = (currentSlide.value + 1) % slides.length
+  currentSlide.value = (currentSlide.value + 1) % slides.value.length
 }
 
 const prevSlide = () => {
-  currentSlide.value = currentSlide.value === 0 ? slides.length - 1 : currentSlide.value - 1
+  currentSlide.value = currentSlide.value === 0 ? slides.value.length - 1 : currentSlide.value - 1
 }
 
 const goToSlide = (index: number) => {

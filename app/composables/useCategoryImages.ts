@@ -14,48 +14,50 @@ export interface CategoryImageData {
   imageCount: number
 }
 
-// Category names mapping
-const categoryNames: Record<string, string> = {
-  'feeding-bottles': 'Baby Feeding Bottles',
-  'water-cups': 'Baby Sippy Cups',
-  'baby-tableware': 'Baby Tableware',
-  'bath-potty': 'Baby Bath & Potty',
-  'milk-container': 'Baby Milk Powder Container',
-  'accessories': 'Other Accessory',
-}
-
-/**
- * Generate SEO-friendly alt text
- */
-function generateAltText(categorySlug: string, index: number): string {
-  const categoryName = categoryNames[categorySlug] ?? categorySlug
-  return `${categoryName} - Product ${index + 1}`
-}
-
 /**
  * Main composable
  */
 export function useCategoryImages() {
+  const { $t } = useI18n()
+
   // Load all category images
   const allImages = import.meta.glob(
     '~/assets/images/home/categories/**/*.{jpg,jpeg,png,webp}',
     { eager: true, as: 'url' }
   )
 
-  /**
-   * Get curated images for a specific category
-   */
-  const getCategoryImages = (categorySlug: string): ProductImage[] => {
-    const images: ProductImage[] = []
-    const folderMap: Record<string, string> = {
-      'feeding-bottles': 'bottles',
-      'water-cups': 'cups',
-      'baby-tableware': 'tableware',
-      'bath-potty': 'bath-potty',
-      'milk-container': 'milk-container',
-      'accessories': 'accessories',
-    }
+  // Category names mapping with i18n keys
+  const categoryI18nKeys: Record<string, string> = {
+    'feeding-bottles': 'products.feedingBottles.title',
+    'water-cups': 'products.sippyCups.title',
+    'baby-tableware': 'products.tableware.title',
+    'bath-potty': 'products.bathPotty.title',
+    'milk-container': 'products.milkPowderContainer.title',
+    'accessories': 'products.accessories.title',
+  }
 
+  // Folder mapping
+  const folderMap: Record<string, string> = {
+    'feeding-bottles': 'bottles',
+    'water-cups': 'cups',
+    'baby-tableware': 'tableware',
+    'bath-potty': 'bath-potty',
+    'milk-container': 'milk-container',
+    'accessories': 'accessories',
+  }
+
+  /**
+   * Generate SEO-friendly alt text (reactive)
+   */
+  const generateAltText = (categorySlug: string, index: number): string => {
+    const categoryName = $t(categoryI18nKeys[categorySlug] ?? categorySlug) as string
+    return `${categoryName} - Product ${index + 1}`
+  }
+
+  /**
+   * Get curated images for a specific category (static images, reactive alt text)
+   */
+  const getCategoryImagesBySlug = (categorySlug: string): ProductImage[] => {
     const folder = folderMap[categorySlug]
     if (!folder) return []
 
@@ -66,8 +68,8 @@ export function useCategoryImages() {
       const normalizedPath = imagePath.replace(/\\/g, '/')
       if (normalizedPath.includes(`/categories/${folder}/`)) {
         const filename = imagePath.split('/').pop() ?? ''
-        // Extract index from filename (img1, img2, etc.)
-        const match = filename.match(/img(\d)/)
+        // Extract index from filename (1, 2, 3, 4 or img1, img2, etc.)
+        const match = filename.match(/(?:img)?(\d)/)
         const index = match?.[1] ? parseInt(match[1]) : 1
 
         const imgData = allImages[imagePath]
@@ -84,34 +86,30 @@ export function useCategoryImages() {
     // Sort by index
     categoryImages.sort((a, b) => a.index - b.index)
 
-    // Convert to ProductImage format
-    for (const img of categoryImages) {
-      images.push({
-        src: img.url,
-        alt: generateAltText(categorySlug, img.index - 1),
-        filename: img.path.split('/').pop() ?? '',
-      })
-    }
-
-    return images
+    // Convert to ProductImage format with reactive alt text
+    return categoryImages.map(img => ({
+      src: img.url,
+      alt: generateAltText(categorySlug, img.index - 1),
+      filename: img.path.split('/').pop() ?? '',
+    }))
   }
 
   /**
-   * Get all categories with their curated images
+   * Get all categories with their curated images (reactive)
    */
-  const getAllCategoryImages = (): CategoryImageData[] => {
+  const getAllCategoryImages = computed<CategoryImageData[]>(() => {
     const slugs = ['feeding-bottles', 'water-cups', 'baby-tableware', 'bath-potty', 'milk-container', 'accessories']
 
     return slugs.map(slug => ({
       slug,
-      name: categoryNames[slug] ?? slug,
-      images: getCategoryImages(slug),
-      imageCount: getCategoryImages(slug).length,
+      name: $t(categoryI18nKeys[slug] ?? slug) as string,
+      images: getCategoryImagesBySlug(slug),
+      imageCount: getCategoryImagesBySlug(slug).length,
     }))
-  }
+  })
 
   return {
-    getCategoryImages,
+    getCategoryImagesBySlug,
     getAllCategoryImages,
   }
 }

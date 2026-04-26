@@ -45,7 +45,7 @@
         <!-- Image Grid Side -->
         <div class="image-side">
           <div class="image-grid" :class="`grid-${getGridStyle(index)}`">
-            <div v-for="(image, imgIndex) in getCategoryImages(category, 4)" :key="imgIndex" class="image-card">
+            <div v-for="(image, imgIndex) in category.images.slice(0, 4)" :key="imgIndex" class="image-card">
               <img :src="image.src" :alt="image.alt" loading="lazy" />
             </div>
           </div>
@@ -117,8 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { useCategoryImages, type CategoryImageData } from '~/composables/useCategoryImages'
-import type { ProductImage } from '~/types/product'
+import { useCategoryImages } from '~/composables/useCategoryImages'
 
 definePageMeta({
   layout: 'default',
@@ -130,24 +129,19 @@ useHomeSeo()
 
 // Use curated category images from assets/images/home/categories/
 const { getAllCategoryImages } = useCategoryImages()
-const categories = getAllCategoryImages()
+const categories = computed(() => getAllCategoryImages.value)
 
-// Category descriptions - use translations
+// Category descriptions - use translations (reactive)
 const getCategoryDescription = (slug: string): string => {
   const descMap: Record<string, string> = {
-    'feeding-bottles': $t('products.feedingBottles.description'),
-    'water-cups': $t('products.sippyCups.description'),
-    'baby-tableware': $t('products.tableware.description'),
-    'bath-potty': $t('products.bathPotty.description'),
-    'milk-container': $t('products.milkPowderContainer.description'),
-    'accessories': $t('products.accessories.description'),
+    'feeding-bottles': $t('products.feedingBottles.description') as string,
+    'water-cups': $t('products.sippyCups.description') as string,
+    'baby-tableware': $t('products.tableware.description') as string,
+    'bath-potty': $t('products.bathPotty.description') as string,
+    'milk-container': $t('products.milkPowderContainer.description') as string,
+    'accessories': $t('products.accessories.description') as string,
   }
   return descMap[slug] || 'Quality baby products designed with care.'
-}
-
-// Get category images for homepage sections
-const getCategoryImages = (category: CategoryImageData, count: number): ProductImage[] => {
-  return category.images.slice(0, count)
 }
 
 // Get category link - map slugs to pages

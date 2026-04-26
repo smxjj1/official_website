@@ -30,6 +30,36 @@
     "readyToExploreText": "Browse our complete collection and find the perfect products for your little one.",
     "viewAllProducts": "View All Products"
   },
+  "benefits": {
+    "safetyFirst": {
+      "badge": "Safety First",
+      "title": "100% Safe Materials",
+      "description": "Every product is crafted with your baby's health as our top priority. We use only certified safe materials.",
+      "features": ["BPA, PVC & Phthalate Free", "Food-Grade Materials", "FDA & EN14350 Certified"],
+      "ctaText": "Explore Safe Products"
+    },
+    "smartDesign": {
+      "badge": "Smart Design",
+      "title": "Ergonomic & Practical",
+      "description": "Thoughtfully designed products that make parenting easier while ensuring baby's comfort during feeding and play.",
+      "features": ["Easy-Grip Handles", "Anti-Colic Systems", "Dishwasher Safe"],
+      "ctaText": "View Smart Solutions"
+    },
+    "qualityBuild": {
+      "badge": "Quality Build",
+      "title": "Built to Last",
+      "description": "Premium materials and rigorous testing ensure our products grow with your family, lasting through multiple children.",
+      "features": ["Durable Construction", "Heat Resistant", "Long-lasting Colors"],
+      "ctaText": "See Quality Products"
+    },
+    "completeRange": {
+      "badge": "Complete Range",
+      "title": "Everything You Need",
+      "description": "From feeding to bath time, our comprehensive product line covers all your baby's needs with consistent quality.",
+      "features": ["Full Product Range", "Compatible Systems", "Growing with Baby"],
+      "ctaText": "Browse All Products"
+    }
+  },
   "about": {
     "title": "About Taizhou City Huangyan Oya Plastic Factory",
     "subtitle": "Over 20 Years of Excellence in Baby Feeding Solutions",
@@ -161,5 +191,37 @@
     "en": "EN",
     "zhCN": "简",
     "zhTW": "繁"
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Find answers to common questions about our baby products",
+    "stillHaveQuestions": "Still have questions?",
+    "contactTeam": "Contact Our Team",
+    "items": [
+      {
+        "question": "Are your products BPA-free and safe for babies?",
+        "answer": "Yes, all our products are made from BPA-free, non-toxic materials. We use food-grade PP, PPSU, and silicone that meet international safety standards including FDA, LFGB, and EN14350. Safety is our top priority for your little ones."
+      },
+      {
+        "question": "What materials do you use for your feeding bottles?",
+        "answer": "We offer feeding bottles in three materials: PPSU (polyphenylsulfone) known for its durability and heat resistance, PP (polypropylene) for lightweight everyday use, and glass for parents who prefer natural materials. All are free from harmful chemicals."
+      },
+      {
+        "question": "Do you ship internationally?",
+        "answer": "Yes, we ship to most countries worldwide. Shipping costs and delivery times vary by location. International orders typically arrive within 7-14 business days. You can view exact shipping costs at checkout before placing your order."
+      },
+      {
+        "question": "What is your return and refund policy?",
+        "answer": "We offer a 30-day return policy for unused items in original packaging. If you receive a defective product, we will replace it free of charge. Please contact our customer service team to initiate a return or exchange."
+      },
+      {
+        "question": "Are your products dishwasher and sterilizer safe?",
+        "answer": "Most of our products are dishwasher safe (top rack recommended) and compatible with standard sterilizers. However, we recommend checking the specific product instructions as some items may have special care requirements for optimal longevity."
+      },
+      {
+        "question": "How do I choose the right product for my baby's age?",
+        "answer": "Each product page includes recommended age ranges and developmental milestones. Generally, newborns start with slow-flow nipples, transitioning to faster flows as they grow. Our sippy cups and tableware are designed for babies 6 months and older starting solids."
+      }
+    ]
   }
 }

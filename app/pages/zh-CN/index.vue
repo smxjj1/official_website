@@ -32,10 +32,6 @@
           <span class="category-label">{{ getCategoryLabel(index) }}</span>
           <h2 class="category-title">{{ category.name }}</h2>
           <p class="category-description">{{ getCategoryDescription(category.slug) }}</p>
-          <div class="category-stats">
-            <span class="stat">{{ category.totalImages }} {{ $t('home.products') }}</span>
-            <span class="stat">{{ category.subcategories.length }} {{ $t('home.collections') }}</span>
-          </div>
           <NuxtLink :to="getLocalePath(getCategoryLink(category.slug))" class="category-cta">
             {{ $t('home.viewAll') }} {{ category.name }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -49,7 +45,7 @@
         <!-- Image Grid Side -->
         <div class="image-side">
           <div class="image-grid" :class="`grid-${getGridStyle(index)}`">
-            <div v-for="(image, imgIndex) in getCategoryImages(category, 4)" :key="imgIndex" class="image-card">
+            <div v-for="(image, imgIndex) in category.images.slice(0, 4)" :key="imgIndex" class="image-card">
               <img :src="image.src" :alt="image.alt" loading="lazy" />
             </div>
           </div>
@@ -121,8 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNestedProductGallery, type MainCategory } from '~/composables/useNestedProductGallery'
-import type { ProductImage } from '~/types/product'
+import { useCategoryImages } from '~/composables/useCategoryImages'
 
 definePageMeta({
   layout: 'default',
@@ -132,41 +127,31 @@ const { $t, getLocalePath } = useI18n()
 
 useHomeSeo()
 
-const { getAllCategories } = useNestedProductGallery()
-const categories = getAllCategories()
+// Use curated category images from assets/images/home/categories/
+const { getAllCategoryImages } = useCategoryImages()
+const categories = computed(() => getAllCategoryImages.value)
 
-// Category descriptions - use translations
+// Category descriptions - use translations (reactive)
 const getCategoryDescription = (slug: string): string => {
   const descMap: Record<string, string> = {
-    'feeding-bottles': $t('products.feedingBottles.description'),
-    'water-cups': $t('products.sippyCups.description'),
-    'baby-tableware': $t('products.tableware.description'),
-    'bath-potty': $t('products.bathPotty.description'),
-    'accessories': $t('products.accessories.description'),
+    'feeding-bottles': $t('products.feedingBottles.description') as string,
+    'water-cups': $t('products.sippyCups.description') as string,
+    'baby-tableware': $t('products.tableware.description') as string,
+    'bath-potty': $t('products.bathPotty.description') as string,
+    'milk-container': $t('products.milkPowderContainer.description') as string,
+    'accessories': $t('products.accessories.description') as string,
   }
   return descMap[slug] || 'Quality baby products designed with care.'
 }
 
-// Get category images for sections
-const getCategoryImages = (category: MainCategory, count: number): ProductImage[] => {
-  const allImages: ProductImage[] = []
-
-  // Collect images from all subcategories
-  for (const subcat of category.subcategories) {
-    allImages.push(...subcat.images)
-    if (allImages.length >= count) break
-  }
-
-  return allImages.slice(0, count)
-}
-
-// Get category link - map old slugs to new pages
+// Get category link - map slugs to pages
 const getCategoryLink = (slug: string): string => {
   const linkMap: Record<string, string> = {
     'feeding-bottles': '/baby-feeding-bottles',
     'water-cups': '/baby-sippy-cups',
     'baby-tableware': '/baby-tableware',
     'bath-potty': '/baby-bath-potty',
+    'milk-container': '/baby-milk-powder-container',
     'accessories': '/other-accessory',
   }
   return linkMap[slug] || '/other-accessory'
@@ -179,13 +164,13 @@ const getCategoryLabel = (index: number): string => {
 
 // Layout variations: left, right, center
 const getLayoutType = (index: number): string => {
-  const layouts = ['left', 'right', 'center', 'left', 'right']
+  const layouts = ['left', 'right', 'center', 'left', 'right', 'left']
   return layouts[index] || 'left'
 }
 
-// Grid style variations
+// Grid style variations - last category uses grid-a for larger images
 const getGridStyle = (index: number): string => {
-  const styles = ['a', 'b', 'c', 'a', 'b']
+  const styles = ['a', 'b', 'c', 'a', 'b', 'a']
   return styles[index] || 'a'
 }
 </script>
@@ -197,6 +182,9 @@ const getGridStyle = (index: number): string => {
   background: @background-color;
 }
 
+// ============================================
+// Hero Section
+// ============================================
 .hero {
   background: linear-gradient(135deg, @primary-color 0%, lighten(@primary-color, 15%) 100%);
   padding: 120px @spacing-md;
@@ -276,6 +264,9 @@ const getGridStyle = (index: number): string => {
   }
 }
 
+// ============================================
+// Category Sections
+// ============================================
 .category-section {
   padding: 100px 0;
   min-height: 80vh;
@@ -288,6 +279,7 @@ const getGridStyle = (index: number): string => {
   }
 }
 
+// Alternating backgrounds
 .section-1,
 .section-3,
 .section-5 {
@@ -295,7 +287,8 @@ const getGridStyle = (index: number): string => {
 }
 
 .section-2,
-.section-4 {
+.section-4,
+.section-6 {
   background: @devide-background;
 }
 
@@ -314,17 +307,24 @@ const getGridStyle = (index: number): string => {
   }
 }
 
-.layout-left .section-inner {
-  flex-direction: row;
+// Layout variations
+.layout-left {
+  .section-inner {
+    flex-direction: row;
+  }
 }
 
-.layout-right .section-inner {
-  flex-direction: row-reverse;
+.layout-right {
+  .section-inner {
+    flex-direction: row-reverse;
+  }
 }
 
-.layout-center .section-inner {
-  flex-direction: column;
-  text-align: center;
+.layout-center {
+  .section-inner {
+    flex-direction: column;
+    text-align: center;
+  }
 
   .image-side {
     width: 100%;
@@ -369,24 +369,6 @@ const getGridStyle = (index: number): string => {
   color: @text-light;
   line-height: 1.7;
   margin: 0 0 @spacing-lg;
-}
-
-.category-stats {
-  display: flex;
-  gap: @spacing-md;
-  margin-bottom: @spacing-lg;
-
-  @media (max-width: @breakpoint-tablet) {
-    justify-content: center;
-  }
-}
-
-.stat {
-  font-size: 0.875rem;
-  color: @secondary-color;
-  padding: @spacing-xs @spacing-sm;
-  background: @background-color;
-  border-radius: @radius-sm;
 }
 
 .category-cta {
@@ -463,6 +445,8 @@ const getGridStyle = (index: number): string => {
   border-radius: @radius-md;
   overflow: hidden;
   background: @background-color;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   img {
     width: 100%;
@@ -471,11 +455,19 @@ const getGridStyle = (index: number): string => {
     transition: transform 0.5s ease;
   }
 
-  &:hover img {
-    transform: scale(1.05);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    img {
+      transform: scale(1.08);
+    }
   }
 }
 
+// ============================================
+// Features Section
+// ============================================
 .features-section {
   padding: 100px 0;
   background: @primary-color;
@@ -552,6 +544,9 @@ const getGridStyle = (index: number): string => {
   margin: 0;
 }
 
+// ============================================
+// Final CTA
+// ============================================
 .final-cta {
   padding: 100px 0;
   background: @card-background;

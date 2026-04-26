@@ -14,22 +14,22 @@
             </svg>
           </button>
           <div class="nav-dropdown-menu" :class="{ 'dropdown-open': showProductsMenu }">
-            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-feeding-bottles') }" @click="closeMenu">
               {{ $t('nav.feedingBottles') }}
             </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-sippy-cups')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/baby-sippy-cups')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-sippy-cups') }" @click="closeMenu">
               {{ $t('nav.sippyCups') }}
             </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-tableware')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/baby-tableware')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-tableware') }" @click="closeMenu">
               {{ $t('nav.tableware') }}
             </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-bath-potty')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/baby-bath-potty')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-bath-potty') }" @click="closeMenu">
               {{ $t('nav.bathPotty') }}
             </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-milk-powder-container')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/baby-milk-powder-container')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-milk-powder-container') }" @click="closeMenu">
               {{ $t('nav.milkPowderBox') }}
             </NuxtLink>
-            <NuxtLink :to="getLocalePath('/other-accessory')" class="dropdown-link" @click="closeMenu">
+            <NuxtLink :to="getLocalePath('/other-accessory')" class="dropdown-link" :class="{ active: isCurrentProduct('/other-accessory') }" @click="closeMenu">
               {{ $t('nav.accessories') }}
             </NuxtLink>
           </div>
@@ -71,6 +71,11 @@ const isProductPage = computed(() => {
   const productPaths = ['/baby-feeding-bottles', '/baby-sippy-cups', '/baby-tableware', '/baby-bath-potty', '/baby-milk-powder-container', '/other-accessory']
   return productPaths.some(path => isActive(path))
 })
+
+// Check if current product page matches specific product path
+const isCurrentProduct = (path: string) => {
+  return isActive(path)
+}
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
@@ -286,6 +291,12 @@ const closeMenu = () => {
   &:hover {
     color: @primary-color;
     background: rgba(@primary-color, 0.05);
+  }
+
+  &.active {
+    color: @primary-color;
+    font-weight: 600;
+    background: rgba(@primary-color, 0.08);
   }
 
   @media (max-width: @breakpoint-tablet) {

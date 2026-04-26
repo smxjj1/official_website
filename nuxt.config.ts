@@ -9,6 +9,8 @@ export default defineNuxtConfig({
     public: {
       siteUrl: 'https://yourdomain.com',
       siteName: 'Oya Plastic Factory',
+      analyticsToken: process.env.NUXT_PUBLIC_ANALYTICS_TOKEN || '',
+      analyticsBaseUrl: 'https://analytics.oyaplasticfactory.com',
     },
   },
   eslint: {
@@ -22,6 +24,12 @@ export default defineNuxtConfig({
   },
   nitro: {
     compressPublicAssets: true,
+    devProxy: {
+      '/api/contact': {
+        target: 'https://analytics.oyaplasticfactory.com/api/contact',
+        changeOrigin: true,
+      },
+    },
   },
   vite: {
     plugins: [

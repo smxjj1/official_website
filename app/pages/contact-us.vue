@@ -16,7 +16,7 @@
           <h2 class="section-title">{{ $t('contact.formTitle') }}</h2>
           <p class="section-subtitle">{{ $t('contact.formSubtitle') }}</p>
 
-          <form class="contact-form" @submit.prevent="handleSubmit">
+          <form class="contact-form" @submit.prevent="handleSubmit" novalidate>
             <div class="form-row">
               <div class="form-group">
                 <label for="name">{{ $t('contact.name') }} <span class="required">*</span></label>
@@ -26,7 +26,6 @@
                   type="text"
                   :placeholder="$t('contact.namePlaceholder')"
                   :class="{ error: errors.name }"
-                  required
                 />
                 <span v-if="errors.name" class="error-message">{{ errors.name }}</span>
               </div>
@@ -38,7 +37,6 @@
                   type="email"
                   :placeholder="$t('contact.emailPlaceholder')"
                   :class="{ error: errors.email }"
-                  required
                 />
                 <span v-if="errors.email" class="error-message">{{ errors.email }}</span>
               </div>
@@ -105,7 +103,6 @@
                 rows="5"
                 :placeholder="$t('contact.messagePlaceholder')"
                 :class="{ error: errors.message }"
-                required
               ></textarea>
               <span v-if="errors.message" class="error-message">{{ errors.message }}</span>
             </div>
@@ -225,12 +222,15 @@
 
 <script setup lang="ts">
 import { getAllCategories } from '~/data/product-categories'
+import { useAnalytics } from '~/composables/useAnalytics'
 
 definePageMeta({
   layout: 'default',
 })
 
 const { $t, getLocalePath } = useI18n()
+const { sendContactAnalytics } = useAnalytics()
+const config = useRuntimeConfig()
 
 useSeo({
   title: 'Contact Us | Oya Plastic Factory',
@@ -300,6 +300,15 @@ const validateForm = () => {
   return isValid
 }
 
+// Get API endpoint based on environment
+const getApiEndpoint = () => {
+  const baseUrl = config.public.analyticsBaseUrl as string
+  if (import.meta.dev) {
+    return '/api/contact'
+  }
+  return `${baseUrl}/api/contact`
+}
+
 // Form submission
 const handleSubmit = async () => {
   if (!validateForm()) return
@@ -308,11 +317,38 @@ const handleSubmit = async () => {
   submitStatus.value = 'idle'
 
   try {
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    // Main API call
+    const response = await fetch(getApiEndpoint(), {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        company: form.company,
+        address: form.address,
+        subject: form.subject,
+        products: form.products,
+        message: form.message,
+        website: 'oya',
+      }),
+    })
+
+    if (!response.ok) {
+      throw new Error('Request failed')
+    }
 
     // Success
     submitStatus.value = 'success'
+
+    // Fire analytics call (non-blocking)
+    sendContactAnalytics({
+      name: form.name,
+      email: form.email,
+      message: form.message,
+    })
 
     // Reset form
     Object.keys(form).forEach(key => {
@@ -502,7 +538,7 @@ const handleSubmit = async () => {
 
   .error-message {
     font-size: 0.75rem;
-    color: #C4644A;
+    color: red;
   }
 }
 

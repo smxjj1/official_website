@@ -26,3 +26,5 @@ logs
 !.env.production
 server/prisma/generated
 server/prisma/migrations
+
+~$*.xlsx

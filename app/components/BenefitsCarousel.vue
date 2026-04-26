@@ -67,15 +67,21 @@
 </template>
 
 <script setup lang="ts">
-import { useNestedProductGallery } from '~/composables/useNestedProductGallery'
+// Load carousel images from assets/images/home/BenefitsCarousel/
+const carouselImages = import.meta.glob(
+  '~/assets/images/home/BenefitsCarousel/*.{jpg,jpeg,png,webp}',
+  { eager: true, as: 'url' }
+)
 
-const { getAllCategories } = useNestedProductGallery()
-const categories = getAllCategories()
-
-// Get images from categories for the carousel
-const getFirstImage = (categorySlug: string) => {
-  const cat = categories.find(c => c.slug === categorySlug)
-  return cat?.subcategories[0]?.images[0]?.src || ''
+// Get image by index (1, 2, 3, 4)
+const getImage = (index: number): string => {
+  for (const path in carouselImages) {
+    const filename = path.split('/').pop() ?? ''
+    if (filename.startsWith(String(index))) {
+      return carouselImages[path] as string
+    }
+  }
+  return ''
 }
 
 // Benefits slides configuration
@@ -89,8 +95,8 @@ const slides = [
       'Food-Grade Materials',
       'FDA & EN14350 Certified',
     ],
-    image: getFirstImage('feeding-bottles'),
-    link: '/products/feeding-bottles',
+    image: getImage(1),
+    link: '/baby-feeding-bottles',
     ctaText: 'Explore Safe Products',
   },
   {
@@ -102,8 +108,8 @@ const slides = [
       'Anti-Colic Systems',
       'Dishwasher Safe',
     ],
-    image: getFirstImage('water-cups'),
-    link: '/products/water-cups',
+    image: getImage(2),
+    link: '/baby-sippy-cups',
     ctaText: 'View Smart Solutions',
   },
   {
@@ -115,8 +121,8 @@ const slides = [
       'Heat Resistant',
       'Long-lasting Colors',
     ],
-    image: getFirstImage('baby-tableware'),
-    link: '/products/baby-tableware',
+    image: getImage(3),
+    link: '/baby-tableware',
     ctaText: 'See Quality Products',
   },
   {
@@ -128,8 +134,8 @@ const slides = [
       'Compatible Systems',
       'Growing with Baby',
     ],
-    image: getFirstImage('accessories'),
-    link: '/gallery',
+    image: getImage(4),
+    link: '/baby-feeding-bottles',
     ctaText: 'Browse All Products',
   },
 ]
@@ -241,10 +247,12 @@ onUnmounted(() => {
 }
 
 .slide-image {
-  aspect-ratio: 4/3;
+  aspect-ratio: 1/1;
   border-radius: @radius-lg;
   overflow: hidden;
   background: @background-color;
+  width: 100%;
+  height: 100%;
 
   img {
     width: 100%;

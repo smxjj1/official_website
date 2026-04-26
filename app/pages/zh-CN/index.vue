@@ -13,8 +13,8 @@
           <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="hero-cta primary">
             {{ $t('home.exploreProducts') }}
           </NuxtLink>
-          <NuxtLink to="/gallery" class="hero-cta secondary">
-            {{ $t('home.viewGallery') }}
+          <NuxtLink :to="getLocalePath('/contact-us')" class="hero-cta secondary">
+            {{ $t('nav.contact') }}
           </NuxtLink>
         </div>
       </div>
@@ -112,8 +112,8 @@
       <div class="cta-container">
         <h2 class="cta-title">{{ $t('home.readyToExplore') }}</h2>
         <p class="cta-text">{{ $t('home.readyToExploreText') }}</p>
-        <NuxtLink to="/gallery" class="cta-button">
-          {{ $t('home.viewAllProducts') }}
+        <NuxtLink :to="getLocalePath('/contact-us')" class="cta-button">
+          {{ $t('nav.contact') }}
         </NuxtLink>
       </div>
     </section>

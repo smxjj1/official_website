@@ -13,8 +13,8 @@
           <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="hero-cta primary">
             {{ $t('home.exploreProducts') }}
           </NuxtLink>
-          <NuxtLink to="/gallery" class="hero-cta secondary">
-            {{ $t('home.viewGallery') }}
+          <NuxtLink :to="getLocalePath('/contact-us')" class="hero-cta secondary">
+            {{ $t('nav.contact') }}
           </NuxtLink>
         </div>
       </div>
@@ -32,10 +32,6 @@
           <span class="category-label">{{ getCategoryLabel(index) }}</span>
           <h2 class="category-title">{{ category.name }}</h2>
           <p class="category-description">{{ getCategoryDescription(category.slug) }}</p>
-          <div class="category-stats">
-            <span class="stat">{{ category.totalImages }} {{ $t('home.products') }}</span>
-            <span class="stat">{{ category.subcategories.length }} {{ $t('home.collections') }}</span>
-          </div>
           <NuxtLink :to="getLocalePath(getCategoryLink(category.slug))" class="category-cta">
             {{ $t('home.viewAll') }} {{ category.name }}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -112,8 +108,8 @@
       <div class="cta-container">
         <h2 class="cta-title">{{ $t('home.readyToExplore') }}</h2>
         <p class="cta-text">{{ $t('home.readyToExploreText') }}</p>
-        <NuxtLink to="/gallery" class="cta-button">
-          {{ $t('home.viewAllProducts') }}
+        <NuxtLink :to="getLocalePath('/contact-us')" class="cta-button">
+          {{ $t('nav.contact') }}
         </NuxtLink>
       </div>
     </section>
@@ -121,7 +117,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNestedProductGallery, type MainCategory } from '~/composables/useNestedProductGallery'
+import { useCategoryImages, type CategoryImageData } from '~/composables/useCategoryImages'
 import type { ProductImage } from '~/types/product'
 
 definePageMeta({
@@ -132,8 +128,9 @@ const { $t, getLocalePath } = useI18n()
 
 useHomeSeo()
 
-const { getAllCategories } = useNestedProductGallery()
-const categories = getAllCategories()
+// Use curated category images from assets/images/home/categories/
+const { getAllCategoryImages } = useCategoryImages()
+const categories = getAllCategoryImages()
 
 // Category descriptions - use translations
 const getCategoryDescription = (slug: string): string => {
@@ -142,31 +139,25 @@ const getCategoryDescription = (slug: string): string => {
     'water-cups': $t('products.sippyCups.description'),
     'baby-tableware': $t('products.tableware.description'),
     'bath-potty': $t('products.bathPotty.description'),
+    'milk-container': $t('products.milkPowderContainer.description'),
     'accessories': $t('products.accessories.description'),
   }
   return descMap[slug] || 'Quality baby products designed with care.'
 }
 
-// Get category images for sections
-const getCategoryImages = (category: MainCategory, count: number): ProductImage[] => {
-  const allImages: ProductImage[] = []
-
-  // Collect images from all subcategories
-  for (const subcat of category.subcategories) {
-    allImages.push(...subcat.images)
-    if (allImages.length >= count) break
-  }
-
-  return allImages.slice(0, count)
+// Get category images for homepage sections
+const getCategoryImages = (category: CategoryImageData, count: number): ProductImage[] => {
+  return category.images.slice(0, count)
 }
 
-// Get category link - map old slugs to new pages
+// Get category link - map slugs to pages
 const getCategoryLink = (slug: string): string => {
   const linkMap: Record<string, string> = {
     'feeding-bottles': '/baby-feeding-bottles',
     'water-cups': '/baby-sippy-cups',
     'baby-tableware': '/baby-tableware',
     'bath-potty': '/baby-bath-potty',
+    'milk-container': '/baby-milk-powder-container',
     'accessories': '/other-accessory',
   }
   return linkMap[slug] || '/other-accessory'
@@ -179,13 +170,13 @@ const getCategoryLabel = (index: number): string => {
 
 // Layout variations: left, right, center
 const getLayoutType = (index: number): string => {
-  const layouts = ['left', 'right', 'center', 'left', 'right']
+  const layouts = ['left', 'right', 'center', 'left', 'right', 'left']
   return layouts[index] || 'left'
 }
 
-// Grid style variations
+// Grid style variations - last category uses grid-a for larger images
 const getGridStyle = (index: number): string => {
-  const styles = ['a', 'b', 'c', 'a', 'b']
+  const styles = ['a', 'b', 'c', 'a', 'b', 'a']
   return styles[index] || 'a'
 }
 </script>
@@ -302,7 +293,8 @@ const getGridStyle = (index: number): string => {
 }
 
 .section-2,
-.section-4 {
+.section-4,
+.section-6 {
   background: @devide-background;
 }
 
@@ -477,6 +469,8 @@ const getGridStyle = (index: number): string => {
   border-radius: @radius-md;
   overflow: hidden;
   background: @background-color;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   img {
     width: 100%;
@@ -485,8 +479,13 @@ const getGridStyle = (index: number): string => {
     transition: transform 0.5s ease;
   }
 
-  &:hover img {
-    transform: scale(1.05);
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    img {
+      transform: scale(1.08);
+    }
   }
 }
 

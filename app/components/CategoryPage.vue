@@ -270,9 +270,36 @@ useSeo({
 const allProducts = productsData.products.filter(p => p.categorySlug === props.categorySlug) as Product[]
 const totalProducts = allProducts.length
 
+// Map subcategory names to i18n keys
+const getSubcategoryKey = (subcategory: string): string => {
+  const keyMap: Record<string, string> = {
+    'Feeding Bottle- Glass': 'products.subcategories.feedingBottleGlass',
+    'Feeding Bottle- Others': 'products.subcategories.feedingBottleOthers',
+    'Feeding Bottle- PP': 'products.subcategories.feedingBottlePP',
+    'Feeding Bottle- PPSU': 'products.subcategories.feedingBottlePPSU',
+    'Feeding Bottle- Tritan': 'products.subcategories.feedingBottleTritan',
+    'Feeding bottle set': 'products.subcategories.feedingBottleSet',
+    'Sippy Cup- Others': 'products.subcategories.sippyCupOthers',
+    'Sippy Cup- PP': 'products.subcategories.sippyCupPP',
+    'Sippy Cup- Tritan': 'products.subcategories.sippyCupTritan',
+    'Feeding Bowl Sets': 'products.subcategories.feedingBowlSets',
+    'Tableware set': 'products.subcategories.tablewareSet',
+    'Spoons': 'products.subcategories.spoons',
+    'Potty & Bath Tub': 'products.subcategories.pottyBathTub',
+    'Milk Powder Box': 'products.subcategories.milkPowderBox',
+    'Breast Pump': 'products.subcategories.breastPump',
+    'Pacifiers': 'products.subcategories.pacifiers',
+    'Teethers': 'products.subcategories.teethers',
+    'Brush': 'products.subcategories.brush',
+    'Auxilaries- Others': 'products.subcategories.auxilariesOthers',
+    'General': 'products.subcategories.general',
+  }
+  return keyMap[subcategory] || 'products.subcategories.general'
+}
+
 // Group products by subcategory
 const groupedProducts = computed(() => {
-  const groups: { subcategory: string; products: Product[] }[] = []
+  const groups: { subcategory: string; subcategoryKey: string; products: Product[] }[] = []
   const groupMap = new Map<string, Product[]>()
 
   for (const product of allProducts) {
@@ -284,7 +311,8 @@ const groupedProducts = computed(() => {
   }
 
   for (const [subcategory, products] of groupMap) {
-    groups.push({ subcategory, products })
+    const key = getSubcategoryKey(subcategory)
+    groups.push({ subcategory: $t(key) as string, subcategoryKey: key, products })
   }
 
   return groups
@@ -514,6 +542,10 @@ onUnmounted(() => {
   cursor: pointer;
   transition: all @transition-fast;
   border-radius: 0 @radius-sm @radius-sm 0;
+  word-break: normal;
+  overflow-wrap: break-word;
+  hyphens: manual;
+  line-height: 1.4;
 
   &:hover {
     color: @primary-color;

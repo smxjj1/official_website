@@ -3,38 +3,52 @@
     <div class="footer-container">
       <div class="footer-content">
         <div class="footer-brand">
-          <span class="brand-name">Oya Plastic Factory</span>
-          <p class="brand-tagline">Quality baby products for happy families</p>
+          <span class="brand-name">{{ $t('siteName') }}</span>
+          <p class="brand-tagline">{{ $t('footer.tagline') }}</p>
         </div>
         <div class="footer-links">
           <div class="link-group">
-            <h4>Products</h4>
-            <NuxtLink
-              v-for="category in categories"
-              :key="category.slug"
-              :to="`/products/${category.slug}`"
-            >
-              {{ category.name }}
+            <h4>{{ $t('nav.products') }}</h4>
+            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')">
+              {{ $t('nav.feedingBottles') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-sippy-cups')">
+              {{ $t('nav.sippyCups') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-tableware')">
+              {{ $t('nav.tableware') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-bath-potty')">
+              {{ $t('nav.bathPotty') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/baby-milk-powder-container')">
+              {{ $t('nav.milkPowderBox') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/other-accessory')">
+              {{ $t('nav.accessories') }}
             </NuxtLink>
           </div>
           <div class="link-group">
-            <h4>Company</h4>
-            <NuxtLink to="/about">About Us</NuxtLink>
-            <NuxtLink to="/contact-us">Contact</NuxtLink>
+            <h4>{{ $t('footer.company') }}</h4>
+            <NuxtLink :to="getLocalePath('/about-us')">
+              {{ $t('nav.about') }}
+            </NuxtLink>
+            <NuxtLink :to="getLocalePath('/contact-us')">
+              {{ $t('nav.contact') }}
+            </NuxtLink>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; {{ currentYear }} Oya Plastic Factory. All rights reserved.</p>
+        <p>&copy; {{ currentYear }} {{ $t('siteName') }}. {{ $t('footer.copyright') }}</p>
       </div>
     </div>
   </footer>
 </template>
 
 <script setup lang="ts">
-import { getAllCategories } from '~/data/product-categories'
+const { $t, getLocalePath } = useI18n()
 
-const categories = getAllCategories()
 const currentYear = new Date().getFullYear()
 </script>
 
@@ -42,7 +56,7 @@ const currentYear = new Date().getFullYear()
 @import '~/assets/css/variables.less';
 
 .footer {
-  background: #000000;
+  background: #070707;
   color: @card-background;
   margin-top: auto;
 }

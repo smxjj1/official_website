@@ -192,6 +192,11 @@
     "zhCN": "简",
     "zhTW": "繁"
   },
+  "footer": {
+    "tagline": "Quality baby products for happy families",
+    "company": "Company",
+    "copyright": "All rights reserved."
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Find answers to common questions about our baby products",

@@ -73,3 +73,10 @@
 - 默认启用 Nuxt DevTools，可在 `nuxt.config.ts` 中切换。
 - 若需要在 `shared/` 复用服务器逻辑，请确保仅导出与运行时兼容的代码。
 - 构建产物默认压缩并启用 `Nuxt Image` 的 WebP 输出，若部署目标不支持可在 `nuxt.config.ts` → `image.format` 中调整。
+
+## 生产环境变量（analytics）
+- 仅保留以下 3 个键（最终版）：
+  - `NUXT_PUBLIC_ANALYTICS_BASE_URL`（示例：`https://analytics.oyaplasticfactory.com`）
+  - `NUXT_PUBLIC_ANALYTICS_SITE_ID`（示例：`oyaplasticfactory.com`）
+  - `NUXT_PUBLIC_ANALYTICS_TOKEN`（可空，按后端鉴权策略配置）
+- 请以 `.env.production.example` 为唯一模板，避免使用历史字段名（如 `...ENDPOINT`、`...CONTACT_ENDPOINT`）。

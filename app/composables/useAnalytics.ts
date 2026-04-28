@@ -3,30 +3,48 @@
 
 export const useAnalytics = () => {
   const config = useRuntimeConfig()
-  const siteId = config.public.analyticsSiteId as string
+  const siteKey = config.public.analyticsSiteId as string
 
-  // Get the correct API endpoint based on environment
-  const getApiEndpoint = () => {
+  // Stats track endpoint
+  const getTrackEndpoint = () => {
     const baseUrl = config.public.analyticsBaseUrl as string
-    if (import.meta.dev) {
-      // In development, use the proxy path to avoid CORS
-      return '/api/contact'
-    }
-    // In production, use the full URL with dynamic suffix
-    return `${baseUrl}/api/contact`
+    return `${baseUrl}/api/stats/track`
   }
 
-  // Send analytics data (fire-and-forget)
-  const sendContactAnalytics = async (data: {
-    name: string
-    email: string
-    message: string
+  const getOrCreateStorageId = (storage: Storage, key: string, prefix: string) => {
+    let value = storage.getItem(key)
+    if (!value) {
+      value = `${prefix}_${Date.now()}_${Math.random().toString(36).slice(2, 10)}`
+      storage.setItem(key, value)
+    }
+    return value
+  }
+
+  const getAnonymousUserId = () => {
+    if (!import.meta.client) return `u_server_${Date.now()}`
+    return getOrCreateStorageId(localStorage, 'analytics_user_id', 'u')
+  }
+
+  const getSessionId = () => {
+    if (!import.meta.client) return `s_server_${Date.now()}`
+    return getOrCreateStorageId(sessionStorage, 'analytics_session_id', 's')
+  }
+
+  // Send analytics event (fire-and-forget)
+  const sendTrackEvent = async (payload: {
+    eventType: 'click' | 'pageview' | 'banner_view'
+    elementInfo?: Record<string, unknown>
   }) => {
     const token = config.public.analyticsToken as string
 
-    const payload = {
-      ...data,
-      website: siteId,
+    const body = {
+      userId: getAnonymousUserId(),
+      sessionId: getSessionId(),
+      siteKey,
+      eventType: payload.eventType,
+      url: import.meta.client ? window.location.href : '',
+      elementInfo: payload.elementInfo || {},
+      timestamp: new Date().toISOString(),
     }
 
     try {
@@ -38,10 +56,10 @@ export const useAnalytics = () => {
         headers.Authorization = `Bearer ${token}`
       }
 
-      const response = await fetch(getApiEndpoint(), {
+      const response = await fetch(getTrackEndpoint(), {
         method: 'POST',
         headers,
-        body: JSON.stringify(payload),
+        body: JSON.stringify(body),
       })
 
       if (!response.ok) {
@@ -53,7 +71,30 @@ export const useAnalytics = () => {
     }
   }
 
+  // Contact page semantic analytics wrapper
+  const sendContactAnalytics = async (data: {
+    action: string
+    form: string
+    subject?: string
+    reason?: string
+  }) => {
+    await sendTrackEvent({
+      eventType: 'click',
+      elementInfo: data,
+    })
+  }
+
+  const trackPageview = async (path = '') => {
+    await sendTrackEvent({
+      eventType: 'pageview',
+      elementInfo: {
+        path,
+      },
+    })
+  }
+
   return {
     sendContactAnalytics,
+    trackPageview,
   }
 }

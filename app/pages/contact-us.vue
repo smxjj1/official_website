@@ -221,6 +221,7 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { getAllCategories } from '~/data/product-categories'
 import { useAnalytics } from '~/composables/useAnalytics'
 
@@ -229,7 +230,7 @@ definePageMeta({
 })
 
 const { $t, getLocalePath } = useI18n()
-const { sendContactAnalytics } = useAnalytics()
+const { sendContactAnalytics, trackPageview } = useAnalytics()
 const config = useRuntimeConfig()
 const analyticsSiteId = config.public.analyticsSiteId as string
 
@@ -318,6 +319,12 @@ const handleSubmit = async () => {
   submitStatus.value = 'idle'
 
   try {
+    await sendContactAnalytics({
+      action: 'contact_submit_attempt',
+      form: 'contact_us',
+      subject: form.subject || 'other',
+    })
+
     // Main API call
     const response = await fetch(getApiEndpoint(), {
       method: 'POST',
@@ -345,10 +352,10 @@ const handleSubmit = async () => {
     submitStatus.value = 'success'
 
     // Fire analytics call (non-blocking)
-    sendContactAnalytics({
-      name: form.name,
-      email: form.email,
-      message: form.message,
+    await sendContactAnalytics({
+      action: 'contact_submit_success',
+      form: 'contact_us',
+      subject: form.subject || 'other',
     })
 
     // Reset form
@@ -362,10 +369,19 @@ const handleSubmit = async () => {
     }, 5000)
   } catch {
     submitStatus.value = 'error'
+    await sendContactAnalytics({
+      action: 'contact_submit_failed',
+      form: 'contact_us',
+      reason: 'request_failed',
+    })
   } finally {
     isSubmitting.value = false
   }
 }
+
+onMounted(() => {
+  trackPageview('/contact-us')
+})
 </script>
 
 <style lang="less" scoped>

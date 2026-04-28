@@ -10,7 +10,8 @@ export default defineNuxtConfig({
       siteUrl: 'https://yourdomain.com',
       siteName: 'Oya Plastic Factory',
       analyticsToken: process.env.NUXT_PUBLIC_ANALYTICS_TOKEN || '',
-      analyticsBaseUrl: 'https://analytics.oyaplasticfactory.com',
+      analyticsBaseUrl: process.env.NUXT_PUBLIC_ANALYTICS_BASE_URL || 'https://analytics.oyaplasticfactory.com',
+      analyticsSiteId: process.env.NUXT_PUBLIC_ANALYTICS_SITE_ID || 'oyaplasticfactory.com',
     },
   },
   eslint: {
@@ -22,22 +23,13 @@ export default defineNuxtConfig({
     quality: 80,
     format: ['webp'],
   },
-  nitro: {
-    compressPublicAssets: true,
-    devProxy: {
-      '/api/contact': {
-        target: 'https://analytics.oyaplasticfactory.com/api/contact',
-        changeOrigin: true,
-      },
-    },
-  },
   vite: {
     plugins: [
       tailwindcss({
         optimize: {
           minify: true,
         },
-      }),
+      }) as unknown as any,
     ],
     css: {
       preprocessorOptions: {

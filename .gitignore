@@ -24,6 +24,7 @@ logs
 !.env.example
 !.env.development
 !.env.production
+!.env.production.example
 server/prisma/generated
 server/prisma/migrations
 

@@ -231,6 +231,7 @@ definePageMeta({
 const { $t, getLocalePath } = useI18n()
 const { sendContactAnalytics } = useAnalytics()
 const config = useRuntimeConfig()
+const analyticsSiteId = config.public.analyticsSiteId as string
 
 useSeo({
   title: 'Contact Us | Oya Plastic Factory',
@@ -332,7 +333,7 @@ const handleSubmit = async () => {
         subject: form.subject,
         products: form.products,
         message: form.message,
-        website: 'oya',
+        website: analyticsSiteId,
       }),
     })
 

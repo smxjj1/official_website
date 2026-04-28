@@ -3,12 +3,7 @@
 
 export const useAnalytics = () => {
   const config = useRuntimeConfig()
-
-  // Generate dynamic website field: oya<timestamp>_Guangdong-Shenzhen
-  const generateWebsiteField = () => {
-    const timestamp = Date.now()
-    return `oya${timestamp}_Guangdong-Shenzhen`
-  }
+  const siteId = config.public.analyticsSiteId as string
 
   // Get the correct API endpoint based on environment
   const getApiEndpoint = () => {
@@ -29,23 +24,23 @@ export const useAnalytics = () => {
   }) => {
     const token = config.public.analyticsToken as string
 
-    if (!token) {
-      console.warn('[Analytics] Token not configured, skipping analytics call')
-      return
-    }
-
     const payload = {
       ...data,
-      website: generateWebsiteField(),
+      website: siteId,
     }
 
     try {
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      }
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`
+      }
+
       const response = await fetch(getApiEndpoint(), {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
+        headers,
         body: JSON.stringify(payload),
       })
 

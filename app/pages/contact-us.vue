@@ -221,7 +221,6 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { getAllCategories } from '~/data/product-categories'
 import { useAnalytics } from '~/composables/useAnalytics'
 
@@ -230,7 +229,7 @@ definePageMeta({
 })
 
 const { $t, getLocalePath } = useI18n()
-const { sendContactAnalytics, trackPageview } = useAnalytics()
+const { sendContactAnalytics } = useAnalytics()
 const config = useRuntimeConfig()
 const analyticsSiteId = config.public.analyticsSiteId as string
 
@@ -379,9 +378,6 @@ const handleSubmit = async () => {
   }
 }
 
-onMounted(() => {
-  trackPageview('/contact-us')
-})
 </script>
 
 <style lang="less" scoped>

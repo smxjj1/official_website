@@ -12,6 +12,10 @@ export default defineNuxtConfig({
       analyticsToken: process.env.NUXT_PUBLIC_ANALYTICS_TOKEN || '',
       analyticsBaseUrl: process.env.NUXT_PUBLIC_ANALYTICS_BASE_URL || 'https://analytics.oyaplasticfactory.com',
       analyticsSiteId: process.env.NUXT_PUBLIC_ANALYTICS_SITE_ID || 'oyaplasticfactory.com',
+      /** 为 true 时不发起任何上报（如本地调试） */
+      analyticsDisabled: process.env.NUXT_PUBLIC_ANALYTICS_DISABLED === 'true',
+      /** 为 true 时匿名用户 ID 仅存 sessionStorage，关闭标签后重置（偏隐私） */
+      analyticsSessionOnlyUser: process.env.NUXT_PUBLIC_ANALYTICS_SESSION_ONLY_USER === 'true',
     },
   },
   eslint: {

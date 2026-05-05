@@ -1,6 +1,6 @@
 <template>
   <section class="home-carousel">
-    <div class="carousel-container">
+    <div ref="carouselContainerRef" class="carousel-container">
       <!-- Slide Content -->
       <div class="carousel-track" :style="trackStyle">
         <div
@@ -78,8 +78,10 @@
 </template>
 
 <script setup lang="ts">
+import { nextTick } from 'vue'
 import { useProductAssets } from '~/composables/useProductAssets'
 import type { ProductAsset } from '~/composables/useProductAssets'
+import { useAnalytics } from '~/composables/useAnalytics'
 
 interface SlideData {
   category: string
@@ -91,9 +93,13 @@ interface SlideData {
 }
 
 const { getCategoryAssets } = useProductAssets()
+const { sendTrackEvent } = useAnalytics()
 
+const carouselContainerRef = ref<HTMLElement | null>(null)
 const currentIndex = ref(0)
+const bannerSlidesViewed = ref(new Set<number>())
 let autoPlayInterval: ReturnType<typeof setInterval> | null = null
+let bannerObserver: IntersectionObserver | null = null
 
 // Get sample images from each category
 const feedingBottles = getCategoryAssets('feeding-bottles')
@@ -187,15 +193,48 @@ const goToSlide = (index: number) => {
   currentIndex.value = index
 }
 
-// Auto-play
-onMounted(() => {
+// Auto-play + Banner 曝光（每张幻灯片首次可见约一半高度时上报一次）
+onMounted(async () => {
   autoPlayInterval = setInterval(nextSlide, 5000)
+
+  await nextTick()
+  const root = carouselContainerRef.value
+  const slideNodes = root?.querySelectorAll('.carousel-slide')
+  if (!slideNodes?.length)
+    return
+
+  bannerObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting || entry.intersectionRatio < 0.45)
+          continue
+        const idx = [...slideNodes].indexOf(entry.target as HTMLElement)
+        if (idx < 0 || bannerSlidesViewed.value.has(idx))
+          continue
+        bannerSlidesViewed.value.add(idx)
+        const slide = slides[idx]
+        void sendTrackEvent({
+          eventType: 'banner_view',
+          elementInfo: {
+            placement: 'home_carousel',
+            slideIndex: idx,
+            category: slide.category,
+          },
+        })
+      }
+    },
+    { threshold: [0, 0.45, 1] },
+  )
+
+  slideNodes.forEach((el) => bannerObserver!.observe(el))
 })
 
 onUnmounted(() => {
   if (autoPlayInterval) {
     clearInterval(autoPlayInterval)
   }
+  bannerObserver?.disconnect()
+  bannerObserver = null
 })
 </script>
 

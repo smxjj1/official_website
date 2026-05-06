@@ -45,7 +45,7 @@
         <!-- Image Grid Side -->
         <div class="image-side">
           <div class="image-grid" :class="`grid-${getGridStyle(index)}`">
-            <div v-for="(image, imgIndex) in category.images.slice(0, 4)" :key="imgIndex" class="image-card">
+            <div v-for="(image, imgIndex) in category.images.slice(0, 5)" :key="imgIndex" class="image-card">
               <img :src="image.src" :alt="image.alt" loading="lazy" />
             </div>
           </div>
@@ -164,13 +164,13 @@ const getCategoryLabel = (index: number): string => {
 
 // Layout variations: left, right, center
 const getLayoutType = (index: number): string => {
-  const layouts = ['left', 'right', 'center', 'left', 'right', 'left']
+  const layouts = ['left', 'right', 'left', 'center', 'right', 'left']
   return layouts[index] || 'left'
 }
 
 // Grid style variations - last category uses grid-a for larger images
 const getGridStyle = (index: number): string => {
-  const styles = ['a', 'b', 'c', 'a', 'b', 'a']
+  const styles = ['a', 'b', 'a', 'c', 'b', 'a']
   return styles[index] || 'a'
 }
 </script>

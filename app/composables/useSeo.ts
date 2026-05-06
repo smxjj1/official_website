@@ -13,7 +13,7 @@ export function useSeo(options: SeoOptions) {
   const config = useRuntimeConfig()
 
   const siteName = config.public.siteName || 'Oya Plastic Factory'
-  const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
+  const siteUrl = config.public.siteUrl || 'https://oyababies.com'
 
   const canonicalUrl = options.canonicalPath
     ? `${siteUrl}${options.canonicalPath}`
@@ -46,7 +46,7 @@ export function useProductCategorySeo(category: ProductCategory) {
   const config = useRuntimeConfig()
 
   const siteName = config.public.siteName || 'Oya Plastic Factory'
-  const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
+  const siteUrl = config.public.siteUrl || 'https://oyababies.com'
 
   const canonicalUrl = `${siteUrl}${route.path}`
   const fullTitle = `${category.title} | ${siteName}`
@@ -89,7 +89,7 @@ export function useProductCategorySeo(category: ProductCategory) {
 export function useHomeSeo() {
   const config = useRuntimeConfig()
   const siteName = config.public.siteName || 'Oya Plastic Factory'
-  const siteUrl = config.public.siteUrl || 'https://yourdomain.com'
+  const siteUrl = config.public.siteUrl || 'https://oyababies.com'
 
   useSeo({
     title: 'Premium Baby Products | Feeding, Bath & More',

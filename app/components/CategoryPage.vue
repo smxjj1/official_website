@@ -217,7 +217,7 @@
 </template>
 
 <script setup lang="ts">
-import productsData from '~/data/products.json'
+import { useProductCatalog } from '~/composables/useProducts'
 
 const props = defineProps<{
   categorySlug: string
@@ -230,6 +230,9 @@ definePageMeta({
 })
 
 const { $t, getLocalePath } = useI18n()
+
+const categorySlugRef = toRef(props, 'categorySlug')
+const { products: allProducts, totalProducts } = useProductCatalog(categorySlugRef)
 
 interface ProductSpecs {
   pcsPerCtn: number | null
@@ -267,9 +270,6 @@ useSeo({
   description: props.pageDescription,
 })
 
-const allProducts = productsData.products.filter(p => p.categorySlug === props.categorySlug) as Product[]
-const totalProducts = allProducts.length
-
 // Map subcategory names to i18n keys
 const getSubcategoryKey = (subcategory: string): string => {
   const keyMap: Record<string, string> = {
@@ -302,7 +302,7 @@ const groupedProducts = computed(() => {
   const groups: { subcategory: string; subcategoryKey: string; products: Product[] }[] = []
   const groupMap = new Map<string, Product[]>()
 
-  for (const product of allProducts) {
+  for (const product of allProducts.value) {
     const subcat = product.subcategory || 'General'
     if (!groupMap.has(subcat)) {
       groupMap.set(subcat, [])

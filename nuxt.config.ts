@@ -16,6 +16,10 @@ export default defineNuxtConfig({
       analyticsDisabled: process.env.NUXT_PUBLIC_ANALYTICS_DISABLED === 'true',
       /** 为 true 时匿名用户 ID 仅存 sessionStorage，关闭标签后重置（偏隐私） */
       analyticsSessionOnlyUser: process.env.NUXT_PUBLIC_ANALYTICS_SESSION_ONLY_USER === 'true',
+      /** 产品 CMS（analytics-platform /api/public） */
+      cmsSiteKey: process.env.NUXT_PUBLIC_CMS_SITE_KEY || 'oyababies.com',
+      cmsApi: process.env.NUXT_PUBLIC_CMS_API || 'https://analytics.oyababies.com/api/public',
+      cmsMediaBase: process.env.NUXT_PUBLIC_CMS_MEDIA_BASE || 'https://analytics.oyababies.com/media',
     },
   },
   eslint: {

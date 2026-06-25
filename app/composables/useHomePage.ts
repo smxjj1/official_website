@@ -1,4 +1,4 @@
-import productsData from '~/data/products.json'
+import { useProductCatalog } from '~/composables/useProducts'
 import { useCategoryImages } from '~/composables/useCategoryImages'
 
 const HOME_CATEGORY_SLUGS = [
@@ -43,18 +43,17 @@ const GRID_STYLES = ['a', 'b', 'a', 'c', 'b', 'a']
 export function useHomePage() {
   const { $t, getLocalePath } = useI18n()
   const { getAllCategoryImages } = useCategoryImages()
+  const { categories: cmsCategories, totalProducts } = useProductCatalog()
 
   const categories = computed(() => getAllCategoryImages.value)
 
   const productCountMap = computed(() => {
     const map: Record<string, number> = {}
-    for (const cat of productsData.categories) {
+    for (const cat of cmsCategories.value) {
       map[cat.slug] = cat.count
     }
     return map
   })
-
-  const totalProducts = computed(() => productsData.totalProducts)
 
   const getCategoryLink = (slug: string): string => {
     return CATEGORY_ROUTE_MAP[slug] || '/other-accessory'

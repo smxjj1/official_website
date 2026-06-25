@@ -2906,8 +2906,8 @@
     {
       "id": 79,
       "itemNo": "XTQ6360",
-      "name": "baby  stainless still  spoon and fork  set                                            Materia:PP,...",
-      "description": "baby  stainless still  spoon and fork  set                                            Materia:PP,  stainless  still",
+      "name": "baby  stainless still  spoon and fork  set (Materia:PP, stainless still)",
+      "description": "baby  stainless still  spoon and fork  set (Materia:PP, stainless still)",
       "material": "PP",
       "capacity": "",
       "subcategory": "Tableware set",
@@ -2980,9 +2980,9 @@
       "subFolder": "feeding-bottle-set",
       "category": "Baby Feeding Bottles",
       "categorySlug": "baby-feeding-bottles",
-      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-set/8008-1.png",
+      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-set/8008-1.jpg",
       "gallery": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-set/8008-1.png",
+        "/images/products/baby-feeding-bottles/feeding-bottle-set/8008-1.jpg",
         "/images/products/baby-feeding-bottles/feeding-bottle-set/8008-2.png"
       ],
       "images": [
@@ -3746,9 +3746,9 @@
       "subFolder": "feeding-bottle-pp",
       "category": "Baby Feeding Bottles",
       "categorySlug": "baby-feeding-bottles",
-      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-1.jpg",
+      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-1.png",
       "gallery": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-1.jpg",
+        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-1.png",
         "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-2.jpg",
         "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6001-3.jpg"
       ],
@@ -3767,43 +3767,6 @@
         "height": 41,
         "pcs20gp": 24777,
         "pcs40hq": 60174,
-        "moq": 3000,
-        "hsCode": "39241000",
-        "remark": "*without tube and gravity ball price"
-      }
-    },
-    {
-      "id": 104,
-      "itemNo": "XTQ6002",
-      "name": "300ml PP standard neck feeding bottle with handles",
-      "description": "300ml PP standard neck feeding bottle with handles",
-      "material": "PP",
-      "capacity": "300ml",
-      "subcategory": "Feeding Bottle- PP",
-      "subFolder": "feeding-bottle-pp",
-      "category": "Baby Feeding Bottles",
-      "categorySlug": "baby-feeding-bottles",
-      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-1.jpg",
-      "gallery": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-3.jpg"
-      ],
-      "images": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-pp/XTQ6002-3.jpg"
-      ],
-      "specs": {
-        "pcsPerCtn": 72,
-        "nw": 8,
-        "gw": 10,
-        "ctnSize": "67*42.5*44.5",
-        "length": 67,
-        "width": 42.5,
-        "height": 44.5,
-        "pcs20gp": 15910,
-        "pcs40hq": 38638,
         "moq": 3000,
         "hsCode": "39241000",
         "remark": "*without tube and gravity ball price"
@@ -5395,43 +5358,6 @@
       }
     },
     {
-      "id": 150,
-      "itemNo": "XTQ6054",
-      "name": "240ml Glass wide neck bottle with silicon base",
-      "description": "240ml Glass wide neck bottle with silicon base",
-      "material": "Glass",
-      "capacity": "240ml",
-      "subcategory": "Feeding Bottle- Glass",
-      "subFolder": "feeding-bottle-glass",
-      "category": "Baby Feeding Bottles",
-      "categorySlug": "baby-feeding-bottles",
-      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-1.jpg",
-      "gallery": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-3.jpg"
-      ],
-      "images": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/XTQ6054-3.jpg"
-      ],
-      "specs": {
-        "pcsPerCtn": 48,
-        "nw": 10,
-        "gw": 12,
-        "ctnSize": "51.5*41.7*47.5",
-        "length": 51.5,
-        "width": 41.4,
-        "height": 47.5,
-        "pcs20gp": 13271,
-        "pcs40hq": 32229,
-        "moq": 3000,
-        "hsCode": "70109090",
-        "remark": null
-      }
-    },
-    {
       "id": 151,
       "itemNo": "AYK8220",
       "name": "150ml Wide Neck Glass Bottle",
@@ -5745,43 +5671,6 @@
         "height": 50.5,
         "pcs20gp": 17038,
         "pcs40hq": 41379,
-        "moq": 3000,
-        "hsCode": "70109090",
-        "remark": null
-      }
-    },
-    {
-      "id": 160,
-      "itemNo": "A-86",
-      "name": "240ML wide-neck scald guard crystal glass baby bottle",
-      "description": "240ML wide-neck scald guard crystal glass baby bottle& d6.1*21.5, 279g.&High borosilicate glass, PP,  silica gel nipple& yellow, blue, pink",
-      "material": "glass",
-      "capacity": "240ml",
-      "subcategory": "Feeding Bottle- Glass",
-      "subFolder": "feeding-bottle-glass",
-      "category": "Baby Feeding Bottles",
-      "categorySlug": "baby-feeding-bottles",
-      "mainImage": "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-1.jpg",
-      "gallery": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-3.jpg"
-      ],
-      "images": [
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-1.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-2.jpg",
-        "/images/products/baby-feeding-bottles/feeding-bottle-glass/A-86-3.jpg"
-      ],
-      "specs": {
-        "pcsPerCtn": 48,
-        "nw": 14,
-        "gw": 16,
-        "ctnSize": "47*45*51.5",
-        "length": 47,
-        "width": 45,
-        "height": 51.5,
-        "pcs20gp": 12339,
-        "pcs40hq": 29966,
         "moq": 3000,
         "hsCode": "70109090",
         "remark": null

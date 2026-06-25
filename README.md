@@ -76,7 +76,8 @@
 
 ## 生产环境变量（analytics）
 - 仅保留以下 3 个键（最终版）：
-  - `NUXT_PUBLIC_ANALYTICS_BASE_URL`（示例：`https://analytics.oyaplasticfactory.com`）
-  - `NUXT_PUBLIC_ANALYTICS_SITE_ID`（示例：`oyaplasticfactory.com`）
+  - `NUXT_PUBLIC_ANALYTICS_BASE_URL`（示例：`https://analytics.oyababies.com`）
+  - `NUXT_PUBLIC_ANALYTICS_SITE_ID`（生产与开发均为 `oyababies.com`，须与 analytics 后台 `site_key` 一致）
+  - `NUXT_PUBLIC_SITE_URL`（生产与开发建议均设为 `https://oyababies.com`，勿带末尾 `/`，用于 canonical / SEO）
   - `NUXT_PUBLIC_ANALYTICS_TOKEN`（可空，按后端鉴权策略配置）
 - 请以 `.env.production.example` 为唯一模板，避免使用历史字段名（如 `...ENDPOINT`、`...CONTACT_ENDPOINT`）。

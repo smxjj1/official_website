@@ -7,11 +7,11 @@ export default defineNuxtConfig({
   css: ['~/assets/css/theme.css', '~/assets/css/tailwind.css', '~/assets/css/global.css', '~/assets/iconfont/iconfont.css'],
   runtimeConfig: {
     public: {
-      siteUrl: 'https://yourdomain.com',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://oyababies.com',
       siteName: 'Oya Plastic Factory',
       analyticsToken: process.env.NUXT_PUBLIC_ANALYTICS_TOKEN || '',
-      analyticsBaseUrl: process.env.NUXT_PUBLIC_ANALYTICS_BASE_URL || 'https://analytics.oyaplasticfactory.com',
-      analyticsSiteId: process.env.NUXT_PUBLIC_ANALYTICS_SITE_ID || 'oyaplasticfactory.com',
+      analyticsBaseUrl: process.env.NUXT_PUBLIC_ANALYTICS_BASE_URL || 'https://analytics.oyababies.com',
+      analyticsSiteId: process.env.NUXT_PUBLIC_ANALYTICS_SITE_ID || 'oyababies.com',
       /** 为 true 时不发起任何上报（如本地调试） */
       analyticsDisabled: process.env.NUXT_PUBLIC_ANALYTICS_DISABLED === 'true',
       /** 为 true 时匿名用户 ID 仅存 sessionStorage，关闭标签后重置（偏隐私） */

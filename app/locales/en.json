@@ -10,7 +10,8 @@
     "bathPotty": "Bath & Potty",
     "milkPowderBox": "Milk Powder Box",
     "accessories": "Accessories",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "news": "News"
   },
   "home": {
     "heroTitle": "Quality Baby Products for Happy Families",
@@ -340,5 +341,19 @@
         "answer": "Each product page includes recommended age ranges and developmental milestones. Generally, newborns start with slow-flow nipples, transitioning to faster flows as they grow. Our sippy cups and tableware are designed for babies 6 months and older starting solids."
       }
     ]
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Company updates and industry insights",
+    "metaTitle": "News",
+    "metaDescription": "Latest company news and baby products industry updates from Oya Plastic Factory.",
+    "tabs": {
+      "company": "Company News",
+      "industry": "Industry Insights"
+    },
+    "loading": "Loading…",
+    "empty": "No news articles yet. Please check back soon.",
+    "views": "{count} views",
+    "download": "Download"
   }
 }

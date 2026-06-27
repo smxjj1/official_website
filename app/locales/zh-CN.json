@@ -10,7 +10,8 @@
     "bathPotty": "洗浴盆",
     "milkPowderBox": "奶粉盒",
     "accessories": "配件",
-    "contact": "联系我们"
+    "contact": "联系我们",
+    "news": "新闻中心"
   },
   "home": {
     "heroTitle": "优质婴童产品 成就幸福家庭",
@@ -339,5 +340,19 @@
         "answer": "每个产品页面都标注了推荐适用年龄和发展里程碑。一般来说，新生儿从慢流速奶嘴开始，随着成长逐渐过渡到快流速奶嘴。我们的学饮杯和餐具适用于6个月以上开始添加辅食的宝宝。"
       }
     ]
+  },
+  "news": {
+    "title": "新闻中心",
+    "subtitle": "了解公司动态与行业资讯",
+    "metaTitle": "新闻中心",
+    "metaDescription": "欧亚塑料工厂最新公司新闻与婴童行业资讯。",
+    "tabs": {
+      "company": "公司新闻",
+      "industry": "行业资讯"
+    },
+    "loading": "加载中…",
+    "empty": "暂无新闻，请稍后再来查看。",
+    "views": "{count} 次浏览",
+    "download": "下载附件"
   }
 }

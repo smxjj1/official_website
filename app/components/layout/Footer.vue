@@ -89,6 +89,9 @@
               <NuxtLink :to="getLocalePath('/about-us')">{{ $t('nav.about') }}</NuxtLink>
             </li>
             <li>
+              <NuxtLink :to="getLocalePath('/news')">{{ $t('nav.news') }}</NuxtLink>
+            </li>
+            <li>
               <NuxtLink :to="getLocalePath('/contact-us')">{{ $t('nav.contact') }}</NuxtLink>
             </li>
           </ul>

@@ -29,7 +29,68 @@
     "builtToLastText": "Durable materials and quality construction mean our products grow with your family.",
     "readyToExplore": "Ready to Explore?",
     "readyToExploreText": "Browse our complete collection and find the perfect products for your little one.",
-    "viewAllProducts": "View All Products"
+    "viewAllProducts": "View All Products",
+    "hero": {
+      "slides": [
+        {
+          "title": "Quality Baby Products for Happy Families",
+          "subtitle": "Safe, thoughtfully designed products that support your baby's growth and make parenting easier.",
+          "primaryCta": "Explore Products",
+          "secondaryCta": "Contact Us"
+        },
+        {
+          "title": "Safety You Can Trust",
+          "subtitle": "BPA-free, food-grade materials tested to international standards for your peace of mind.",
+          "primaryCta": "Explore Safe Products"
+        },
+        {
+          "title": "Smart Design for Real Parents",
+          "subtitle": "Ergonomic feeding solutions that make everyday care simpler and more comfortable.",
+          "primaryCta": "View Sippy Cups"
+        },
+        {
+          "title": "20+ Years of Manufacturing Excellence",
+          "subtitle": "Trusted OEM/ODM partner serving brands in 60+ countries worldwide.",
+          "primaryCta": "About Us"
+        },
+        {
+          "title": "Partner With Us",
+          "subtitle": "Wholesale, customization, and bulk orders with reliable quality and delivery.",
+          "primaryCta": "Contact Us"
+        }
+      ]
+    },
+    "categories": {
+      "subtitleTag": "Product Catalog",
+      "title": "Complete Baby Products & Accessories Collection",
+      "subtitle": "Our range covers feeding bottles, sippy cups, tableware, bath products, milk powder containers, and accessories — one-stop sourcing for home and retail.",
+      "viewAllCta": "View All Products"
+    },
+    "featured": {
+      "subtitleTag": "Product Lines",
+      "title": "Explore Every Category in Detail",
+      "subtitle": "From newborn feeding to toddler independence — discover our thoughtfully designed product lines for every stage."
+    },
+    "benefitsSection": {
+      "subtitleTag": "Why Choose Us",
+      "title": "Safety, Design & Quality You Can Trust",
+      "subtitle": "Every product reflects our commitment to safe materials, practical design, and durable construction for growing families."
+    },
+    "trust": {
+      "stats": [
+        { "value": "400+", "label": "Products" },
+        { "value": "20+", "label": "Years Experience" },
+        { "value": "60+", "label": "Countries Served" },
+        { "value": "ISO", "label": "Certified Quality" }
+      ]
+    },
+    "ctaBottom": {
+      "tag": "Get in Touch",
+      "title": "Looking for a Reliable Baby Products Supplier?",
+      "description": "We provide cost-effective solutions for wholesale, OEM/ODM, and bulk orders — from catalog selection to custom product development.",
+      "primaryCta": "Browse Products",
+      "secondaryCta": "Contact Us"
+    }
   },
   "benefits": {
     "safetyFirst": {
@@ -222,17 +283,29 @@
   },
   "faq": {
     "title": "Frequently Asked Questions",
-    "subtitle": "Find answers to common questions about our baby products",
+    "subtitle": "Learn about our product range, quality control, and partnership services",
     "stillHaveQuestions": "Still have questions?",
     "contactTeam": "Contact Our Team",
     "items": [
       {
-        "question": "Are your products BPA-free and safe for babies?",
-        "answer": "Yes, all our products are made from BPA-free, non-toxic materials. We use food-grade PP, PPSU, and silicone that meet international safety standards including FDA, LFGB, and EN14350. Safety is our top priority for your little ones."
+        "question": "What can you buy from us?",
+        "answer": "Baby feeding bottles, baby training bottles, baby tableware, baby bathtub & potty, baby care products, and more."
       },
       {
-        "question": "What materials do you use for your feeding bottles?",
-        "answer": "We offer feeding bottles in three materials: PPSU (polyphenylsulfone) known for its durability and heat resistance, PP (polypropylene) for lightweight everyday use, and glass for parents who prefer natural materials. All are free from harmful chemicals."
+        "question": "How does your factory handle quality control?",
+        "answer": "We operate a standard QC system to control quality throughout production. We always provide a pre-production sample before mass production, and always perform final inspection before shipment."
+      },
+      {
+        "question": "What services can we provide?",
+        "answer": "Own design team, full production processes, fast delivery and mold making, and quality assurance.\n\nAccepted Delivery Terms: FOB, CIF, EXW, FCA, Express Delivery\nAccepted Payment Currency: USD, EUR, HKD, CNY\nAccepted Payment Type: T/T, L/C, PayPal, Cash, Escrow\nLanguage Spoken: English, Chinese"
+      },
+      {
+        "question": "What materials do you use for your baby products?",
+        "answer": "All materials are food-grade. Our main materials include PPSU, Tritan, PP, silicone, 304/316 stainless steel, TPE, and more."
+      },
+      {
+        "question": "Are your products BPA-free and safe for babies?",
+        "answer": "Yes, all our products are made from BPA-free, non-toxic materials. We use food-grade PP, PPSU, and silicone that meet international safety standards including FDA, LFGB, and EN14350. Safety is our top priority for your little ones."
       },
       {
         "question": "Do you ship internationally?",

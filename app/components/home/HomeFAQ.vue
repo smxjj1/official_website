@@ -1,8 +1,10 @@
 <template>
   <section class="home-faq">
     <div class="faq-container">
-      <h2 class="faq-title">{{ $t('faq.title') }}</h2>
-      <p class="faq-subtitle">{{ $t('faq.subtitle') }}</p>
+      <HomeSectionHeader
+        :title="$t('faq.title')"
+        :description="$t('faq.subtitle')"
+      />
 
       <div class="faq-list">
         <div
@@ -34,7 +36,7 @@
 
       <div class="faq-cta">
         <p>{{ $t('faq.stillHaveQuestions') }}</p>
-        <NuxtLink :to="getLocalePath('/contact')" class="contact-link">
+        <NuxtLink :to="getLocalePath('/contact-us')" class="contact-link">
           {{ $t('faq.contactTeam') }}
         </NuxtLink>
       </div>
@@ -89,29 +91,9 @@ const toggleItem = (index: number) => {
   @media (max-width: @breakpoint-tablet) {
     padding: 0 @spacing-md;
   }
-}
 
-.faq-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: @text-color;
-  text-align: center;
-  margin: 0 0 @spacing-sm;
-
-  @media (max-width: @breakpoint-tablet) {
-    font-size: 1.5rem;
-  }
-}
-
-.faq-subtitle {
-  font-size: 1rem;
-  color: @text-light;
-  text-align: center;
-  margin: 0 0 @spacing-xl;
-
-  @media (max-width: @breakpoint-tablet) {
-    font-size: 0.9rem;
-    margin-bottom: @spacing-lg;
+  :deep(.section-header) {
+    margin-bottom: @spacing-xl;
   }
 }
 
@@ -187,6 +169,7 @@ const toggleItem = (index: number) => {
     line-height: 1.7;
     color: @text-light;
     margin: 0;
+    white-space: pre-line;
   }
 }
 

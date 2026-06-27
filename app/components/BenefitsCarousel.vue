@@ -1,6 +1,13 @@
 <template>
   <section class="benefits-carousel">
     <div class="carousel-container">
+      <HomeSectionHeader
+        class="benefits-header"
+        :subtitle="$t('home.benefitsSection.subtitleTag')"
+        :title="$t('home.benefitsSection.title')"
+        :description="$t('home.benefitsSection.subtitle')"
+      />
+
       <!-- Slide Viewport -->
       <div class="carousel-viewport">
         <!-- Slides -->
@@ -175,6 +182,10 @@ onUnmounted(() => {
 
   @media (max-width: @breakpoint-tablet) {
     padding: 0 @spacing-md;
+  }
+
+  :deep(.benefits-header) {
+    margin-bottom: @spacing-xxl;
   }
 }
 

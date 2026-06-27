@@ -27,7 +27,69 @@
     "builtToLast": "经久耐用",
     "builtToLastText": "优质材料与精湛工艺，让我们的产品陪伴您的家庭成长。",
     "readyToExplore": "准备好探索了吗？",
-    "readyToExploreText": "浏览我们的完整产品系列，为您的宝宝找到最合适的产品。"
+    "readyToExploreText": "浏览我们的完整产品系列，为您的宝宝找到最合适的产品。",
+    "viewAllProducts": "查看全部产品",
+    "hero": {
+      "slides": [
+        {
+          "title": "优质婴童产品 成就幸福家庭",
+          "subtitle": "安全、精心设计的产品，陪伴宝宝成长，让育儿更轻松。",
+          "primaryCta": "浏览产品",
+          "secondaryCta": "联系我们"
+        },
+        {
+          "title": "安全材质 值得信赖",
+          "subtitle": "不含 BPA，食品级材料，通过国际安全标准检测，让您安心。",
+          "primaryCta": "了解安全产品"
+        },
+        {
+          "title": "为父母而设计的智慧方案",
+          "subtitle": "人体工学喂养设计，让日常护理更简单、更舒适。",
+          "primaryCta": "查看学饮杯"
+        },
+        {
+          "title": "20 余年制造经验",
+          "subtitle": "值得信赖的 OEM/ODM 合作伙伴，产品销往 60 多个国家和地区。",
+          "primaryCta": "关于我们"
+        },
+        {
+          "title": "期待与您合作",
+          "subtitle": "批发、定制与大批量订单，稳定品质，准时交付。",
+          "primaryCta": "联系我们"
+        }
+      ]
+    },
+    "categories": {
+      "subtitleTag": "产品目录",
+      "title": "全系列婴童产品与配件",
+      "subtitle": "涵盖奶瓶、学饮杯、餐具、洗浴用品、奶粉盒及配件，满足家庭与零售一站式采购需求。",
+      "viewAllCta": "查看全部产品"
+    },
+    "featured": {
+      "subtitleTag": "产品系列",
+      "title": "深入了解每个品类",
+      "subtitle": "从新生儿喂养到幼儿独立 — 探索我们为每个成长阶段精心设计的产品线。"
+    },
+    "benefitsSection": {
+      "subtitleTag": "选择我们的理由",
+      "title": "安全、设计与品质兼备",
+      "subtitle": "每一款产品都体现我们对安全材质、实用设计与耐用品质的追求。"
+    },
+    "trust": {
+      "stats": [
+        { "value": "400+", "label": "款产品" },
+        { "value": "20+", "label": "年制造经验" },
+        { "value": "60+", "label": "出口国家" },
+        { "value": "ISO", "label": "质量认证" }
+      ]
+    },
+    "ctaBottom": {
+      "tag": "联系我们",
+      "title": "正在寻找可靠的婴童产品供应商？",
+      "description": "我们提供批发、OEM/ODM 及大批量订单的高性价比方案，从目录选型到定制开发全程支持。",
+      "primaryCta": "浏览产品",
+      "secondaryCta": "联系我们"
+    }
   },
   "benefits": {
     "safetyFirst": {
@@ -220,17 +282,29 @@
   },
   "faq": {
     "title": "常见问题",
-    "subtitle": "了解关于我们婴儿产品的常见问题解答",
+    "subtitle": "了解我们的产品范围、质量管控与合作服务",
     "stillHaveQuestions": "还有问题？",
     "contactTeam": "联系我们的团队",
     "items": [
       {
-        "question": "你们的产品是否不含BPA，安全可靠吗？",
-        "answer": "是的，我们所有产品均采用不含BPA、无毒害材料制造。我们使用食品级PP、PPSU和硅胶，符合FDA、LFGB和EN14350等国际安全标准。宝宝的安全是我们的首要考虑。"
+        "question": "可以从我们这里采购哪些产品？",
+        "answer": "婴儿奶瓶、训练杯/学饮杯、婴儿餐具、婴儿浴盆与坐便器、婴儿护理用品等。"
       },
       {
-        "question": "你们奶瓶使用什么材质？",
-        "answer": "我们提供三种材质的奶瓶：PPSU（聚苯砜）以其耐用性和耐热性著称，PP（聚丙烯）适合日常轻量使用，玻璃材质则适合偏好天然材料的父母。所有材质均不含有害化学物质。"
+        "question": "工厂如何进行质量控制？",
+        "answer": "我们采用标准 QC 体系全程管控质量。量产前必定提供产前样；出货前必定进行最终检验。"
+      },
+      {
+        "question": "我们可以提供哪些服务？",
+        "answer": "自主设计团队、完整生产流程、快速交期与模具制作、质量保障。\n\n可接受交货条款：FOB、CIF、EXW、FCA、快递交货\n可接受付款货币：USD、EUR、HKD、CNY\n可接受付款方式：T/T、L/C、PayPal、Cash、Escrow\n使用语言：英语、中文"
+      },
+      {
+        "question": "婴童产品使用什么材料？",
+        "answer": "所有材料均为食品级。主要材料包括 PPSU、Tritan、PP、硅胶、304/316 不锈钢、TPE 等。"
+      },
+      {
+        "question": "你们的产品是否不含BPA，安全可靠吗？",
+        "answer": "是的，我们所有产品均采用不含BPA、无毒害材料制造。我们使用食品级PP、PPSU和硅胶，符合FDA、LFGB和EN14350等国际安全标准。宝宝的安全是我们的首要考虑。"
       },
       {
         "question": "你们支持国际发货吗？",

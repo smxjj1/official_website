@@ -1,19 +1,20 @@
 <template>
   <section class="category-grid-section">
     <div class="section-container">
-      <div class="section-header">
-        <h2 class="section-title">{{ $t('home.categories.title') }}</h2>
-        <p class="section-subtitle">{{ $t('home.categories.subtitle') }}</p>
-      </div>
+      <HomeSectionHeader
+        :subtitle="$t('home.categories.subtitleTag')"
+        :title="$t('home.categories.title')"
+        :description="$t('home.categories.subtitle')"
+      />
 
-      <div class="category-grid">
+      <div class="products-grid">
         <NuxtLink
           v-for="category in categories"
           :key="category.slug"
           :to="getLocalePath(getCategoryLink(category.slug))"
-          class="category-card"
+          class="product-item"
         >
-          <div class="card-image">
+          <div class="product-image">
             <img
               v-if="category.images[0]"
               :src="category.images[0].src"
@@ -21,12 +22,19 @@
               loading="lazy"
             >
           </div>
-          <div class="card-body">
-            <h3 class="card-title">{{ category.name }}</h3>
-            <span class="card-count">
+          <div class="product-content">
+            <h3>{{ category.name }}</h3>
+            <p>
               {{ getCategoryProductCount(category.slug) }} {{ $t('home.products') }}
-            </span>
+              · {{ getCategoryDescription(category.slug) }}
+            </p>
           </div>
+        </NuxtLink>
+      </div>
+
+      <div class="cta-wrapper">
+        <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="cta-btn">
+          {{ $t('home.categories.viewAllCta') }}
         </NuxtLink>
       </div>
     </div>
@@ -34,11 +42,11 @@
 </template>
 
 <script setup lang="ts">
-const { $t } = useI18n()
 const {
   categories,
   getCategoryLink,
   getCategoryProductCount,
+  getCategoryDescription,
   getLocalePath,
 } = useHomePage()
 </script>
@@ -51,7 +59,7 @@ const {
   background: @card-background;
 
   @media (max-width: @breakpoint-tablet) {
-    padding: 60px 0;
+    padding: 72px 0;
   }
 }
 
@@ -65,40 +73,11 @@ const {
   }
 }
 
-.section-header {
-  text-align: center;
-  margin-bottom: @spacing-xxl;
-
-  @media (max-width: @breakpoint-tablet) {
-    margin-bottom: @spacing-xl;
-  }
-}
-
-.section-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: @text-color;
-  margin: 0 0 @spacing-sm;
-
-  @media (max-width: @breakpoint-tablet) {
-    font-size: 1.75rem;
-  }
-}
-
-.section-subtitle {
-  font-size: 1rem;
-  color: @text-light;
-  margin: 0;
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.category-grid {
+.products-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: @spacing-lg;
+  margin-bottom: @spacing-xxl;
 
   @media (max-width: @breakpoint-desktop) {
     grid-template-columns: repeat(2, 1fr);
@@ -109,28 +88,27 @@ const {
   }
 }
 
-.category-card {
+.product-item {
+  position: relative;
   display: block;
-  text-decoration: none;
-  background: @background-color;
-  border-radius: @radius-lg;
+  border-radius: @radius-md;
   overflow: hidden;
-  border: 1px solid @border-light;
-  transition: transform @transition-normal, box-shadow @transition-normal;
+  text-decoration: none;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(74, 64, 58, 0.12);
+    .product-image img {
+      transform: scale(1.08);
+    }
 
-    .card-image img {
-      transform: scale(1.05);
+    .product-content {
+      background: @primary-color;
     }
   }
 }
 
-.card-image {
-  aspect-ratio: 4/3;
+.product-image {
   overflow: hidden;
+  height: 280px;
   background: @devide-background;
 
   img {
@@ -139,22 +117,58 @@ const {
     object-fit: cover;
     transition: transform 0.5s ease;
   }
+
+  @media (max-width: @breakpoint-mobile) {
+    height: 220px;
+  }
 }
 
-.card-body {
-  padding: @spacing-md @spacing-lg @spacing-lg;
+.product-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: @spacing-lg @spacing-xl;
+  background: rgba(74, 64, 58, 0.92);
+  transition: background 0.35s ease;
+
+  h3 {
+    font-size: 1.375rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 @spacing-xs;
+  }
+
+  p {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.82);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
-.card-title {
-  font-size: 1.125rem;
+.cta-wrapper {
+  text-align: center;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: @spacing-md @spacing-xxl;
+  background: @primary-color;
+  color: white;
+  font-size: 1.0625rem;
   font-weight: 600;
-  color: @text-color;
-  margin: 0 0 @spacing-xs;
-}
+  border-radius: @radius-sm;
+  text-decoration: none;
+  transition: background @transition-fast, transform @transition-fast;
 
-.card-count {
-  font-size: 0.875rem;
-  color: @secondary-color;
-  font-weight: 500;
+  &:hover {
+    background: lighten(@primary-color, 6%);
+    transform: translateY(-2px);
+  }
 }
 </style>

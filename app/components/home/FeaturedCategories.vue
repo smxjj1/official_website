@@ -1,11 +1,22 @@
 <template>
-  <section
-    v-for="(category, index) in categories"
-    :key="category.slug"
-    class="category-section"
-    :class="[`layout-${getLayoutType(index)}`, `section-${index + 1}`]"
-  >
-    <div class="section-inner">
+  <div class="featured-categories">
+    <section class="featured-intro">
+      <div class="intro-container">
+        <HomeSectionHeader
+          :subtitle="$t('home.featured.subtitleTag')"
+          :title="$t('home.featured.title')"
+          :description="$t('home.featured.subtitle')"
+        />
+      </div>
+    </section>
+
+    <section
+      v-for="(category, index) in categories"
+      :key="category.slug"
+      class="category-section"
+      :class="[`layout-${getLayoutType(index)}`, `section-${index + 1}`]"
+    >
+      <div class="section-inner">
       <div class="content-side">
         <span class="category-label">{{ getCategoryLabel(index) }}</span>
         <h2 class="category-title">{{ category.name }}</h2>
@@ -34,7 +45,8 @@
         </div>
       </div>
     </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -52,6 +64,29 @@ const {
 
 <style lang="less" scoped>
 @import '~/assets/css/variables.less';
+
+.featured-categories {
+  overflow: hidden;
+}
+
+.featured-intro {
+  padding: 100px 0 0;
+  background: @devide-background;
+
+  @media (max-width: @breakpoint-tablet) {
+    padding-top: 72px;
+  }
+}
+
+.intro-container {
+  max-width: @breakpoint-wide;
+  margin: 0 auto;
+  padding: 0 @spacing-xl;
+
+  @media (max-width: @breakpoint-tablet) {
+    padding: 0 @spacing-md;
+  }
+}
 
 .category-section {
   padding: 100px 0;

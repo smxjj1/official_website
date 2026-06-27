@@ -168,7 +168,7 @@ definePageMeta({
 })
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
 .news-page {
   background: #f8fafc;
 }

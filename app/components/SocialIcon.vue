@@ -5,10 +5,10 @@
     :aria-label="decorative ? undefined : ariaLabel"
   >
     <img
-      v-if="iconSource === 'upload' && iconUrl"
+      v-if="iconUrl"
       :src="iconUrl"
       :alt="ariaLabel || ''"
-      class="uploaded-icon"
+      :class="imageIconClass"
     />
     <svg
       v-else-if="iconKey === 'email'"
@@ -38,10 +38,6 @@
     >
       <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
     </svg>
-    <span
-      v-else-if="iconKey === 'xiaohongshu'"
-      class="social-icon-mask xiaohongshu-icon"
-    />
     <svg
       v-else-if="iconKey === 'threads'"
       viewBox="0 0 976.98 1082"
@@ -97,6 +93,10 @@ const props = withDefaults(defineProps<{
 })
 
 const iconClass = computed(() => ['social-icon', `social-icon--${props.variant}`])
+const imageIconClass = computed(() => [
+  'uploaded-icon',
+  props.iconKey === 'xiaohongshu' ? 'brand-icon--wide' : '',
+])
 </script>
 
 <style scoped>
@@ -131,26 +131,7 @@ const iconClass = computed(() => ['social-icon', `social-icon--${props.variant}`
   display: block;
 }
 
-.social-icon--contact .uploaded-icon {
-  width: 14px;
-  height: 14px;
-}
-
-.social-icon-mask {
-  display: inline-block;
-  background-color: currentColor;
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: center;
-  -webkit-mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-}
-
-.xiaohongshu-icon {
+.brand-icon--wide {
   width: calc(14px * 1.4);
-  height: 14px;
-  mask-image: url('/images/logo/xiaohongshu.ico');
-  -webkit-mask-image: url('/images/logo/xiaohongshu.ico');
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <header class="header">
     <!-- Top contact bar -->
-    <div class="top-info-bar">
+    <div v-if="contactLinks.length || socialLinks.length" class="top-info-bar">
       <div class="top-info-inner">
-        <div class="contact-info">
+        <div v-if="contactLinks.length" class="contact-info">
           <a
             v-for="link in contactLinks"
             :key="`${link.iconKey}-${link.url}`"

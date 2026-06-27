@@ -142,7 +142,7 @@
           <div class="contact-cards">
             <h3 class="info-title">{{ $t('contact.infoTitle') }}</h3>
 
-            <div class="info-card">
+            <div v-if="displayAddress" class="info-card">
               <div class="info-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
@@ -151,11 +151,11 @@
               </div>
               <div class="info-content">
                 <h4>{{ $t('contact.addressLabel') }}</h4>
-                <p>{{ $t('contact.addressValue') }}</p>
+                <p class="pre-line">{{ displayAddress }}</p>
               </div>
             </div>
 
-            <div class="info-card">
+            <div v-if="emailLink" class="info-card">
               <div class="info-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -164,23 +164,27 @@
               </div>
               <div class="info-content">
                 <h4>{{ $t('contact.emailLabel') }}</h4>
-                <p>{{ $t('contact.emailValue') }}</p>
+                <p>
+                  <a :href="emailLink.url">{{ getLinkDisplayText(emailLink) }}</a>
+                </p>
               </div>
             </div>
 
-            <div class="info-card">
+            <div v-if="phoneLink" class="info-card">
               <div class="info-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
               </div>
               <div class="info-content">
-                <h4>{{ $t('contact.whatsappLabel') }}</h4>
-                <p>{{ $t('contact.whatsappValue') }}</p>
+                <h4>{{ phoneLink.label || $t('contact.whatsappLabel') }}</h4>
+                <p>
+                  <a :href="phoneLink.url">{{ getLinkDisplayText(phoneLink) }}</a>
+                </p>
               </div>
             </div>
 
-            <div class="info-card">
+            <div v-if="displayBusinessHours" class="info-card">
               <div class="info-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"/>
@@ -189,7 +193,7 @@
               </div>
               <div class="info-content">
                 <h4>{{ $t('contact.hoursLabel') }}</h4>
-                <p>{{ $t('contact.hoursValue') }}</p>
+                <p class="pre-line">{{ displayBusinessHours }}</p>
               </div>
             </div>
           </div>
@@ -223,15 +227,27 @@
 <script setup lang="ts">
 import { getAllCategories } from '~/data/product-categories'
 import { useAnalytics } from '~/composables/useAnalytics'
+import type { ContactLinkItem } from '~/composables/useContactLinks'
 
 definePageMeta({
   layout: 'default',
 })
 
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath, locale } = useI18n()
 const { sendContactAnalytics } = useAnalytics()
+const {
+  contactLinks,
+  contactProfile,
+  getLinkDisplayText,
+  getLocalizedProfileText,
+} = useContactLinks()
 const config = useRuntimeConfig()
 const analyticsSiteId = config.public.analyticsSiteId as string
+
+const emailLink = computed(() => contactLinks.value.find((link: ContactLinkItem) => link.iconKey === 'email'))
+const phoneLink = computed(() => contactLinks.value.find((link: ContactLinkItem) => link.iconKey === 'phone' || link.iconKey === 'whatsapp'))
+const displayAddress = computed(() => getLocalizedProfileText(contactProfile.value, 'address', locale.value))
+const displayBusinessHours = computed(() => getLocalizedProfileText(contactProfile.value, 'businessHours', locale.value))
 
 useSeo({
   title: 'Contact Us | Oya Plastic Factory',
@@ -660,6 +676,10 @@ const handleSubmit = async () => {
     margin: 0;
     line-height: 1.6;
   }
+}
+
+.pre-line {
+  white-space: pre-line;
 }
 
 // Mission Card

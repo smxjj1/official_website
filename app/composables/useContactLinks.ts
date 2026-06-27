@@ -10,18 +10,47 @@ export interface ContactLinkItem {
   sortOrder?: number
 }
 
+export interface ContactProfile {
+  address?: string | null
+  businessHours?: string | null
+  addressI18n?: Record<string, string> | null
+  businessHoursI18n?: Record<string, string> | null
+}
+
 export interface ContactLinksPayload {
   contact: ContactLinkItem[]
   social: ContactLinkItem[]
   links: ContactLinkItem[]
+  profile?: ContactProfile | null
 }
 
-function splitLinks(links: ContactLinkItem[]): ContactLinksPayload {
-  return {
-    contact: links.filter(item => item.linkType === 'contact'),
-    social: links.filter(item => item.linkType === 'social'),
-    links,
-  }
+const EMPTY_PROFILE: ContactProfile = {
+  address: null,
+  businessHours: null,
+  addressI18n: null,
+  businessHoursI18n: null,
+}
+
+const EMPTY_PAYLOAD: ContactLinksPayload = {
+  contact: [],
+  social: [],
+  links: [],
+  profile: EMPTY_PROFILE,
+}
+
+export function getLocalizedProfileText(
+  profile: ContactProfile | null | undefined,
+  field: 'address' | 'businessHours',
+  locale?: string,
+): string {
+  if (!profile) return ''
+  const i18nKey = field === 'address' ? 'addressI18n' : 'businessHoursI18n'
+  const i18n = profile[i18nKey]
+  const normalizedLocale = locale || 'en'
+
+  if (i18n?.[normalizedLocale]) return i18n[normalizedLocale]
+  if (normalizedLocale === 'zh-TW' && i18n?.['zh-CN']) return i18n['zh-CN']
+  return profile[field] || ''
 }
 
 export function getLinkDisplayText(link: ContactLinkItem): string {
@@ -52,29 +81,8 @@ export function getLinkAriaLabel(link: ContactLinkItem): string {
   return link.label || labels[link.iconKey || ''] || link.iconKey || 'Link'
 }
 
-function buildFallbackLinks(email: string, phone: string): ContactLinkItem[] {
-  const phoneDigits = phone.replace(/[^\d+]/g, '')
-  return [
-    {
-      linkType: 'contact',
-      iconKey: 'email',
-      url: `mailto:${email}`,
-      openInNewTab: false,
-      sortOrder: 0,
-    },
-    {
-      linkType: 'contact',
-      iconKey: 'phone',
-      url: phoneDigits ? `tel:${phoneDigits}` : '#',
-      openInNewTab: false,
-      sortOrder: 1,
-    },
-  ]
-}
-
 export function useContactLinks() {
   const config = useRuntimeConfig()
-  const { $t } = useI18n()
   const siteKey = (config.public.cmsSiteKey as string) || 'oyababies.com'
   const cmsApi = ((config.public.cmsApi as string) || 'https://analytics.oyababies.com/api/public').replace(/\/$/, '')
 
@@ -86,31 +94,31 @@ export function useContactLinks() {
     },
   )
 
-  const fromCms = computed(() => !error.value && (data.value?.data?.links?.length ?? 0) > 0)
-
-  const fallbackLinks = computed(() => {
-    const email = String($t('contact.emailValue') || 'admin@oyababies.com')
-    const phone = String($t('contact.whatsappValue') || '+86 576-84856888')
-    return buildFallbackLinks(email, phone)
-  })
-
   const payload = computed<ContactLinksPayload>(() => {
-    if (fromCms.value && data.value?.data) {
-      return data.value.data
+    if (error.value || !data.value?.success || !data.value.data) {
+      return EMPTY_PAYLOAD
     }
-    return splitLinks(fallbackLinks.value)
+    return {
+      ...data.value.data,
+      profile: data.value.data.profile || EMPTY_PROFILE,
+    }
   })
 
   const contactLinks = computed(() => payload.value.contact)
   const socialLinks = computed(() => payload.value.social)
+  const contactProfile = computed(() => payload.value.profile || EMPTY_PROFILE)
+  const hasLinks = computed(() => payload.value.links.length > 0)
 
   return {
     contactLinks,
     socialLinks,
-    fromCms,
+    contactProfile,
+    hasLinks,
     pending,
+    error,
     refresh,
     getLinkDisplayText,
     getLinkAriaLabel,
+    getLocalizedProfileText,
   }
 }

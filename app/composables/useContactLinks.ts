@@ -53,6 +53,24 @@ export function getLocalizedProfileText(
   return profile[field] || ''
 }
 
+/** Stable geocoding query for Google Maps embed (same across all UI locales). */
+export function getMapEmbedQuery(profile: ContactProfile | null | undefined): string {
+  if (!profile) return ''
+  const zhCn = profile.addressI18n?.['zh-CN']?.trim()
+  if (zhCn) return zhCn
+  const en = profile.addressI18n?.en?.trim()
+  if (en) return en
+  return (profile.address || '').replace(/[\r\n]+/g, ' ').trim()
+}
+
+export function buildGoogleMapEmbedUrl(query: string, locale?: string): string {
+  const normalized = query.replace(/[\r\n]+/g, ' ').replace(/\s+/g, ' ').trim()
+  if (!normalized) return ''
+  const hl = locale?.startsWith('zh') ? 'zh-CN' : 'en'
+  const q = encodeURIComponent(normalized).replace(/%20/g, '+')
+  return `https://www.google.com/maps?q=${q}&output=embed&z=15&hl=${hl}`
+}
+
 export function getLinkDisplayText(link: ContactLinkItem): string {
   const url = link.url || ''
   if (link.iconKey === 'email') {
@@ -120,5 +138,7 @@ export function useContactLinks() {
     getLinkDisplayText,
     getLinkAriaLabel,
     getLocalizedProfileText,
+    getMapEmbedQuery,
+    buildGoogleMapEmbedUrl,
   }
 }

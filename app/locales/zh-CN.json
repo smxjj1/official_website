@@ -259,7 +259,7 @@
     "errorMessage": "发送失败，请重试。",
     "infoTitle": "联系方式",
     "addressLabel": "地址",
-    "addressValue": "中国浙江省台州市黄岩区高桥街道，邮编318025",
+    "addressValue": "浙江省台州市黄岩区高桥街道三童岙里村78号",
     "emailLabel": "邮箱",
     "emailValue": "admin@oyababies.com",
     "whatsappLabel": "WhatsApp",
@@ -278,6 +278,9 @@
   "footer": {
     "tagline": "优质婴童产品成就幸福家庭",
     "company": "关于我们",
+    "findUs": "找到我们",
+    "privacyPolicy": "隐私政策",
+    "termsOfService": "服务条款",
     "copyright": "版权所有。"
   },
   "faq": {

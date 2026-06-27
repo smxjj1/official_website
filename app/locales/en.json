@@ -260,7 +260,7 @@
     "errorMessage": "Something went wrong. Please try again.",
     "infoTitle": "Contact Information",
     "addressLabel": "Address",
-    "addressValue": "318025, GAOQIAO STREET, HUANGYAN, TAIZHOU, ZHEJIANG, CHINA",
+    "addressValue": "No. 78, Santong Aoli Village, Gaoqiao Street, Huangyan District, Taizhou, Zhejiang, China",
     "emailLabel": "Email",
     "emailValue": "admin@oyababies.com",
     "whatsappLabel": "WhatsApp",
@@ -279,6 +279,9 @@
   "footer": {
     "tagline": "Quality baby products for happy families",
     "company": "Company",
+    "findUs": "Find Us",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
     "copyright": "All rights reserved."
   },
   "faq": {

@@ -5,6 +5,26 @@
         <div class="footer-brand">
           <span class="brand-name">{{ $t('siteName') }}</span>
           <p class="brand-tagline">{{ $t('footer.tagline') }}</p>
+          <ul v-if="contactLinks.length" class="footer-contact">
+            <li v-for="link in contactLinks" :key="`${link.iconKey}-${link.url}`">
+              <SocialIcon :icon-key="link.iconKey" variant="contact" class="contact-icon" />
+              <a :href="link.url">{{ getLinkDisplayText(link) }}</a>
+              <span v-if="link.label" class="contact-tag">{{ link.label }}</span>
+            </li>
+          </ul>
+          <div v-if="socialLinks.length" class="social-links">
+            <a
+              v-for="link in socialLinks"
+              :key="`${link.iconKey}-${link.url}`"
+              :href="link.url"
+              class="social-link"
+              :aria-label="getLinkAriaLabel(link)"
+              :target="link.openInNewTab ? '_blank' : undefined"
+              :rel="link.openInNewTab ? 'noopener noreferrer' : undefined"
+            >
+              <SocialIcon :icon-key="link.iconKey" variant="social" />
+            </a>
+          </div>
         </div>
         <div class="footer-links">
           <div class="link-group">
@@ -51,6 +71,7 @@
 
 <script setup lang="ts">
 const { $t, getLocalePath } = useI18n()
+const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel } = useContactLinks()
 
 const currentYear = new Date().getFullYear()
 </script>
@@ -96,7 +117,85 @@ const currentYear = new Date().getFullYear()
   .brand-tagline {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
-    margin: 0;
+    margin: 0 0 @spacing-md;
+  }
+}
+
+.footer-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 @spacing-md;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: @spacing-xs;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.875rem;
+
+    :deep(.social-icon--contact svg),
+    .contact-icon {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      color: @primary-color;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color @transition-fast;
+      word-break: break-all;
+
+      &:hover {
+        color: @card-background;
+      }
+    }
+
+    .contact-tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: @card-background;
+      background: @primary-color;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 10px;
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: background @transition-fast, color @transition-fast;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: @card-background;
+    }
+
+    :deep(.social-icon--social svg) {
+      width: 16px;
+      height: 16px;
+    }
+
+    :deep(.xiaohongshu-icon) {
+      width: calc(16px * 1.4);
+      height: 16px;
+    }
   }
 }
 

@@ -4,17 +4,27 @@
     <div class="top-info-bar">
       <div class="top-info-inner">
         <div class="contact-info">
-          <a :href="`mailto:${$t('contact.emailValue')}`" class="info-item">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-            </svg>
-            <span>{{ $t('contact.emailValue') }}</span>
+          <a
+            v-for="link in contactLinks"
+            :key="`${link.iconKey}-${link.url}`"
+            :href="link.url"
+            class="info-item"
+          >
+            <SocialIcon :icon-key="link.iconKey" variant="contact" />
+            <span>{{ getLinkDisplayText(link) }}</span>
           </a>
-          <a :href="phoneHref" class="info-item">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-            </svg>
-            <span>{{ $t('contact.whatsappValue') }}</span>
+        </div>
+        <div v-if="socialLinks.length" class="social-links">
+          <a
+            v-for="link in socialLinks"
+            :key="`${link.iconKey}-${link.url}`"
+            :href="link.url"
+            class="social-link"
+            :aria-label="getLinkAriaLabel(link)"
+            :target="link.openInNewTab ? '_blank' : undefined"
+            :rel="link.openInNewTab ? 'noopener noreferrer' : undefined"
+          >
+            <SocialIcon :icon-key="link.iconKey" variant="social" />
           </a>
         </div>
       </div>
@@ -106,6 +116,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { $t, getLocalePath } = useI18n()
+const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel } = useContactLinks()
 
 const isMenuOpen = ref(false)
 const showProductsMenu = ref(false)
@@ -120,12 +131,6 @@ const productLinks = [
   { path: '/baby-milk-powder-container', labelKey: 'nav.milkPowderBox' },
   { path: '/other-accessory', labelKey: 'nav.accessories' },
 ]
-
-const phoneHref = computed(() => {
-  const raw = String($t('contact.whatsappValue') || '')
-  const digits = raw.replace(/[^\d+]/g, '')
-  return digits ? `tel:${digits}` : '#'
-})
 
 const isHomePage = computed(() => {
   const p = route.path.replace(/\/$/, '') || '/'
@@ -250,7 +255,8 @@ onUnmounted(() => {
   text-decoration: none;
   transition: color @transition-fast;
 
-  svg {
+  svg,
+  :deep(.social-icon--contact svg) {
     width: 14px;
     height: 14px;
     flex-shrink: 0;
@@ -271,6 +277,41 @@ onUnmounted(() => {
 
   &:hover {
     color: @primary-color;
+  }
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  @media (max-width: @breakpoint-mobile) {
+    gap: 6px;
+  }
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  color: @text-light;
+  text-decoration: none;
+  transition: color @transition-fast;
+
+  &:hover {
+    color: @primary-color;
+  }
+
+  :deep(.social-icon--social svg) {
+    width: 14px;
+    height: 14px;
+  }
+
+  :deep(.xiaohongshu-icon) {
+    width: calc(14px * 1.4);
+    height: 14px;
   }
 }
 

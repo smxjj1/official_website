@@ -30,6 +30,9 @@
           </div>
           <div class="link-group">
             <h4>{{ $t('footer.company') }}</h4>
+            <NuxtLink :to="getLocalePath('/')">
+              {{ $t('nav.home') }}
+            </NuxtLink>
             <NuxtLink :to="getLocalePath('/about-us')">
               {{ $t('nav.about') }}
             </NuxtLink>

@@ -5,6 +5,9 @@
         <span class="logo-text">{{ $t('siteName') }}</span>
       </NuxtLink>
       <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
+        <NuxtLink :to="getLocalePath('/')" class="nav-link" :class="{ active: isHomePage }" @click="closeMenu">
+          {{ $t('nav.home') }}
+        </NuxtLink>
         <!-- Products Dropdown -->
         <div class="nav-dropdown" @mouseenter="showProductsMenu = true" @mouseleave="showProductsMenu = false">
           <button class="nav-link nav-dropdown-trigger" :class="{ active: isProductPage }">
@@ -54,6 +57,11 @@ const route = useRoute()
 const { $t, getLocalePath, locale } = useI18n()
 const isMenuOpen = ref(false)
 const showProductsMenu = ref(false)
+
+const isHomePage = computed(() => {
+  const p = route.path.replace(/\/$/, '') || '/'
+  return p === '/' || p === '/zh-CN' || p === '/zh-TW'
+})
 
 const isActive = (path: string) => {
   const currentPath = route.path

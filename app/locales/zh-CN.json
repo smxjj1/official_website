@@ -223,6 +223,19 @@
     "comingSoon": "敬请期待",
     "comingSoonText": "该品类产品即将上线，请稍后再来查看。"
   },
+  "inquiryList": {
+    "addToList": "加入咨询列表",
+    "added": "已加入咨询列表",
+    "alreadyInList": "该产品已在列表中",
+    "limitReached": "最多添加 20 个产品",
+    "title": "咨询列表",
+    "open": "打开咨询列表",
+    "close": "关闭",
+    "remove": "移除",
+    "clearAll": "清空列表",
+    "clearConfirm": "确定清空咨询列表中的所有产品？",
+    "contactInquiry": "咨询产品"
+  },
   "contact": {
     "heroTitle": "联系我们",
     "heroSubtitle": "我们是一家专业的优质婴童产品制造商，为您提供一站式商务解决方案。提交询价，我们将在24小时内回复。",

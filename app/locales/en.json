@@ -224,6 +224,19 @@
     "comingSoon": "Coming Soon",
     "comingSoonText": "Products in this category will be added soon. Please check back later."
   },
+  "inquiryList": {
+    "addToList": "Add to List",
+    "added": "Added to inquiry list",
+    "alreadyInList": "Already in your list",
+    "limitReached": "Maximum 20 products",
+    "title": "Inquiry List",
+    "open": "Open inquiry list",
+    "close": "Close",
+    "remove": "Remove",
+    "clearAll": "Clear All",
+    "clearConfirm": "Clear all products from your inquiry list?",
+    "contactInquiry": "Contact for Inquiry"
+  },
   "contact": {
     "heroTitle": "Get in Touch",
     "heroSubtitle": "We're a dedicated manufacturer of premium baby products, offering one-stop solutions for your business needs. Request a quote and we'll respond within 24 hours.",

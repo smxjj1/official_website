@@ -5,10 +5,13 @@
       <slot />
     </main>
     <LayoutFooter />
+    <InquiryListFab :contact-path="contactPath" />
   </div>
 </template>
 
 <script setup lang="ts">
+const { getLocalePath } = useI18n()
+const contactPath = computed(() => getLocalePath('/contact-us'))
 </script>
 
 <style lang="less" scoped>

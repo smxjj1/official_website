@@ -223,6 +223,19 @@
     "comingSoon": "敬請期待",
     "comingSoonText": "該品類產品即將上線，請稍後再來查看。"
   },
+  "inquiryList": {
+    "addToList": "加入諮詢列表",
+    "added": "已加入諮詢列表",
+    "alreadyInList": "該產品已在列表中",
+    "limitReached": "最多添加 20 個產品",
+    "title": "諮詢列表",
+    "open": "打開諮詢列表",
+    "close": "關閉",
+    "remove": "移除",
+    "clearAll": "清空列表",
+    "clearConfirm": "確定清空諮詢列表中的所有產品？",
+    "contactInquiry": "諮詢產品"
+  },
   "contact": {
     "heroTitle": "聯繫我們",
     "heroSubtitle": "我們是一家專業的優質嬰童產品製造商，為您提供一站式商務解決方案。提交詢價，我們將在24小時內回覆。",

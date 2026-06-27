@@ -204,9 +204,18 @@
                   </table>
                 </div>
 
-                <NuxtLink :to="getLocalePath('/contact-us')" class="detail-cta">
-                  {{ $t('products.contactInquiry') }}
-                </NuxtLink>
+                <div class="detail-actions">
+                  <button type="button" class="detail-add-list" @click="handleAddToList">
+                    {{ $t('inquiryList.addToList') }}
+                  </button>
+                  <NuxtLink
+                    v-if="currentProduct"
+                    :to="{ path: getLocalePath('/contact-us'), query: { products: currentProduct.itemNo } }"
+                    class="detail-cta"
+                  >
+                    {{ $t('products.contactInquiry') }}
+                  </NuxtLink>
+                </div>
               </div>
             </div>
           </div>
@@ -230,6 +239,7 @@ definePageMeta({
 })
 
 const { $t, getLocalePath } = useI18n()
+const { add, showFeedback } = useInquiryList()
 
 const categorySlugRef = toRef(props, 'categorySlug')
 const { products: allProducts, totalProducts } = useProductCatalog(categorySlugRef)
@@ -409,6 +419,30 @@ const closeDetail = () => {
   detailOpen.value = false
   document.body.style.marginLeft = ''
   document.body.style.overflow = ''
+}
+
+const handleAddToList = () => {
+  const product = currentProduct.value
+  if (!product) return
+
+  const result = add({
+    itemNo: product.itemNo,
+    name: product.name,
+    categorySlug: product.categorySlug,
+    mainImage: product.mainImage,
+  })
+
+  if (result.ok) {
+    showFeedback(String($t('inquiryList.added')))
+    return
+  }
+  if (result.reason === 'duplicate') {
+    showFeedback(String($t('inquiryList.alreadyInList')))
+    return
+  }
+  if (result.reason === 'limit') {
+    showFeedback(String($t('inquiryList.limitReached')))
+  }
 }
 
 const handleKeydown = (e: KeyboardEvent) => {
@@ -950,6 +984,29 @@ onUnmounted(() => {
     &:last-child {
       color: @text-color;
     }
+  }
+}
+
+.detail-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: @spacing-sm;
+  margin-top: @spacing-md;
+}
+
+.detail-add-list {
+  padding: @spacing-sm @spacing-lg;
+  background: transparent;
+  border: 2px solid @primary-color;
+  color: @primary-color;
+  font-weight: 600;
+  border-radius: @radius-sm;
+  cursor: pointer;
+  transition: background @transition-fast, color @transition-fast;
+
+  &:hover {
+    background: @primary-color;
+    color: @card-background;
   }
 }
 

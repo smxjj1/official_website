@@ -1,5 +1,5 @@
 <template>
-  <div class="language-switcher" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
+  <div class="language-switcher" :class="{ light }" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
     <button class="globe-btn" aria-label="Switch language">
       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="12" cy="12" r="10"/>
@@ -24,7 +24,12 @@
 </template>
 
 <script setup lang="ts">
-const { locale, setLocale, $t } = useI18n()
+const { locale, setLocale } = useI18n()
+
+const { light = false } = defineProps<{
+  light?: boolean
+}>()
+
 const showDropdown = ref(false)
 
 const languages = [
@@ -44,7 +49,19 @@ const handleLocaleChange = (code: string) => {
 
 .language-switcher {
   position: relative;
-  margin-left: @spacing-md;
+
+  &.light .globe-btn {
+    color: rgba(255, 255, 255, 0.88);
+
+    &:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
+
+.top-lang-switcher {
+  margin-left: 0;
 }
 
 .globe-btn {

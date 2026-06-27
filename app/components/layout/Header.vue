@@ -1,98 +1,208 @@
 <template>
   <header class="header">
-    <div class="header-container">
-      <NuxtLink :to="getLocalePath('/')" class="logo">
-        <span class="logo-text">{{ $t('siteName') }}</span>
-      </NuxtLink>
-      <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
-        <NuxtLink :to="getLocalePath('/')" class="nav-link" :class="{ active: isHomePage }" @click="closeMenu">
-          {{ $t('nav.home') }}
-        </NuxtLink>
-        <!-- Products Dropdown -->
-        <div class="nav-dropdown" @mouseenter="showProductsMenu = true" @mouseleave="showProductsMenu = false">
-          <button class="nav-link nav-dropdown-trigger" :class="{ active: isProductPage }">
-            {{ $t('nav.products') }}
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 12 15 18 9" />
+    <!-- Top contact bar -->
+    <div class="top-info-bar">
+      <div class="top-info-inner">
+        <div class="contact-info">
+          <a :href="`mailto:${$t('contact.emailValue')}`" class="info-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
             </svg>
-          </button>
-          <div class="nav-dropdown-menu" :class="{ 'dropdown-open': showProductsMenu }">
-            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-feeding-bottles') }" @click="closeMenu">
-              {{ $t('nav.feedingBottles') }}
-            </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-sippy-cups')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-sippy-cups') }" @click="closeMenu">
-              {{ $t('nav.sippyCups') }}
-            </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-tableware')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-tableware') }" @click="closeMenu">
-              {{ $t('nav.tableware') }}
-            </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-bath-potty')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-bath-potty') }" @click="closeMenu">
-              {{ $t('nav.bathPotty') }}
-            </NuxtLink>
-            <NuxtLink :to="getLocalePath('/baby-milk-powder-container')" class="dropdown-link" :class="{ active: isCurrentProduct('/baby-milk-powder-container') }" @click="closeMenu">
-              {{ $t('nav.milkPowderBox') }}
-            </NuxtLink>
-            <NuxtLink :to="getLocalePath('/other-accessory')" class="dropdown-link" :class="{ active: isCurrentProduct('/other-accessory') }" @click="closeMenu">
-              {{ $t('nav.accessories') }}
-            </NuxtLink>
-          </div>
+            <span>{{ $t('contact.emailValue') }}</span>
+          </a>
+          <a :href="phoneHref" class="info-item">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+            </svg>
+            <span>{{ $t('contact.whatsappValue') }}</span>
+          </a>
         </div>
-        <NuxtLink :to="getLocalePath('/about-us')" class="nav-link" :class="{ active: isActive('/about-us') }" @click="closeMenu">
-          {{ $t('nav.about') }}
+      </div>
+    </div>
+
+    <!-- Main navbar -->
+    <div class="header-main" :class="{ 'header-main--shadow': showNavShadow }">
+      <div class="header-container">
+        <NuxtLink :to="getLocalePath('/')" class="logo" @click="closeMenu">
+          <span class="logo-text">{{ $t('siteName') }}</span>
         </NuxtLink>
-        <NuxtLink :to="getLocalePath('/contact-us')" class="nav-link nav-link-contact" :class="{ active: isActive('/contact-us') }" @click="closeMenu">
-          {{ $t('nav.contact') }}
-        </NuxtLink>
-      </nav>
-      <LanguageSwitcher />
-      <button class="menu-toggle" @click="toggleMenu" aria-label="Toggle menu">
-        <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }" />
-      </button>
+
+        <nav class="nav" :class="{ 'nav-open': isMenuOpen }">
+          <NuxtLink
+            :to="getLocalePath('/')"
+            class="nav-link"
+            :class="{ active: isHomePage }"
+            @click="closeMenu"
+          >
+            {{ $t('nav.home') }}
+          </NuxtLink>
+
+          <div class="nav-dropdown">
+            <button
+              type="button"
+              class="nav-link nav-dropdown-trigger"
+              :class="{ active: isProductPage }"
+              :aria-expanded="showProductsMenu"
+              @click="toggleProductsMenu"
+              @mouseenter="openProductsMenu"
+              @mouseleave="closeProductsMenuDelayed"
+            >
+              {{ $t('nav.products') }}
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </button>
+            <div
+              class="nav-dropdown-menu"
+              :class="{ 'dropdown-open': showProductsMenu }"
+              @mouseenter="cancelProductsMenuClose"
+              @mouseleave="closeProductsMenuDelayed"
+            >
+              <NuxtLink
+                v-for="item in productLinks"
+                :key="item.path"
+                :to="getLocalePath(item.path)"
+                class="dropdown-link"
+                :class="{ active: isCurrentProduct(item.path) }"
+                @click="closeMenu"
+              >
+                {{ $t(item.labelKey) }}
+              </NuxtLink>
+            </div>
+          </div>
+
+          <NuxtLink
+            :to="getLocalePath('/about-us')"
+            class="nav-link"
+            :class="{ active: isActive('/about-us') }"
+            @click="closeMenu"
+          >
+            {{ $t('nav.about') }}
+          </NuxtLink>
+          <NuxtLink
+            :to="getLocalePath('/contact-us')"
+            class="nav-link nav-link-contact"
+            :class="{ active: isActive('/contact-us') }"
+            @click="closeMenu"
+          >
+            {{ $t('nav.contact') }}
+          </NuxtLink>
+        </nav>
+
+        <LanguageSwitcher />
+        <button
+          class="menu-toggle"
+          :aria-expanded="isMenuOpen"
+          aria-label="Toggle menu"
+          @click="toggleMenu"
+        >
+          <span class="menu-icon" :class="{ 'menu-icon-open': isMenuOpen }" />
+        </button>
+      </div>
     </div>
   </header>
 </template>
 
 <script setup lang="ts">
 const route = useRoute()
-const { $t, getLocalePath, locale } = useI18n()
+const { $t, getLocalePath } = useI18n()
+
 const isMenuOpen = ref(false)
 const showProductsMenu = ref(false)
+const isScrolled = ref(false)
+let productsMenuTimer: ReturnType<typeof setTimeout> | null = null
+
+const productLinks = [
+  { path: '/baby-feeding-bottles', labelKey: 'nav.feedingBottles' },
+  { path: '/baby-sippy-cups', labelKey: 'nav.sippyCups' },
+  { path: '/baby-tableware', labelKey: 'nav.tableware' },
+  { path: '/baby-bath-potty', labelKey: 'nav.bathPotty' },
+  { path: '/baby-milk-powder-container', labelKey: 'nav.milkPowderBox' },
+  { path: '/other-accessory', labelKey: 'nav.accessories' },
+]
+
+const phoneHref = computed(() => {
+  const raw = String($t('contact.whatsappValue') || '')
+  const digits = raw.replace(/[^\d+]/g, '')
+  return digits ? `tel:${digits}` : '#'
+})
 
 const isHomePage = computed(() => {
   const p = route.path.replace(/\/$/, '') || '/'
   return p === '/' || p === '/zh-CN' || p === '/zh-TW'
 })
 
-const isActive = (path: string) => {
-  const currentPath = route.path
-  // Strip locale prefix for comparison
-  let strippedPath = currentPath
-  if (currentPath.startsWith('/zh-CN')) {
-    strippedPath = currentPath.replace('/zh-CN', '') || '/'
-  } else if (currentPath.startsWith('/zh-TW')) {
-    strippedPath = currentPath.replace('/zh-TW', '') || '/'
-  }
-  return strippedPath === path || strippedPath.startsWith(path + '/') || strippedPath.startsWith(path)
+const showNavShadow = computed(() => isScrolled.value || !isHomePage.value)
+
+const stripLocale = (path: string) => {
+  if (path.startsWith('/zh-CN')) return path.replace('/zh-CN', '') || '/'
+  if (path.startsWith('/zh-TW')) return path.replace('/zh-TW', '') || '/'
+  return path
 }
 
-const isProductPage = computed(() => {
-  const productPaths = ['/baby-feeding-bottles', '/baby-sippy-cups', '/baby-tableware', '/baby-bath-potty', '/baby-milk-powder-container', '/other-accessory']
-  return productPaths.some(path => isActive(path))
-})
+const isActive = (path: string) => {
+  const strippedPath = stripLocale(route.path)
+  return strippedPath === path || strippedPath.startsWith(`${path}/`)
+}
 
-// Check if current product page matches specific product path
-const isCurrentProduct = (path: string) => {
-  return isActive(path)
+const isProductPage = computed(() =>
+  productLinks.some(item => isActive(item.path)),
+)
+
+const isCurrentProduct = (path: string) => isActive(path)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50
 }
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
+  if (!isMenuOpen.value) {
+    showProductsMenu.value = false
+  }
 }
 
 const closeMenu = () => {
   isMenuOpen.value = false
   showProductsMenu.value = false
 }
+
+const toggleProductsMenu = () => {
+  if (window.innerWidth <= 992) {
+    showProductsMenu.value = !showProductsMenu.value
+  }
+}
+
+const openProductsMenu = () => {
+  if (window.innerWidth > 992) {
+    if (productsMenuTimer) clearTimeout(productsMenuTimer)
+    showProductsMenu.value = true
+  }
+}
+
+const closeProductsMenuDelayed = () => {
+  if (window.innerWidth > 992) {
+    productsMenuTimer = setTimeout(() => {
+      showProductsMenu.value = false
+    }, 120)
+  }
+}
+
+const cancelProductsMenuClose = () => {
+  if (productsMenuTimer) clearTimeout(productsMenuTimer)
+}
+
+watch(() => route.path, closeMenu)
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  if (productsMenuTimer) clearTimeout(productsMenuTimer)
+})
 </script>
 
 <style lang="less" scoped>
@@ -104,8 +214,74 @@ const closeMenu = () => {
   left: 0;
   right: 0;
   z-index: 1000;
+}
+
+.top-info-bar {
+  background: @section-background;
+  border-bottom: 1px solid @border-light;
+  font-size: 0.75rem;
+}
+
+.top-info-inner {
+  max-width: @breakpoint-wide;
+  margin: 0 auto;
+  padding: 6px @spacing-md;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contact-info {
+  display: flex;
+  align-items: center;
+  gap: @spacing-lg;
+  flex-wrap: wrap;
+
+  @media (max-width: @breakpoint-mobile) {
+    gap: @spacing-sm;
+  }
+}
+
+.info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: @text-light;
+  text-decoration: none;
+  transition: color @transition-fast;
+
+  svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: @primary-color;
+  }
+
+  span {
+    max-width: 240px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: @breakpoint-mobile) {
+      max-width: 150px;
+      font-size: 11px;
+    }
+  }
+
+  &:hover {
+    color: @primary-color;
+  }
+}
+
+.header-main {
   background: @card-background;
   border-bottom: 1px solid @border-color;
+  transition: box-shadow @transition-normal;
+
+  &.header-main--shadow {
+    box-shadow: 0 2px 12px rgba(74, 64, 58, 0.06);
+  }
 }
 
 .header-container {
@@ -125,6 +301,7 @@ const closeMenu = () => {
 .logo {
   text-decoration: none;
   color: @primary-color;
+  flex-shrink: 0;
 }
 
 .logo-text {
@@ -136,21 +313,25 @@ const closeMenu = () => {
 .nav {
   margin-left: auto;
   display: flex;
+  align-items: center;
   gap: @spacing-lg;
 
-  @media (max-width: @breakpoint-tablet) {
+  @media (max-width: 992px) {
     position: fixed;
-    top: 60px;
+    top: calc(32px + 60px);
     left: 0;
     right: 0;
-    background: @card-background;
     flex-direction: column;
-    padding: @spacing-md;
+    align-items: stretch;
     gap: 0;
+    margin: 0;
+    padding: @spacing-md;
+    background: @card-background;
     border-bottom: 1px solid @border-color;
-    transform: translateY(-100%);
+    transform: translateY(-8px);
     opacity: 0;
     visibility: hidden;
+    pointer-events: none;
     transition: @transition-normal;
     z-index: 999;
 
@@ -158,13 +339,8 @@ const closeMenu = () => {
       transform: translateY(0);
       opacity: 1;
       visibility: visible;
+      pointer-events: auto;
     }
-  }
-}
-
-.language-switcher {
-  @media (max-width: @breakpoint-tablet) {
-    display: none;
   }
 }
 
@@ -176,6 +352,10 @@ const closeMenu = () => {
   padding: @spacing-xs 0;
   transition: color @transition-fast;
   position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
 
   &:hover {
     color: @primary-color;
@@ -198,59 +378,52 @@ const closeMenu = () => {
   }
 
   &.nav-dropdown-trigger {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 4px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
 
     svg {
       transition: transform @transition-fast;
     }
 
     &:hover svg,
-    &.active svg {
+    &.active svg,
+    &[aria-expanded='true'] svg {
       transform: rotate(180deg);
     }
   }
 
-  &.nav-link-contact {
-    @media (max-width: @breakpoint-tablet) {
-      margin-left: 0;
-    }
-  }
-
-  @media (max-width: @breakpoint-tablet) {
+  @media (max-width: 992px) {
     padding: @spacing-sm 0;
     border-bottom: 1px solid @border-color;
+    width: 100%;
+    justify-content: space-between;
 
-    &:last-child {
-      border-bottom: none;
+    &.nav-dropdown-trigger {
+      justify-content: space-between;
     }
 
     &.active::after {
       display: none;
     }
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 
-// Dropdown styles
 .nav-dropdown {
   position: relative;
 
-  @media (max-width: @breakpoint-tablet) {
-    .nav-dropdown-trigger {
-      width: 100%;
-      justify-content: space-between;
-    }
+  @media (max-width: 992px) {
+    width: 100%;
   }
 }
 
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 8px);
   left: 0;
   min-width: 180px;
   background: @card-background;
@@ -261,7 +434,7 @@ const closeMenu = () => {
   visibility: hidden;
   transform: translateY(-8px);
   transition: all @transition-fast;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(74, 64, 58, 0.1);
   z-index: 1001;
 
   &.dropdown-open {
@@ -270,7 +443,7 @@ const closeMenu = () => {
     transform: translateY(0);
   }
 
-  @media (max-width: @breakpoint-tablet) {
+  @media (max-width: 992px) {
     position: static;
     border: none;
     border-radius: 0;
@@ -281,7 +454,7 @@ const closeMenu = () => {
     transform: none;
 
     &.dropdown-open {
-      max-height: 300px;
+      max-height: 320px;
       opacity: 1;
       visibility: visible;
     }
@@ -307,8 +480,7 @@ const closeMenu = () => {
     background: rgba(@primary-color, 0.08);
   }
 
-  @media (max-width: @breakpoint-tablet) {
-    padding: @spacing-sm @spacing-md;
+  @media (max-width: 992px) {
     border-bottom: 1px solid @border-color;
 
     &:last-child {
@@ -325,8 +497,9 @@ const closeMenu = () => {
   height: 24px;
   cursor: pointer;
   position: relative;
+  flex-shrink: 0;
 
-  @media (max-width: @breakpoint-tablet) {
+  @media (max-width: 992px) {
     display: block;
   }
 }

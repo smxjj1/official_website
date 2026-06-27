@@ -22,6 +22,11 @@
 
 .main {
   flex: 1;
-  padding-top: 60px;
+  /* top bar ~32px + main nav 60px */
+  padding-top: 92px;
+
+  @media (max-width: 992px) {
+    padding-top: 88px;
+  }
 }
 </style>

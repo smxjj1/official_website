@@ -3,7 +3,7 @@
     <div class="trust-container">
       <div class="stats-bar">
         <div v-for="(stat, index) in stats" :key="index" class="stat-item">
-          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-value" :class="{ 'stat-value--certs': index === 3 }">{{ stat.value }}</span>
           <span class="stat-label">{{ stat.label }}</span>
         </div>
       </div>
@@ -51,14 +51,13 @@
 
 <script setup lang="ts">
 const { $t } = useI18n()
-const { totalProducts } = useHomePage()
 
 const stats = computed(() => {
   const rawStats = $t('home.trust.stats')
   if (!Array.isArray(rawStats)) return []
 
-  return rawStats.map((stat: any, index: number) => ({
-    value: index === 0 ? `${totalProducts.value}+` : (stat.value as string),
+  return rawStats.map((stat: any) => ({
+    value: stat.value as string,
     label: stat.label as string,
   }))
 })
@@ -115,6 +114,16 @@ const stats = computed(() => {
 
   @media (max-width: @breakpoint-tablet) {
     font-size: 1.75rem;
+  }
+
+  &--certs {
+    font-size: 1.125rem;
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+
+    @media (max-width: @breakpoint-tablet) {
+      font-size: 0.9375rem;
+    }
   }
 }
 

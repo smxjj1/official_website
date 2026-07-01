@@ -80,14 +80,17 @@
             >
               <NuxtLink
                 v-for="item in productLinks"
-                :key="item.path"
+                :key="item.slug"
                 :to="getLocalePath(item.path)"
                 class="dropdown-link"
                 :class="{ active: isCurrentProduct(item.path) }"
                 @click="closeMenu"
               >
-                {{ $t(item.labelKey) }}
+                {{ item.label }}
               </NuxtLink>
+              <span v-if="!navPending && productLinks.length === 0" class="dropdown-empty">
+                —
+              </span>
             </div>
           </div>
 
@@ -135,20 +138,12 @@
 const route = useRoute()
 const { $t, getLocalePath } = useI18n()
 const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel } = useContactLinks()
+const { navItems: productLinks, pending: navPending } = useProductCategoryNav()
 
 const isMenuOpen = ref(false)
 const showProductsMenu = ref(false)
 const isScrolled = ref(false)
 let productsMenuTimer: ReturnType<typeof setTimeout> | null = null
-
-const productLinks = [
-  { path: '/baby-feeding-bottles', labelKey: 'nav.feedingBottles' },
-  { path: '/baby-sippy-cups', labelKey: 'nav.sippyCups' },
-  { path: '/baby-tableware', labelKey: 'nav.tableware' },
-  { path: '/baby-bath-potty', labelKey: 'nav.bathPotty' },
-  { path: '/baby-milk-powder-container', labelKey: 'nav.milkPowderBox' },
-  { path: '/other-accessory', labelKey: 'nav.accessories' },
-]
 
 const isHomePage = computed(() => {
   const p = route.path.replace(/\/$/, '') || '/'

@@ -1,5 +1,8 @@
 import { useProductCatalog } from '~/composables/useProducts'
 import { useCategoryImages } from '~/composables/useCategoryImages'
+import { useProductCategoryNav } from '~/composables/useProductCategoryNav'
+import { resolveCategoryPath } from '~/utils/productCategory'
+import type { CmsCategoryMeta } from '~/utils/productCategory'
 
 const HOME_CATEGORY_SLUGS = [
   'feeding-bottles',
@@ -44,6 +47,7 @@ export function useHomePage() {
   const { $t, getLocalePath } = useI18n()
   const { getAllCategoryImages } = useCategoryImages()
   const { categories: cmsCategories, totalProducts } = useProductCatalog()
+  const { sortedCategories } = useProductCategoryNav()
 
   const categories = computed(() => getAllCategoryImages.value)
 
@@ -56,7 +60,12 @@ export function useHomePage() {
   })
 
   const getCategoryLink = (slug: string): string => {
-    return CATEGORY_ROUTE_MAP[slug] || '/other-accessory'
+    const productSlug = CATEGORY_PRODUCT_SLUG_MAP[slug] || slug
+    const cmsCat = sortedCategories.value.find(c => c.slug === productSlug) as CmsCategoryMeta | undefined
+    if (cmsCat) {
+      return resolveCategoryPath(cmsCat)
+    }
+    return CATEGORY_ROUTE_MAP[slug] || `/${productSlug}`
   }
 
   const getCategoryProductCount = (slug: string): number => {

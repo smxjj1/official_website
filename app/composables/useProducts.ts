@@ -14,6 +14,16 @@ interface CatalogResponse {
   products?: OyaProduct[]
 }
 
+export interface CatalogCategory {
+  name: string
+  slug: string
+  count?: number
+  sortOrder?: number
+  subcategories?: string[]
+  pageRoute?: string | null
+  nameI18n?: Record<string, string> | null
+}
+
 function resolveCategorySlug(input?: string | Ref<string | undefined>): string | undefined {
   if (!input) return undefined
   if (typeof input === 'string') {
@@ -60,10 +70,14 @@ export function useProductCatalog(categorySlug?: string | Ref<string | undefined
   })
 
   const categories = computed<OyaCategory[]>(() => {
+    let list: OyaCategory[]
     if (fromCms.value && data.value?.categories?.length) {
-      return data.value.categories as OyaCategory[]
+      list = data.value.categories as OyaCategory[]
     }
-    return fallbackOya.categories as OyaCategory[]
+    else {
+      list = fallbackOya.categories as OyaCategory[]
+    }
+    return [...list].sort((a, b) => ((a as CatalogCategory).sortOrder ?? 0) - ((b as CatalogCategory).sortOrder ?? 0))
   })
 
   const totalProducts = computed(() => products.value.length)

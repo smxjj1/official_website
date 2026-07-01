@@ -1,5 +1,5 @@
 {
-  "siteName": "Oya Plastic Factory",
+  "siteName": "Huangyan Oya Plastic Factory",
   "nav": {
     "home": "Home",
     "products": "Products",
@@ -79,10 +79,10 @@
     },
     "trust": {
       "stats": [
-        { "value": "400+", "label": "Products" },
+        { "value": "2000+", "label": "Products" },
         { "value": "20+", "label": "Years Experience" },
         { "value": "60+", "label": "Countries Served" },
-        { "value": "ISO", "label": "Certified Quality" }
+        { "value": "ISO9001, BSCI, FAMA", "label": "Certified Quality" }
       ]
     },
     "ctaBottom": {

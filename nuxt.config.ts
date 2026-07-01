@@ -8,7 +8,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://oyababies.com',
-      siteName: 'Oya Plastic Factory',
+      siteName: 'Huangyan Oya Plastic Factory',
       analyticsToken: process.env.NUXT_PUBLIC_ANALYTICS_TOKEN || '',
       analyticsBaseUrl: process.env.NUXT_PUBLIC_ANALYTICS_BASE_URL || 'https://analytics.oyababies.com',
       analyticsSiteId: process.env.NUXT_PUBLIC_ANALYTICS_SITE_ID || 'oyababies.com',

@@ -226,12 +226,15 @@
 </template>
 
 <script setup lang="ts">
+import { normalizeSubcategoryKey, sortSubcategoryKeys } from '~/utils/productCategory'
 import { useProductCatalog } from '~/composables/useProducts'
 
 const props = defineProps<{
   categorySlug: string
   pageTitle: string
   pageDescription: string
+  /** CMS 子分类白名单顺序（可选） */
+  subcategoryOrder?: string[]
 }>()
 
 definePageMeta({
@@ -242,7 +245,7 @@ const { $t, getLocalePath } = useI18n()
 const { add, showFeedback } = useInquiryList()
 
 const categorySlugRef = toRef(props, 'categorySlug')
-const { products: allProducts, totalProducts } = useProductCatalog(categorySlugRef)
+const { products: allProducts, totalProducts, categories: catalogCategories } = useProductCatalog(categorySlugRef)
 
 interface ProductSpecs {
   pcsPerCtn: number | null
@@ -276,7 +279,7 @@ interface Product {
 }
 
 useSeo({
-  title: `${props.pageTitle} | Oya Plastic Factory`,
+  title: `${props.pageTitle} | Huangyan Oya Plastic Factory`,
   description: props.pageDescription,
 })
 
@@ -304,28 +307,47 @@ const getSubcategoryKey = (subcategory: string): string => {
     'Auxilaries- Others': 'products.subcategories.auxilariesOthers',
     'General': 'products.subcategories.general',
   }
-  return keyMap[subcategory] || 'products.subcategories.general'
+  return keyMap[subcategory] || ''
 }
+
+/** 子分类展示名：优先 i18n，否则用 CMS 原始名称 */
+const getSubcategoryDisplay = (subcategory: string): string => {
+  if (subcategory === 'General') {
+    return $t('products.subcategories.general') as string
+  }
+  const key = getSubcategoryKey(subcategory)
+  if (key) {
+    return $t(key) as string
+  }
+  return subcategory
+}
+
+const subcategoryOrderList = computed(() => {
+  if (props.subcategoryOrder?.length) {
+    return props.subcategoryOrder
+  }
+  const cat = catalogCategories.value.find(c => c.slug === props.categorySlug)
+  return (cat as { subcategories?: string[] } | undefined)?.subcategories || []
+})
 
 // Group products by subcategory
 const groupedProducts = computed(() => {
-  const groups: { subcategory: string; subcategoryKey: string; products: Product[] }[] = []
   const groupMap = new Map<string, Product[]>()
 
   for (const product of allProducts.value) {
-    const subcat = product.subcategory || 'General'
+    const subcat = normalizeSubcategoryKey(product.subcategory)
     if (!groupMap.has(subcat)) {
       groupMap.set(subcat, [])
     }
     groupMap.get(subcat)!.push(product)
   }
 
-  for (const [subcategory, products] of groupMap) {
-    const key = getSubcategoryKey(subcategory)
-    groups.push({ subcategory: $t(key) as string, subcategoryKey: key, products })
-  }
-
-  return groups
+  const orderedKeys = sortSubcategoryKeys([...groupMap.keys()], subcategoryOrderList.value)
+  return orderedKeys.map((subcategory) => ({
+    subcategory: getSubcategoryDisplay(subcategory),
+    subcategoryKey: subcategory,
+    products: groupMap.get(subcategory)!,
+  }))
 })
 
 const detailOpen = ref(false)

@@ -323,11 +323,12 @@ const getSubcategoryDisplay = (subcategory: string): string => {
 }
 
 const subcategoryOrderList = computed(() => {
-  if (props.subcategoryOrder?.length) {
+  if (Array.isArray(props.subcategoryOrder) && props.subcategoryOrder.length) {
     return props.subcategoryOrder
   }
   const cat = catalogCategories.value.find(c => c.slug === props.categorySlug)
-  return (cat as { subcategories?: string[] } | undefined)?.subcategories || []
+  const subs = (cat as { subcategories?: string[] } | undefined)?.subcategories
+  return Array.isArray(subs) ? subs : []
 })
 
 // Group products by subcategory

@@ -164,7 +164,7 @@ const isActive = (path: string) => {
 }
 
 const isProductPage = computed(() =>
-  productLinks.some(item => isActive(item.path)),
+  productLinks.value.some(item => isActive(item.path)),
 )
 
 const isCurrentProduct = (path: string) => isActive(path)

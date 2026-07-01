@@ -23,7 +23,7 @@ export function normalizeSubcategoryKey(subcategory: string): string {
 /** 按 CMS 白名单顺序排列子分类组（未列出的排在后面，General 最后） */
 export function sortSubcategoryKeys(keys: string[], preferredOrder: string[] = []): string[] {
   const unique = [...new Set(keys)]
-  const order = preferredOrder.filter(Boolean)
+  const order = (Array.isArray(preferredOrder) ? preferredOrder : []).filter(Boolean)
   const result: string[] = []
   const seen = new Set<string>()
 

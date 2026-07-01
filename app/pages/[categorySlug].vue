@@ -25,7 +25,10 @@ const isReady = computed(() => !pending.value && !!category.value)
 
 const pageTitle = computed(() => getCategoryPageTitle(categorySlug.value))
 const pageDescription = computed(() => getCategoryPageDescription(categorySlug.value))
-const subcategoryOrder = computed(() => category.value?.subcategories || [])
+const subcategoryOrder = computed(() => {
+  const subs = category.value?.subcategories
+  return Array.isArray(subs) ? subs : []
+})
 
 watch([pending, category], () => {
   if (pending.value) {

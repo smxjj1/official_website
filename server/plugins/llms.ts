@@ -1,3 +1,4 @@
+import { buildLlmsFullContents } from '../../shared/seo/llms-full'
 import {
   buildLocalizedStaticSections,
   buildLlmsNotes,
@@ -19,5 +20,13 @@ export default defineNitroPlugin((nitroApp) => {
     if (domain) {
       options.notes = buildLlmsNotes(domain)
     }
+  })
+
+  nitroApp.hooks.hook('llms:generate:full', async (_event, options, contents) => {
+    const domain = String(options.domain || '')
+    const title = String(options.full?.title || options.title || 'Documentation')
+    const description = String(options.full?.description || options.description || '')
+
+    contents.push(...await buildLlmsFullContents(domain, title, description))
   })
 })

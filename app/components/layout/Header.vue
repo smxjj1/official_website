@@ -9,6 +9,7 @@
             :key="`${link.iconKey}-${link.url}`"
             :href="link.url"
             class="info-item"
+            :aria-label="getContactLinkAriaLabel(link)"
           >
             <SocialIcon
               :icon-key="link.iconKey"
@@ -16,7 +17,7 @@
               :icon-url="link.iconUrl"
               variant="contact"
             />
-            <span>{{ getLinkDisplayText(link) }}</span>
+            <span aria-hidden="true">{{ getLinkDisplayText(link) }}</span>
           </a>
         </div>
         <div v-if="socialLinks.length" class="social-links">
@@ -137,7 +138,7 @@
 <script setup lang="ts">
 const route = useRoute()
 const { $t, getLocalePath } = useSiteLocale()
-const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel } = useContactLinks()
+const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel, getContactLinkAriaLabel } = useContactLinks()
 const { navItems: productLinks, pending: navPending } = useProductCategoryNav()
 
 const isMenuOpen = ref(false)

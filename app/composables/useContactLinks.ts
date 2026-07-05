@@ -99,6 +99,13 @@ export function getLinkAriaLabel(link: ContactLinkItem): string {
   return link.label || labels[link.iconKey || ''] || link.iconKey || 'Link'
 }
 
+/** Accessible name for contact links (icon-only on small screens). */
+export function getContactLinkAriaLabel(link: ContactLinkItem): string {
+  const display = getLinkDisplayText(link)
+  const type = getLinkAriaLabel(link)
+  return display ? `${type}: ${display}` : type
+}
+
 export function useContactLinks() {
   const config = useRuntimeConfig()
   const siteKey = (config.public.cmsSiteKey as string) || 'oyababies.com'
@@ -137,6 +144,7 @@ export function useContactLinks() {
     refresh,
     getLinkDisplayText,
     getLinkAriaLabel,
+    getContactLinkAriaLabel,
     getLocalizedProfileText,
     getMapEmbedQuery,
     buildGoogleMapEmbedUrl,

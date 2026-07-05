@@ -25,6 +25,8 @@
               :src="slide.image"
               :webp-src="slide.webpSrc"
               :alt="slide.title"
+              width="828"
+              height="335"
               loading="lazy"
             />
           </div>
@@ -250,21 +252,26 @@ onUnmounted(() => {
 }
 
 .slide-image {
-  aspect-ratio: 1/1;
+  aspect-ratio: 99 / 40;
   border-radius: @radius-lg;
   overflow: hidden;
   background: @background-color;
   width: 100%;
-  height: 100%;
 
   :deep(.optim-img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
   }
 
   @media (max-width: @breakpoint-tablet) {
-    aspect-ratio: 16/9;
+    aspect-ratio: 99 / 40;
+    max-height: none;
+
+    :deep(.optim-img) {
+      object-fit: contain;
+    }
   }
 }
 

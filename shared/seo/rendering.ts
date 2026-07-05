@@ -76,7 +76,6 @@ export function buildHybridRouteRules(categorySlugs: string[]) {
     '/': { prerender: true },
     '/zh-CN': { prerender: true },
     '/zh-TW': { prerender: true },
-    '/news': { isr: BLOG_ISR_SECONDS },
     '/example/**': { index: false },
   }
 
@@ -86,6 +85,7 @@ export function buildHybridRouteRules(categorySlugs: string[]) {
     for (const slug of allSlugs) {
       rules[localePath(prefix, slug)] = { isr: PRODUCT_ISR_SECONDS }
     }
+    rules[localePath(prefix, '/news')] = { isr: BLOG_ISR_SECONDS }
   }
 
   return rules

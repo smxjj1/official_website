@@ -8,7 +8,7 @@ const siteDescription = 'Premium baby products for happy families — feeding bo
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo'],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo', 'nuxt-gtag'],
 
   i18n: {
     locales: [
@@ -45,6 +45,11 @@ export default defineNuxtConfig({
       cmsApi: process.env.NUXT_PUBLIC_CMS_API || 'https://analytics.oyababies.com/api/public',
       cmsMediaBase: process.env.NUXT_PUBLIC_CMS_MEDIA_BASE || 'https://analytics.oyababies.com/media',
     },
+  },
+
+  gtag: {
+    enabled: process.env.NUXT_PUBLIC_ANALYTICS_DISABLED !== 'true',
+    id: process.env.NUXT_PUBLIC_GTAG_ID || 'G-G9GVDFP3ED',
   },
 
   /** Hybrid Rendering：首页 SSG，产品页 ISR 5 分钟，新闻页 ISR 30 分钟 */

@@ -1,4 +1,5 @@
 import tailwindcss from '@tailwindcss/vite'
+import { buildEnglishStaticSection, buildLlmsNotes } from './shared/seo/llms'
 import { buildHybridRouteRules, fetchCategorySlugs, getFallbackCategorySlugs } from './shared/seo/rendering'
 
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || 'https://oyababies.com'
@@ -8,7 +9,7 @@ const siteDescription = 'Premium baby products for happy families — feeding bo
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/eslint', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo', 'nuxt-gtag'],
+  modules: ['@nuxt/eslint', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo', 'nuxt-gtag', 'nuxt-llms'],
 
   i18n: {
     locales: [
@@ -52,12 +53,20 @@ export default defineNuxtConfig({
     id: process.env.NUXT_PUBLIC_GTAG_ID || 'G-G9GVDFP3ED',
   },
 
+  llms: {
+    domain: siteUrl,
+    title: siteName,
+    description: siteDescription,
+    sections: [buildEnglishStaticSection()],
+    notes: buildLlmsNotes(siteUrl),
+  },
+
   /** Hybrid Rendering：首页 SSG，产品页 ISR 5 分钟，新闻页 ISR 30 分钟 */
   routeRules: buildHybridRouteRules(getFallbackCategorySlugs()),
 
   nitro: {
     prerender: {
-      routes: ['/', '/zh-CN', '/zh-TW'],
+      routes: ['/', '/zh-CN', '/zh-TW', '/llms.txt'],
     },
   },
 

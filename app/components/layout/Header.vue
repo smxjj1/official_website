@@ -282,9 +282,13 @@ onUnmounted(() => {
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    @media (max-width: @breakpoint-mobile) {
-      max-width: 150px;
+    @media (max-width: @breakpoint-tablet) {
+      max-width: 120px;
       font-size: 11px;
+    }
+
+    @media (max-width: @breakpoint-mobile) {
+      display: none;
     }
   }
 
@@ -299,7 +303,7 @@ onUnmounted(() => {
   gap: 10px;
 
   @media (max-width: @breakpoint-mobile) {
-    gap: 6px;
+    display: none;
   }
 }
 
@@ -362,6 +366,18 @@ onUnmounted(() => {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
+
+  @media (max-width: @breakpoint-tablet) {
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: @breakpoint-mobile) {
+    font-size: 1rem;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 
 .nav {
@@ -372,7 +388,7 @@ onUnmounted(() => {
 
   @media (max-width: 992px) {
     position: fixed;
-    top: calc(32px + 60px);
+    top: calc(36px + 60px);
     left: 0;
     right: 0;
     flex-direction: column;

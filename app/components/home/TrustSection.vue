@@ -68,7 +68,7 @@ const stats = computed(() => {
 
 .trust-section {
   padding: 100px 0;
-  background: @primary-color;
+  background: @primary-color-dark;
 
   @media (max-width: @breakpoint-tablet) {
     padding: 60px 0;
@@ -130,7 +130,7 @@ const stats = computed(() => {
 .stat-label {
   display: block;
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.92);
   margin-top: @spacing-xs;
 }
 
@@ -186,7 +186,7 @@ const stats = computed(() => {
 
 .feature-text {
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.92);
   line-height: 1.6;
   margin: 0;
 }

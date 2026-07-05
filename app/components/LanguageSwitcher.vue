@@ -68,11 +68,13 @@ const handleLocaleChange = (code: string) => {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
   background: transparent;
   border: none;
-  color: @text-light;
+  color: @text-light-accessible;
   cursor: pointer;
   border-radius: 50%;
   transition: all @transition-fast;

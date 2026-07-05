@@ -196,7 +196,7 @@ onUnmounted(() => {
   display: inline-block;
   font-size: 0.875rem;
   font-weight: 600;
-  color: @primary-color;
+  color: @primary-color-dark;
   letter-spacing: 0.1em;
   margin-bottom: @spacing-sm;
 }
@@ -215,7 +215,7 @@ onUnmounted(() => {
 
 .category-description {
   font-size: 1rem;
-  color: @text-light;
+  color: @text-light-accessible;
   line-height: 1.7;
   margin: 0 0 @spacing-lg;
 }
@@ -225,15 +225,15 @@ onUnmounted(() => {
   align-items: center;
   gap: @spacing-sm;
   padding: @spacing-sm @spacing-lg;
-  background: @primary-color;
-  color: @card-background;
+  background: @primary-color-dark;
+  color: white;
   font-weight: 600;
   text-decoration: none;
   border-radius: @radius-sm;
   transition: background @transition-fast, transform @transition-fast;
 
   &:hover {
-    background: lighten(@primary-color, 8%);
+    background: lighten(@primary-color-dark, 8%);
     transform: translateX(4px);
   }
 

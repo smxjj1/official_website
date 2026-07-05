@@ -160,7 +160,7 @@ const {
 .cta-btn {
   display: inline-block;
   padding: @spacing-md @spacing-xxl;
-  background: @primary-color;
+  background: @primary-color-dark;
   color: white;
   font-size: 1.0625rem;
   font-weight: 600;
@@ -169,7 +169,7 @@ const {
   transition: background @transition-fast, transform @transition-fast;
 
   &:hover {
-    background: lighten(@primary-color, 6%);
+    background: lighten(@primary-color-dark, 6%);
     transform: translateY(-2px);
   }
 }

@@ -13,6 +13,7 @@
         <!-- Slides -->
         <div
           v-for="(slide, index) in slides"
+          v-show="currentSlide === index"
           :key="index"
           class="carousel-slide"
           :class="{ active: currentSlide === index }"
@@ -210,7 +211,7 @@ onUnmounted(() => {
   }
 }
 
-// Individual slides - absolutely positioned, only active one visible
+// Individual slides - only the active slide is visible in layout
 .carousel-slide {
   position: absolute;
   top: 0;
@@ -221,20 +222,15 @@ onUnmounted(() => {
   grid-template-columns: 1fr 1fr;
   gap: @spacing-xxl;
   align-items: center;
-  // Hidden by default
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
   z-index: 1;
-  // Smooth transition
-  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
-  // Active slide - fully visible
   &.active {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
     z-index: 10;
+  }
+
+  &:not(.active) {
+    visibility: hidden;
+    pointer-events: none;
   }
 
   @media (max-width: @breakpoint-tablet) {
@@ -284,8 +280,8 @@ onUnmounted(() => {
 .slide-badge {
   display: inline-block;
   padding: @spacing-xs @spacing-md;
-  background: @primary-color;
-  color: @card-background;
+  background: @primary-color-dark;
+  color: white;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -309,7 +305,7 @@ onUnmounted(() => {
 
 .slide-description {
   font-size: 1.1rem;
-  color: @text-light;
+  color: @text-light-accessible;
   line-height: 1.7;
   margin: 0 0 @spacing-lg;
 
@@ -336,7 +332,7 @@ onUnmounted(() => {
     }
 
     svg {
-      color: @primary-color;
+      color: @primary-color-dark;
       flex-shrink: 0;
     }
   }
@@ -347,15 +343,15 @@ onUnmounted(() => {
   align-items: center;
   gap: @spacing-sm;
   padding: @spacing-sm @spacing-lg;
-  background: @primary-color;
-  color: @card-background;
+  background: @primary-color-dark;
+  color: white;
   font-weight: 600;
   text-decoration: none;
   border-radius: @radius-sm;
   transition: background @transition-fast, transform @transition-fast;
 
   &:hover {
-    background: lighten(@primary-color, 8%);
+    background: lighten(@primary-color-dark, 8%);
     transform: translateX(4px);
   }
 
@@ -434,19 +430,32 @@ onUnmounted(() => {
 }
 
 .dot {
-  width: 12px;
-  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border-radius: 50%;
-  border: 2px solid @primary-color;
+  border: none;
   background: transparent;
   cursor: pointer;
-  transition: all @transition-fast;
 
-  &.active {
-    background: @primary-color;
+  &::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid @primary-color-dark;
+    background: transparent;
+    transition: all @transition-fast;
   }
 
-  &:hover:not(.active) {
+  &.active::before {
+    background: @primary-color-dark;
+  }
+
+  &:hover:not(.active)::before {
     background: @border-color;
   }
 }

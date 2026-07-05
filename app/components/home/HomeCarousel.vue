@@ -350,7 +350,7 @@ onUnmounted(() => {
 
 .benefit-icon {
   flex-shrink: 0;
-  color: lighten(@primary-color, 40%);
+  color: rgba(255, 255, 255, 0.92);
   margin-top: 2px;
 }
 
@@ -358,7 +358,7 @@ onUnmounted(() => {
   display: inline-block;
   padding: @spacing-sm @spacing-lg;
   background: @card-background;
-  color: @primary-color;
+  color: @primary-color-dark;
   font-weight: 600;
   text-decoration: none;
   border-radius: 4px;

@@ -114,14 +114,14 @@ const toggleItem = (index: number) => {
   }
 
   &.active {
-    border-color: @primary-color;
+    border-color: @primary-color-dark;
 
     .faq-header {
       background: @background-color;
     }
 
     .faq-icon {
-      color: @primary-color;
+      color: @primary-color-dark;
     }
   }
 }
@@ -157,7 +157,7 @@ const toggleItem = (index: number) => {
 
 .faq-icon {
   flex-shrink: 0;
-  color: @text-light;
+  color: @text-light-accessible;
   transition: color @transition-fast;
 }
 
@@ -167,7 +167,7 @@ const toggleItem = (index: number) => {
   p {
     font-size: 0.9rem;
     line-height: 1.7;
-    color: @text-light;
+    color: @text-light-accessible;
     margin: 0;
     white-space: pre-line;
   }
@@ -181,7 +181,7 @@ const toggleItem = (index: number) => {
 
   p {
     font-size: 0.9rem;
-    color: @text-light;
+    color: @text-light-accessible;
     margin: 0 0 @spacing-sm;
   }
 }
@@ -189,15 +189,15 @@ const toggleItem = (index: number) => {
 .contact-link {
   display: inline-block;
   padding: @spacing-sm @spacing-lg;
-  background: @primary-color;
-  color: @card-background;
+  background: @primary-color-dark;
+  color: white;
   font-weight: 600;
   text-decoration: none;
   border-radius: @radius-sm;
   transition: background @transition-fast;
 
   &:hover {
-    background: lighten(@primary-color, 8%);
+    background: lighten(@primary-color-dark, 8%);
   }
 }
 

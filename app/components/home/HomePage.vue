@@ -131,11 +131,11 @@ useHomeSeo()
   transition: transform @transition-fast, background @transition-fast, border-color @transition-fast;
 
   &.primary {
-    background: @primary-color;
+    background: @primary-color-dark;
     color: white;
 
     &:hover {
-      background: lighten(@primary-color, 6%);
+      background: lighten(@primary-color-dark, 6%);
       transform: translateY(-2px);
     }
   }

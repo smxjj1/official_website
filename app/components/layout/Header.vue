@@ -265,9 +265,15 @@ onUnmounted(() => {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: @text-light;
+  color: @text-light-accessible;
   text-decoration: none;
   transition: color @transition-fast;
+  min-height: 44px;
+  min-width: 44px;
+
+  @media (min-width: (@breakpoint-mobile + 1)) {
+    min-width: 0;
+  }
 
   svg,
   :deep(.social-icon--contact svg) {
@@ -359,7 +365,7 @@ onUnmounted(() => {
 
 .logo {
   text-decoration: none;
-  color: @primary-color;
+  color: @primary-color-dark;
   flex-shrink: 0;
 }
 

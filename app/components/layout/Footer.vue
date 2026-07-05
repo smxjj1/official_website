@@ -17,7 +17,9 @@
                 variant="contact"
                 class="contact-icon"
               />
-              <a :href="link.url">{{ getLinkDisplayText(link) }}</a>
+              <a :href="link.url" :aria-label="getContactLinkAriaLabel(link)">
+                <span aria-hidden="true">{{ getLinkDisplayText(link) }}</span>
+              </a>
               <span v-if="link.label" class="contact-tag">{{ link.label }}</span>
             </li>
           </ul>
@@ -43,7 +45,7 @@
 
         <!-- Products -->
         <div class="footer-column">
-          <h4 class="footer-title">{{ $t('nav.products') }}</h4>
+          <h2 class="footer-title">{{ $t('nav.products') }}</h2>
           <ul class="footer-links">
             <li>
               <NuxtLink :to="getLocalePath('/baby-feeding-bottles')">
@@ -80,7 +82,7 @@
 
         <!-- Company -->
         <div class="footer-column">
-          <h4 class="footer-title">{{ $t('footer.company') }}</h4>
+          <h2 class="footer-title">{{ $t('footer.company') }}</h2>
           <ul class="footer-links">
             <li>
               <NuxtLink :to="getLocalePath('/')">{{ $t('nav.home') }}</NuxtLink>
@@ -99,7 +101,7 @@
 
         <!-- Find Us -->
         <div v-if="displayAddress || mapEmbedUrl" class="footer-column footer-findus">
-          <h4 class="footer-title">{{ $t('footer.findUs') }}</h4>
+          <h2 class="footer-title">{{ $t('footer.findUs') }}</h2>
           <p v-if="displayAddress" class="footer-address pre-line">{{ displayAddress }}</p>
           <div v-if="mapEmbedUrl" class="map-wrapper">
             <button
@@ -144,6 +146,7 @@ const {
   contactProfile,
   getLinkDisplayText,
   getLinkAriaLabel,
+  getContactLinkAriaLabel,
   getLocalizedProfileText,
   getMapEmbedQuery,
   buildGoogleMapEmbedUrl,
@@ -396,7 +399,7 @@ const mapEmbedUrl = computed(() =>
   padding-top: @spacing-md;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.72);
 
   p {
     margin: 0;
@@ -407,7 +410,7 @@ const mapEmbedUrl = computed(() =>
     gap: @spacing-md;
 
     a {
-      color: rgba(255, 255, 255, 0.45);
+      color: rgba(255, 255, 255, 0.72);
       text-decoration: none;
       transition: color @transition-fast;
 

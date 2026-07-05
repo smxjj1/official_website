@@ -31,7 +31,7 @@ defineProps<{
   display: inline-block;
   font-size: 0.875rem;
   font-weight: 600;
-  color: @primary-color;
+  color: @primary-color-dark;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   margin-bottom: @spacing-md;
@@ -56,7 +56,7 @@ defineProps<{
 
 .section-desc {
   font-size: 1.125rem;
-  color: @text-light;
+  color: @text-light-accessible;
   line-height: 1.75;
   margin: 0;
 

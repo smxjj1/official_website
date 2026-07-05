@@ -159,6 +159,19 @@ const slides = computed<HeroSlide[]>(() => {
     .filter(slide => slide.image)
 })
 
+const firstSlideImage = computed(() => slides.value[0]?.webpSrc || slides.value[0]?.image || '')
+
+useHead(() => ({
+  link: firstSlideImage.value
+    ? [{
+        rel: 'preload',
+        as: 'image',
+        href: firstSlideImage.value,
+        fetchpriority: 'high',
+      }]
+    : [],
+}))
+
 const trackStyle = computed(() => ({
   transform: `translateX(-${currentIndex.value * 100}%)`,
 }))
@@ -308,7 +321,7 @@ onUnmounted(() => {
 
   &.primary {
     background: @card-background;
-    color: @primary-color;
+    color: @primary-color-dark;
 
     &:hover {
       transform: translateY(-2px);
@@ -360,15 +373,27 @@ onUnmounted(() => {
 }
 
 .indicator {
-  width: 10px;
-  height: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.35);
+  background: transparent;
   cursor: pointer;
-  transition: background @transition-fast, transform @transition-fast;
 
-  &.active {
+  &::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+    transition: background @transition-fast, transform @transition-fast;
+  }
+
+  &.active::before {
     background: @card-background;
     transform: scale(1.15);
   }

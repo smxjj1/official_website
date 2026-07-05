@@ -1,7 +1,7 @@
 <template>
   <div class="home-page">
     <HomeHeroCarousel />
-    <HomeCategoryGrid />
+    <LazyHomeCategoryGrid />
     <LazyHomeFeaturedCategories />
     <LazyBenefitsCarousel />
     <LazyHomeTrustSection />

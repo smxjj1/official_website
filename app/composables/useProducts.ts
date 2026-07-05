@@ -1,17 +1,10 @@
 /**
- * 从 analytics CMS 拉取产品目录；API 不可用时回退到本地 products.json
+ * 从 analytics CMS 拉取产品目录；API 不可用时回退到本地 products.json（异步 chunk，不进入首屏 entry）
  */
-import fallbackOya from '~/data/products.json'
 
-type OyaCatalog = typeof fallbackOya
-type OyaProduct = OyaCatalog['products'][number]
-type OyaCategory = OyaCatalog['categories'][number]
-
-interface CatalogResponse {
-  generatedAt?: string
-  totalProducts?: number
-  categories?: OyaCategory[]
-  products?: OyaProduct[]
+type OyaProduct = {
+  categorySlug?: string
+  [key: string]: unknown
 }
 
 export interface CatalogCategory {
@@ -22,6 +15,29 @@ export interface CatalogCategory {
   subcategories?: string[]
   pageRoute?: string | null
   nameI18n?: Record<string, string> | null
+}
+
+type OyaCategory = CatalogCategory
+
+interface CatalogResponse {
+  generatedAt?: string
+  totalProducts?: number
+  categories?: OyaCategory[]
+  products?: OyaProduct[]
+}
+
+interface FallbackCatalog {
+  products: OyaProduct[]
+  categories: OyaCategory[]
+}
+
+let fallbackPromise: Promise<FallbackCatalog> | null = null
+
+function loadFallbackCatalog() {
+  if (!fallbackPromise) {
+    fallbackPromise = import('~/data/products.json').then(mod => mod.default as FallbackCatalog)
+  }
+  return fallbackPromise
 }
 
 function resolveCategorySlug(input?: string | Ref<string | undefined>): string | undefined {
@@ -56,13 +72,21 @@ export function useProductCatalog(categorySlug?: string | Ref<string | undefined
     key: fetchKey,
   })
 
+  const fallbackCatalog = ref<FallbackCatalog | null>(null)
+
+  watch([data, error], async () => {
+    const hasCmsProducts = !error.value && (data.value?.products?.length ?? 0) > 0
+    if (!hasCmsProducts && !fallbackCatalog.value)
+      fallbackCatalog.value = await loadFallbackCatalog()
+  }, { immediate: true })
+
   const fromCms = computed(() => !error.value && (data.value?.products?.length ?? 0) > 0)
 
   const products = computed<OyaProduct[]>(() => {
     if (fromCms.value) {
       return data.value!.products as OyaProduct[]
     }
-    const list = fallbackOya.products as OyaProduct[]
+    const list = fallbackCatalog.value?.products ?? []
     if (slugRef.value) {
       return list.filter(p => p.categorySlug === slugRef.value)
     }
@@ -75,9 +99,9 @@ export function useProductCatalog(categorySlug?: string | Ref<string | undefined
       list = data.value.categories as OyaCategory[]
     }
     else {
-      list = fallbackOya.categories as OyaCategory[]
+      list = fallbackCatalog.value?.categories ?? []
     }
-    return [...list].sort((a, b) => ((a as CatalogCategory).sortOrder ?? 0) - ((b as CatalogCategory).sortOrder ?? 0))
+    return [...list].sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
   })
 
   const totalProducts = computed(() => products.value.length)

@@ -17,13 +17,13 @@ const IMAGE_EXT = new Set(['.png', '.jpg', '.jpeg'])
 function maxWidthFor(filePath) {
   const normalized = filePath.replace(/\\/g, '/')
   if (normalized.includes('/hero/') || normalized.includes('BenefitsCarousel'))
-    return 1920
+    return 828
   if (normalized.includes('/logo') || normalized.includes('default-logo'))
     return 512
   if (normalized.includes('/company/'))
     return 1600
   if (normalized.includes('/categories/'))
-    return 900
+    return 640
   if (normalized.includes('/products/'))
     return 1200
   return 1200
@@ -54,7 +54,7 @@ async function walk(dir) {
 
     await sharp(fullPath)
       .resize({ width, withoutEnlargement: true })
-      .webp({ quality: 82, effort: 4 })
+      .webp({ quality: 75, effort: 4 })
       .toFile(outPath)
 
     const originalSize = (await stat(fullPath)).size

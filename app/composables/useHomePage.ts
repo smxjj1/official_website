@@ -1,4 +1,3 @@
-import { useProductCatalog } from '~/composables/useProducts'
 import { useCategoryImages } from '~/composables/useCategoryImages'
 import { useProductCategoryNav } from '~/composables/useProductCategoryNav'
 import { resolveCategoryPath } from '~/utils/productCategory'
@@ -46,15 +45,14 @@ const GRID_STYLES = ['a', 'b', 'a', 'c', 'b', 'a']
 export function useHomePage() {
   const { $t, getLocalePath } = useSiteLocale()
   const { getAllCategoryImages } = useCategoryImages()
-  const { categories: cmsCategories, totalProducts } = useProductCatalog()
   const { sortedCategories } = useProductCategoryNav()
 
   const categories = computed(() => getAllCategoryImages.value)
 
   const productCountMap = computed(() => {
     const map: Record<string, number> = {}
-    for (const cat of cmsCategories.value) {
-      map[cat.slug] = cat.count
+    for (const cat of sortedCategories.value) {
+      map[cat.slug] = cat.count ?? 0
     }
     return map
   })
@@ -93,7 +91,6 @@ export function useHomePage() {
   return {
     HOME_CATEGORY_SLUGS,
     categories,
-    totalProducts,
     getCategoryLink,
     getCategoryProductCount,
     getCategoryDescription,

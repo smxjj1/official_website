@@ -18,6 +18,8 @@
             :webp-src="slide.webpSrc"
             :alt="slide.title"
             class="slide-bg"
+            width="828"
+            height="552"
             :loading="index === currentIndex ? 'eager' : 'lazy'"
             :fetchpriority="index === currentIndex ? 'high' : 'auto'"
           />
@@ -110,7 +112,15 @@ function getImageSources(index: number): { src: string, webpSrc?: string } {
   }
 }
 
+const containerRef = ref<HTMLElement | null>(null)
+const currentIndex = ref(0)
+const preloadAdjacentSlides = ref(false)
+let autoPlayInterval: ReturnType<typeof setInterval> | null = null
+
 function shouldLoadSlideImage(index: number) {
+  if (!preloadAdjacentSlides.value)
+    return index === currentIndex.value
+
   const total = slides.value.length
   if (total <= 1)
     return index === 0
@@ -149,10 +159,6 @@ const slides = computed<HeroSlide[]>(() => {
     .filter(slide => slide.image)
 })
 
-const containerRef = ref<HTMLElement | null>(null)
-const currentIndex = ref(0)
-let autoPlayInterval: ReturnType<typeof setInterval> | null = null
-
 const trackStyle = computed(() => ({
   transform: `translateX(-${currentIndex.value * 100}%)`,
 }))
@@ -185,6 +191,13 @@ const resumeAutoPlay = () => {
 
 onMounted(() => {
   resumeAutoPlay()
+  const enableAdjacent = () => {
+    preloadAdjacentSlides.value = true
+  }
+  if ('requestIdleCallback' in window)
+    requestIdleCallback(enableAdjacent, { timeout: 4000 })
+  else
+    setTimeout(enableAdjacent, 2500)
 })
 
 onUnmounted(() => {

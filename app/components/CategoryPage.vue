@@ -55,12 +55,12 @@
                   @click="openDetail(product)"
                 >
                   <div class="card-image">
-                    <img
+                    <OptimImg
                       v-if="product.mainImage"
                       :src="product.mainImage"
                       :alt="product.name"
                       loading="lazy"
-                    >
+                    />
                     <div v-if="!product.mainImage" class="card-placeholder">
                       <span>{{ product.itemNo.charAt(0) }}</span>
                     </div>
@@ -140,7 +140,7 @@
                     :class="{ active: galleryIndex === i }"
                     @click="galleryIndex = i"
                   >
-                    <img :src="img" :alt="`View ${i + 1}`" loading="lazy">
+                    <OptimImg :src="img" :alt="`View ${i + 1}`" loading="lazy" />
                   </button>
                 </div>
               </div>

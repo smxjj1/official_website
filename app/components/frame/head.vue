@@ -8,7 +8,7 @@ defineOptions({
   <header class="w-full">
     <div class="container mx-auto h-full flex-between">
       <a href="/">
-        <img src="/images/default-logo.png" alt="logo" class="w-auto h-10">
+        <OptimImg src="/images/default-logo.png" alt="logo" class="w-auto h-10" loading="eager" />
       </a>
       <nav>
         <a href="/">Home</a>

@@ -11,11 +11,14 @@
           </p>
         </div>
         <div class="hero-image">
-          <img
+          <OptimImg
             :src="companyDoorImage"
+            :webp-src="companyDoorWebp"
             alt="Oya Plastic Factory Entrance"
             class="factory-image"
-          >
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
       </div>
     </section>
@@ -92,22 +95,26 @@
         </p>
         <div class="certificates-grid">
           <div class="certificate-card" @click="openLightbox('iso')">
-            <img
+            <OptimImg
               :src="isoImage"
+              :webp-src="isoWebp"
               alt="ISO 9001 Certificate"
               class="certificate-image"
-            >
+              loading="lazy"
+            />
             <div class="certificate-label">
               <strong>ISO 9001</strong>
               <span>{{ $t('about.iso') }}</span>
             </div>
           </div>
           <div class="certificate-card" @click="openLightbox('bsci')">
-            <img
+            <OptimImg
               :src="bsciImage"
+              :webp-src="bsciWebp"
               alt="BSCI Certificate"
               class="certificate-image"
-            >
+              loading="lazy"
+            />
             <div class="certificate-label">
               <strong>BSCI</strong>
               <span>{{ $t('about.bsci') }}</span>
@@ -159,8 +166,11 @@
 <script setup lang="ts">
 // Import images
 import companyDoorImage from '~/assets/images/company/company_door.jpg'
+import companyDoorWebp from '~/assets/images/company/company_door.webp'
 import isoImage from '~/assets/images/company/ISO.jpg'
+import isoWebp from '~/assets/images/company/ISO.webp'
 import bsciImage from '~/assets/images/company/BSCi.jpg'
+import bsciWebp from '~/assets/images/company/BSCi.webp'
 
 definePageMeta({
   layout: 'default',
@@ -286,10 +296,16 @@ onUnmounted(() => {
 
 .factory-image {
   width: 100%;
-  height: auto;
   border-radius: @radius-lg;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
-  object-fit: cover;
+
+  :deep(img) {
+    width: 100%;
+    height: auto;
+    border-radius: @radius-lg;
+    object-fit: cover;
+    display: block;
+  }
 }
 
 // Strengths Section

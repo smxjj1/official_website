@@ -86,6 +86,8 @@ export function useProductCategorySeo(category: ProductCategory) {
   })
 }
 
+import heroWebp from '~/assets/images/home/BenefitsCarousel/1.webp'
+
 export function useHomeSeo() {
   const config = useRuntimeConfig()
   const siteName = config.public.siteName || 'Huangyan Oya Plastic Factory'
@@ -107,6 +109,15 @@ export function useHomeSeo() {
   }
 
   useHead({
+    link: [
+      {
+        rel: 'preload',
+        as: 'image',
+        href: heroWebp,
+        type: 'image/webp',
+        fetchpriority: 'high',
+      },
+    ],
     script: [
       {
         type: 'application/ld+json',

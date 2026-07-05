@@ -12,13 +12,15 @@
           :key="index"
           class="carousel-slide"
         >
-          <img
+          <OptimImg
             v-if="slide.image"
             :src="slide.image"
+            :webp-src="slide.webpSrc"
             :alt="slide.title"
             class="slide-bg"
-            loading="eager"
-          >
+            :loading="index === 0 ? 'eager' : 'lazy'"
+            :fetchpriority="index === 0 ? 'high' : 'auto'"
+          />
           <div class="slide-overlay" />
           <div class="slide-content">
             <h1 class="slide-title">{{ slide.title }}</h1>
@@ -73,6 +75,7 @@ interface HeroSlide {
   secondaryCta?: string
   secondaryLink?: string
   image: string
+  webpSrc?: string
 }
 
 const { $t, getLocalePath } = useSiteLocale()
@@ -86,20 +89,28 @@ const fallbackImages = import.meta.glob(
   { eager: true, query: '?url', import: 'default' },
 )
 
-function getImageByIndex(index: number): string {
-  for (const path in heroImages) {
-    const filename = path.split('/').pop() ?? ''
-    if (filename.startsWith(String(index)) || filename.startsWith(`hero-${index}`)) {
-      return heroImages[path] as string
+function getImageSources(index: number): { src: string, webpSrc?: string } {
+  let jpeg = ''
+  let webp = ''
+
+  for (const collection of [heroImages, fallbackImages]) {
+    for (const path in collection) {
+      const filename = path.split('/').pop() ?? ''
+      if (!filename.startsWith(String(index)) && !filename.startsWith(`hero-${index}`))
+        continue
+      if (/\.webp$/i.test(path))
+        webp = collection[path] as string
+      else
+        jpeg = collection[path] as string
     }
+    if (jpeg || webp)
+      break
   }
-  for (const path in fallbackImages) {
-    const filename = path.split('/').pop() ?? ''
-    if (filename.startsWith(String(index))) {
-      return fallbackImages[path] as string
-    }
+
+  return {
+    src: jpeg || webp,
+    webpSrc: webp || undefined,
   }
-  return ''
 }
 
 const slideLinks = [
@@ -114,15 +125,19 @@ const slides = computed<HeroSlide[]>(() => {
   const rawSlides = $t('home.hero.slides')
   if (!Array.isArray(rawSlides)) return []
 
-  return rawSlides.map((slide: any, index: number) => ({
-    title: slide.title as string,
-    subtitle: slide.subtitle as string,
-    primaryCta: slide.primaryCta as string,
-    primaryLink: getLocalePath(slideLinks[index]?.primary || '/baby-feeding-bottles'),
-    secondaryCta: index === 0 ? (slide.secondaryCta as string) : undefined,
-    secondaryLink: index === 0 ? getLocalePath('/contact-us') : undefined,
-    image: getImageByIndex(index + 1),
-  }))
+  return rawSlides.map((slide: any, index: number) => {
+    const sources = getImageSources(index + 1)
+    return {
+      title: slide.title as string,
+      subtitle: slide.subtitle as string,
+      primaryCta: slide.primaryCta as string,
+      primaryLink: getLocalePath(slideLinks[index]?.primary || '/baby-feeding-bottles'),
+      secondaryCta: index === 0 ? (slide.secondaryCta as string) : undefined,
+      secondaryLink: index === 0 ? getLocalePath('/contact-us') : undefined,
+      image: sources.src,
+      webpSrc: sources.webpSrc,
+    }
+  })
 })
 
 const containerRef = ref<HTMLElement | null>(null)
@@ -204,7 +219,12 @@ onUnmounted(() => {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+
+  :deep(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .slide-overlay {

@@ -19,7 +19,12 @@
         >
           <!-- Image Side -->
           <div class="slide-image">
-            <img :src="slide.image" :alt="slide.title" loading="lazy" />
+            <OptimImg
+              :src="slide.image"
+              :webp-src="slide.webpSrc"
+              :alt="slide.title"
+              :loading="index === 0 ? 'eager' : 'lazy'"
+            />
           </div>
 
           <!-- Content Side -->
@@ -82,15 +87,20 @@ const carouselImages = import.meta.glob(
   { eager: true, as: 'url' }
 )
 
-// Get image by index (1, 2, 3, 4)
-const getImage = (index: number): string => {
+// Get image sources by index (1, 2, 3, 4)
+const getImageSources = (index: number): { src: string, webpSrc?: string } => {
+  let jpeg = ''
+  let webp = ''
   for (const path in carouselImages) {
     const filename = path.split('/').pop() ?? ''
-    if (filename.startsWith(String(index))) {
-      return carouselImages[path] as string
-    }
+    if (!filename.startsWith(String(index)))
+      continue
+    if (/\.webp$/i.test(path))
+      webp = carouselImages[path] as string
+    else
+      jpeg = carouselImages[path] as string
   }
-  return ''
+  return { src: jpeg || webp, webpSrc: webp || undefined }
 }
 
 // Benefits slides configuration with i18n - use computed to react to locale changes
@@ -100,7 +110,8 @@ const slides = computed(() => [
     title: $t('benefits.safetyFirst.title') as string,
     description: $t('benefits.safetyFirst.description') as string,
     features: $t('benefits.safetyFirst.features') as string[],
-    image: getImage(1),
+    image: getImageSources(1).src,
+    webpSrc: getImageSources(1).webpSrc,
     link: getLocalePath('/baby-feeding-bottles'),
     ctaText: $t('benefits.safetyFirst.ctaText') as string,
   },
@@ -109,7 +120,8 @@ const slides = computed(() => [
     title: $t('benefits.smartDesign.title') as string,
     description: $t('benefits.smartDesign.description') as string,
     features: $t('benefits.smartDesign.features') as string[],
-    image: getImage(2),
+    image: getImageSources(2).src,
+    webpSrc: getImageSources(2).webpSrc,
     link: getLocalePath('/baby-sippy-cups'),
     ctaText: $t('benefits.smartDesign.ctaText') as string,
   },
@@ -118,7 +130,8 @@ const slides = computed(() => [
     title: $t('benefits.qualityBuild.title') as string,
     description: $t('benefits.qualityBuild.description') as string,
     features: $t('benefits.qualityBuild.features') as string[],
-    image: getImage(3),
+    image: getImageSources(3).src,
+    webpSrc: getImageSources(3).webpSrc,
     link: getLocalePath('/baby-tableware'),
     ctaText: $t('benefits.qualityBuild.ctaText') as string,
   },
@@ -127,7 +140,8 @@ const slides = computed(() => [
     title: $t('benefits.completeRange.title') as string,
     description: $t('benefits.completeRange.description') as string,
     features: $t('benefits.completeRange.features') as string[],
-    image: getImage(4),
+    image: getImageSources(4).src,
+    webpSrc: getImageSources(4).webpSrc,
     link: getLocalePath('/baby-feeding-bottles'),
     ctaText: $t('benefits.completeRange.ctaText') as string,
   },
@@ -251,7 +265,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
 
-  img {
+  :deep(img) {
     width: 100%;
     height: 100%;
     object-fit: cover;

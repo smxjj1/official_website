@@ -14,6 +14,7 @@ export interface HeroContent {
 
 export interface ProductImage {
   src: string
+  webpSrc?: string
   alt: string
   filename: string
 }

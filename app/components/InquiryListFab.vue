@@ -22,7 +22,7 @@
         <ul class="panel-list">
           <li v-for="item in items" :key="item.itemNo" class="panel-item">
             <div class="item-thumb">
-              <img v-if="item.mainImage" :src="item.mainImage" :alt="item.name" loading="lazy">
+              <OptimImg v-if="item.mainImage" :src="item.mainImage" :alt="item.name" loading="lazy" />
               <span v-else>{{ item.itemNo.charAt(0) }}</span>
             </div>
             <div class="item-info">

@@ -15,12 +15,13 @@
           class="product-item"
         >
           <div class="product-image">
-            <img
+            <OptimImg
               v-if="category.images[0]"
               :src="category.images[0].src"
+              :webp-src="category.images[0].webpSrc"
               :alt="category.images[0].alt"
               loading="lazy"
-            >
+            />
           </div>
           <div class="product-content">
             <h3>{{ category.name }}</h3>

@@ -40,7 +40,12 @@
             :key="imgIndex"
             class="image-card"
           >
-            <img :src="image.src" :alt="image.alt" loading="lazy">
+            <OptimImg
+              :src="image.src"
+              :webp-src="image.webpSrc"
+              :alt="image.alt"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>

@@ -62,13 +62,12 @@ export function useCategoryImages() {
     if (!folder) return []
 
     // Find images in this category folder
-    const categoryImages: { path: string; url: string; index: number }[] = []
+    const categoryImages: { path: string; url: string; index: number; isWebp: boolean }[] = []
 
     for (const imagePath in allImages) {
       const normalizedPath = imagePath.replace(/\\/g, '/')
       if (normalizedPath.includes(`/categories/${folder}/`)) {
         const filename = imagePath.split('/').pop() ?? ''
-        // Extract index from filename (1, 2, 3, 4 or img1, img2, etc.)
         const match = filename.match(/(?:img)?(\d)/)
         const index = match?.[1] ? parseInt(match[1]) : 1
 
@@ -78,20 +77,31 @@ export function useCategoryImages() {
             path: imagePath,
             url: imgData as string,
             index,
+            isWebp: /\.webp$/i.test(filename),
           })
         }
       }
     }
 
-    // Sort by index
-    categoryImages.sort((a, b) => a.index - b.index)
+    const grouped = new Map<number, { jpeg?: string, webp?: string, path: string }>()
+    for (const img of categoryImages) {
+      const current = grouped.get(img.index) ?? { path: img.path }
+      if (img.isWebp)
+        current.webp = img.url
+      else
+        current.jpeg = img.url
+      grouped.set(img.index, current)
+    }
 
-    // Convert to ProductImage format with reactive alt text
-    return categoryImages.map(img => ({
-      src: img.url,
-      alt: generateAltText(categorySlug, img.index - 1),
-      filename: img.path.split('/').pop() ?? '',
-    }))
+    return [...grouped.entries()]
+      .sort(([a], [b]) => a - b)
+      .map(([index, urls]) => ({
+        src: urls.jpeg || urls.webp || '',
+        webpSrc: urls.webp,
+        alt: generateAltText(categorySlug, index - 1),
+        filename: urls.path.split('/').pop() ?? '',
+      }))
+      .filter(img => img.src)
   }
 
   /**

@@ -8,7 +8,7 @@ const siteDescription = 'Premium baby products for happy families — feeding bo
 
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NODE_ENV === 'development' },
   modules: ['@nuxt/eslint', '@nuxt/image', '@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo', 'nuxt-gtag', 'nuxt-llms'],
 
   i18n: {
@@ -71,6 +71,11 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ['/', '/zh-CN', '/zh-TW', '/llms.txt', '/llms-full.txt'],
+    },
+    routeRules: {
+      '/images/**': {
+        headers: { 'cache-control': 'public, max-age=31536000, immutable' },
+      },
     },
   },
 

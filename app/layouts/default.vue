@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-const { getLocalePath } = useI18n()
+const { getLocalePath } = useSiteLocale()
 const contactPath = computed(() => getLocalePath('/contact-us'))
 </script>
 

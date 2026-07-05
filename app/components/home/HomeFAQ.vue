@@ -45,7 +45,7 @@
 </template>
 
 <script setup lang="ts">
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 
 const openItems = ref<number[]>([])
 

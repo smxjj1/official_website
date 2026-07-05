@@ -136,7 +136,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 const { contactLinks, socialLinks, getLinkDisplayText, getLinkAriaLabel } = useContactLinks()
 const { navItems: productLinks, pending: navPending } = useProductCategoryNav()
 

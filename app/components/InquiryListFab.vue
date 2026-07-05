@@ -70,7 +70,7 @@ const props = defineProps<{
   contactPath: string
 }>()
 
-const { $t } = useI18n()
+const { $t } = useSiteLocale()
 const {
   items,
   count,

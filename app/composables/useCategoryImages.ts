@@ -18,7 +18,7 @@ export interface CategoryImageData {
  * Main composable
  */
 export function useCategoryImages() {
-  const { $t } = useI18n()
+  const { $t } = useSiteLocale()
 
   // Load all category images
   const allImages = import.meta.glob(

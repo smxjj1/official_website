@@ -44,7 +44,7 @@ const LAYOUT_TYPES = ['left', 'right', 'left', 'center', 'right', 'left']
 const GRID_STYLES = ['a', 'b', 'a', 'c', 'b', 'a']
 
 export function useHomePage() {
-  const { $t, getLocalePath } = useI18n()
+  const { $t, getLocalePath } = useSiteLocale()
   const { getAllCategoryImages } = useCategoryImages()
   const { categories: cmsCategories, totalProducts } = useProductCatalog()
   const { sortedCategories } = useProductCategoryNav()

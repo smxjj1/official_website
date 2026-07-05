@@ -75,7 +75,7 @@ interface HeroSlide {
   image: string
 }
 
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 
 const heroImages = import.meta.glob(
   '~/assets/images/home/hero/*.{jpg,jpeg,png,webp}',

@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 const categorySlug = 'other-accessory'
-const { $t } = useI18n()
+const { $t } = useSiteLocale()
 const pageTitle = $t('products.accessories.title')
 const pageDescription = $t('products.accessories.description')
 </script>

@@ -241,7 +241,7 @@ definePageMeta({
   layout: 'default',
 })
 
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 const { add, showFeedback } = useInquiryList()
 
 const categorySlugRef = toRef(props, 'categorySlug')

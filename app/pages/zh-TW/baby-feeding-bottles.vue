@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 const categorySlug = 'baby-feeding-bottles'
-const { $t } = useI18n()
+const { $t } = useSiteLocale()
 const pageTitle = $t('products.feedingBottles.title')
 const pageDescription = $t('products.feedingBottles.description')
 </script>

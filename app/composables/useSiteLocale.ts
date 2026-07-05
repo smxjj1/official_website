@@ -22,7 +22,7 @@ function detectLocaleFromPath(path: string): string {
   return 'en'
 }
 
-export const useI18n = () => {
+export function useSiteLocale() {
   const route = useRoute()
   const locale = useState<string>('locale', () => detectLocaleFromPath(route.path))
 

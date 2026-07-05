@@ -50,7 +50,7 @@
 </template>
 
 <script setup lang="ts">
-const { $t } = useI18n()
+const { $t } = useSiteLocale()
 
 const stats = computed(() => {
   const rawStats = $t('home.trust.stats')

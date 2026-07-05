@@ -233,7 +233,7 @@ definePageMeta({
   layout: 'default',
 })
 
-const { $t, getLocalePath, locale } = useI18n()
+const { $t, getLocalePath, locale } = useSiteLocale()
 const route = useRoute()
 const { sendContactAnalytics } = useAnalytics()
 const {

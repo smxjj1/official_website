@@ -24,7 +24,7 @@
 </template>
 
 <script setup lang="ts">
-const { locale, setLocale } = useI18n()
+const { locale, setLocale } = useSiteLocale()
 
 const { light = false } = defineProps<{
   light?: boolean

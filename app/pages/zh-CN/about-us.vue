@@ -166,7 +166,7 @@ definePageMeta({
   layout: 'default',
 })
 
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 
 useSeo({
   title: '关于我们 | Oya Plastic Factory',

@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-const { $t, locale, getLocalePath } = useI18n()
+const { $t, locale, getLocalePath } = useSiteLocale()
 
 // Load carousel images from assets/images/home/BenefitsCarousel/
 const carouselImages = import.meta.glob(

@@ -84,7 +84,7 @@
 <script setup lang="ts">
 import type { NewsArticle, NewsCategory } from '~/composables/useNews'
 
-const { $t, getLocalePath } = useI18n()
+const { $t, getLocalePath } = useSiteLocale()
 const { fetchNews, recordNewsView } = useNews()
 const { trackNewsView } = useAnalytics()
 

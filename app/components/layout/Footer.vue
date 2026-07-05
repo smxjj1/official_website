@@ -128,7 +128,7 @@
 </template>
 
 <script setup lang="ts">
-const { $t, getLocalePath, locale } = useI18n()
+const { $t, getLocalePath, locale } = useSiteLocale()
 const {
   contactLinks,
   socialLinks,

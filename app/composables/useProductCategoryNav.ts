@@ -39,7 +39,7 @@ export interface ProductNavItem {
 }
 
 export function useProductCategoryNav() {
-  const { $t, locale } = useI18n()
+  const { $t, locale } = useSiteLocale()
   const { categories, pending, fromCms, refresh } = useProductCatalog()
 
   const sortedCategories = computed(() =>

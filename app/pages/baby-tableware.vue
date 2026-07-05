@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 const categorySlug = 'baby-tableware'
-const { $t } = useI18n()
+const { $t } = useSiteLocale()
 const pageTitle = $t('products.tableware.title')
 const pageDescription = $t('products.tableware.description')
 </script>

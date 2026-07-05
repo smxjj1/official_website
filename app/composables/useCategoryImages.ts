@@ -20,10 +20,10 @@ export interface CategoryImageData {
 export function useCategoryImages() {
   const { $t } = useSiteLocale()
 
-  // Load all category images
+  // Load WebP only — avoid bundling multi-MB PNG/JPEG fallbacks into the client build.
   const allImages = import.meta.glob(
-    '~/assets/images/home/categories/**/*.{jpg,jpeg,png,webp}',
-    { eager: true, as: 'url' }
+    '~/assets/images/home/categories/**/*.webp',
+    { eager: true, query: '?url', import: 'default' },
   )
 
   // Category names mapping with i18n keys
@@ -62,7 +62,7 @@ export function useCategoryImages() {
     if (!folder) return []
 
     // Find images in this category folder
-    const categoryImages: { path: string; url: string; index: number; isWebp: boolean }[] = []
+    const categoryImages: { path: string; url: string; index: number }[] = []
 
     for (const imagePath in allImages) {
       const normalizedPath = imagePath.replace(/\\/g, '/')
@@ -77,31 +77,19 @@ export function useCategoryImages() {
             path: imagePath,
             url: imgData as string,
             index,
-            isWebp: /\.webp$/i.test(filename),
           })
         }
       }
     }
 
-    const grouped = new Map<number, { jpeg?: string, webp?: string, path: string }>()
-    for (const img of categoryImages) {
-      const current = grouped.get(img.index) ?? { path: img.path }
-      if (img.isWebp)
-        current.webp = img.url
-      else
-        current.jpeg = img.url
-      grouped.set(img.index, current)
-    }
-
-    return [...grouped.entries()]
-      .sort(([a], [b]) => a - b)
-      .map(([index, urls]) => ({
-        src: urls.jpeg || urls.webp || '',
-        webpSrc: urls.webp,
-        alt: generateAltText(categorySlug, index - 1),
-        filename: urls.path.split('/').pop() ?? '',
+    return categoryImages
+      .sort((a, b) => a.index - b.index)
+      .map((img, arrayIndex) => ({
+        src: img.url,
+        webpSrc: img.url,
+        alt: generateAltText(categorySlug, arrayIndex),
+        filename: img.path.split('/').pop() ?? '',
       }))
-      .filter(img => img.src)
   }
 
   /**

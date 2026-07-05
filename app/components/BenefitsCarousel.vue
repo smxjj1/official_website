@@ -20,10 +20,11 @@
           <!-- Image Side -->
           <div class="slide-image">
             <OptimImg
+              v-if="currentSlide === index"
               :src="slide.image"
               :webp-src="slide.webpSrc"
               :alt="slide.title"
-              :loading="index === 0 ? 'eager' : 'lazy'"
+              loading="lazy"
             />
           </div>
 
@@ -83,24 +84,19 @@ const { $t, locale, getLocalePath } = useSiteLocale()
 
 // Load carousel images from assets/images/home/BenefitsCarousel/
 const carouselImages = import.meta.glob(
-  '~/assets/images/home/BenefitsCarousel/*.{jpg,jpeg,png,webp}',
-  { eager: true, as: 'url' }
+  '~/assets/images/home/BenefitsCarousel/*.webp',
+  { eager: true, query: '?url', import: 'default' },
 )
 
-// Get image sources by index (1, 2, 3, 4)
 const getImageSources = (index: number): { src: string, webpSrc?: string } => {
-  let jpeg = ''
-  let webp = ''
   for (const path in carouselImages) {
     const filename = path.split('/').pop() ?? ''
     if (!filename.startsWith(String(index)))
       continue
-    if (/\.webp$/i.test(path))
-      webp = carouselImages[path] as string
-    else
-      jpeg = carouselImages[path] as string
+    const webp = carouselImages[path] as string
+    return { src: webp, webpSrc: webp }
   }
-  return { src: jpeg || webp, webpSrc: webp || undefined }
+  return { src: '', webpSrc: undefined }
 }
 
 // Benefits slides configuration with i18n - use computed to react to locale changes
@@ -265,7 +261,7 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
 
-  :deep(img) {
+  :deep(.optim-img) {
     width: 100%;
     height: 100%;
     object-fit: cover;

@@ -98,7 +98,7 @@ const {
   text-decoration: none;
 
   &:hover {
-    .product-image img {
+    .product-image :deep(.optim-img) {
       transform: scale(1.08);
     }
 
@@ -113,7 +113,7 @@ const {
   height: 280px;
   background: @devide-background;
 
-  img {
+  :deep(.optim-img) {
     width: 100%;
     height: 100%;
     object-fit: cover;

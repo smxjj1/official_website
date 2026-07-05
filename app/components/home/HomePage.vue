@@ -2,10 +2,10 @@
   <div class="home-page">
     <HomeHeroCarousel />
     <HomeCategoryGrid />
-    <HomeFeaturedCategories />
-    <BenefitsCarousel />
-    <HomeTrustSection />
-    <HomeFAQ />
+    <LazyHomeFeaturedCategories />
+    <LazyBenefitsCarousel />
+    <LazyHomeTrustSection />
+    <LazyHomeFAQ />
     <section class="final-cta">
       <div class="cta-bg">
         <div class="cta-container">

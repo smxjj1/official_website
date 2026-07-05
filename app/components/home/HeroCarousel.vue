@@ -13,17 +13,17 @@
           class="carousel-slide"
         >
           <OptimImg
-            v-if="slide.image"
+            v-if="slide.image && shouldLoadSlideImage(index)"
             :src="slide.image"
             :webp-src="slide.webpSrc"
             :alt="slide.title"
             class="slide-bg"
-            :loading="index === 0 ? 'eager' : 'lazy'"
-            :fetchpriority="index === 0 ? 'high' : 'auto'"
+            :loading="index === currentIndex ? 'eager' : 'lazy'"
+            :fetchpriority="index === currentIndex ? 'high' : 'auto'"
           />
           <div class="slide-overlay" />
           <div class="slide-content">
-            <h1 class="slide-title">{{ slide.title }}</h1>
+            <component :is="index === 0 ? 'h1' : 'h2'" class="slide-title">{{ slide.title }}</component>
             <p class="slide-subtitle">{{ slide.subtitle }}</p>
             <div class="slide-cta-group">
               <NuxtLink :to="slide.primaryLink" class="slide-cta primary">
@@ -81,16 +81,15 @@ interface HeroSlide {
 const { $t, getLocalePath } = useSiteLocale()
 
 const heroImages = import.meta.glob(
-  '~/assets/images/home/hero/*.{jpg,jpeg,png,webp}',
+  '~/assets/images/home/hero/*.webp',
   { eager: true, query: '?url', import: 'default' },
 )
 const fallbackImages = import.meta.glob(
-  '~/assets/images/home/BenefitsCarousel/*.{jpg,jpeg,png,webp}',
+  '~/assets/images/home/BenefitsCarousel/*.webp',
   { eager: true, query: '?url', import: 'default' },
 )
 
 function getImageSources(index: number): { src: string, webpSrc?: string } {
-  let jpeg = ''
   let webp = ''
 
   for (const collection of [heroImages, fallbackImages]) {
@@ -98,19 +97,27 @@ function getImageSources(index: number): { src: string, webpSrc?: string } {
       const filename = path.split('/').pop() ?? ''
       if (!filename.startsWith(String(index)) && !filename.startsWith(`hero-${index}`))
         continue
-      if (/\.webp$/i.test(path))
-        webp = collection[path] as string
-      else
-        jpeg = collection[path] as string
+      webp = collection[path] as string
+      break
     }
-    if (jpeg || webp)
+    if (webp)
       break
   }
 
   return {
-    src: jpeg || webp,
+    src: webp,
     webpSrc: webp || undefined,
   }
+}
+
+function shouldLoadSlideImage(index: number) {
+  const total = slides.value.length
+  if (total <= 1)
+    return index === 0
+
+  const prev = currentIndex.value === 0 ? total - 1 : currentIndex.value - 1
+  const next = (currentIndex.value + 1) % total
+  return index === currentIndex.value || index === prev || index === next
 }
 
 const slideLinks = [
@@ -125,19 +132,21 @@ const slides = computed<HeroSlide[]>(() => {
   const rawSlides = $t('home.hero.slides')
   if (!Array.isArray(rawSlides)) return []
 
-  return rawSlides.map((slide: any, index: number) => {
-    const sources = getImageSources(index + 1)
-    return {
-      title: slide.title as string,
-      subtitle: slide.subtitle as string,
-      primaryCta: slide.primaryCta as string,
-      primaryLink: getLocalePath(slideLinks[index]?.primary || '/baby-feeding-bottles'),
-      secondaryCta: index === 0 ? (slide.secondaryCta as string) : undefined,
-      secondaryLink: index === 0 ? getLocalePath('/contact-us') : undefined,
-      image: sources.src,
-      webpSrc: sources.webpSrc,
-    }
-  })
+  return rawSlides
+    .map((slide: any, index: number) => {
+      const sources = getImageSources(index + 1)
+      return {
+        title: slide.title as string,
+        subtitle: slide.subtitle as string,
+        primaryCta: slide.primaryCta as string,
+        primaryLink: getLocalePath(slideLinks[index]?.primary || '/baby-feeding-bottles'),
+        secondaryCta: index === 0 ? (slide.secondaryCta as string) : undefined,
+        secondaryLink: index === 0 ? getLocalePath('/contact-us') : undefined,
+        image: sources.src,
+        webpSrc: sources.webpSrc,
+      }
+    })
+    .filter(slide => slide.image)
 })
 
 const containerRef = ref<HTMLElement | null>(null)
@@ -219,12 +228,7 @@ onUnmounted(() => {
   inset: 0;
   width: 100%;
   height: 100%;
-
-  :deep(img) {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  object-fit: cover;
 }
 
 .slide-overlay {

@@ -13,6 +13,7 @@
     <section
       v-for="(category, index) in categories"
       :key="category.slug"
+      ref="sectionRefs"
       class="category-section"
       :class="[`layout-${getLayoutType(index)}`, `section-${index + 1}`]"
     >
@@ -41,6 +42,7 @@
             class="image-card"
           >
             <OptimImg
+              v-if="visibleSections[index]"
               :src="image.src"
               :webp-src="image.webpSrc"
               :alt="image.alt"
@@ -65,6 +67,45 @@ const {
   getGridStyle,
   getLocalePath,
 } = useHomePage()
+
+const sectionRefs = ref<(HTMLElement | null)[]>([])
+const visibleSections = ref<boolean[]>([])
+let sectionObserver: IntersectionObserver | null = null
+
+watch(categories, (list) => {
+  visibleSections.value = list.map((_, index) => index === 0)
+}, { immediate: true })
+
+onMounted(async () => {
+  if (!('IntersectionObserver' in window)) {
+    visibleSections.value = categories.value.map(() => true)
+    return
+  }
+
+  await nextTick()
+
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting)
+          continue
+        const index = sectionRefs.value.findIndex(el => el === entry.target)
+        if (index >= 0)
+          visibleSections.value[index] = true
+      }
+    },
+    { rootMargin: '200px 0px' },
+  )
+
+  sectionRefs.value.forEach((el) => {
+    if (el)
+      sectionObserver?.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  sectionObserver?.disconnect()
+})
 </script>
 
 <style lang="less" scoped>
@@ -241,7 +282,7 @@ const {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  img {
+  :deep(.optim-img) {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -252,7 +293,9 @@ const {
     transform: translateY(-4px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 
-    img { transform: scale(1.08); }
+    :deep(.optim-img) {
+      transform: scale(1.08);
+    }
   }
 }
 </style>

@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     strategy: 'prefix_except_default',
     detectBrowserLanguage: false,
   },
-  css: ['~/assets/css/theme.css', '~/assets/css/tailwind.css', '~/assets/css/global.css', '~/assets/iconfont/iconfont.css'],
+  css: ['~/assets/css/theme.css', '~/assets/css/tailwind.css', '~/assets/css/global.css'],
 
   site: {
     url: siteUrl,
@@ -51,6 +51,8 @@ export default defineNuxtConfig({
   gtag: {
     enabled: process.env.NUXT_PUBLIC_ANALYTICS_DISABLED !== 'true',
     id: process.env.NUXT_PUBLIC_GTAG_ID || 'G-G9GVDFP3ED',
+    initMode: 'manual',
+    loadingStrategy: 'defer',
   },
 
   llms: {
@@ -74,6 +76,9 @@ export default defineNuxtConfig({
     },
     routeRules: {
       '/images/**': {
+        headers: { 'cache-control': 'public, max-age=31536000, immutable' },
+      },
+      '/_nuxt/**': {
         headers: { 'cache-control': 'public, max-age=31536000, immutable' },
       },
     },

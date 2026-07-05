@@ -22,24 +22,14 @@ const resolvedWebp = computed(() => {
     return props.src.replace(/\.(png|jpe?g)$/i, '.webp')
   return ''
 })
+
+/** Prefer WebP-only delivery to avoid downloading large PNG/JPEG fallbacks. */
+const displaySrc = computed(() => resolvedWebp.value || props.src)
 </script>
 
 <template>
-  <picture v-if="resolvedWebp" class="optim-img">
-    <source :srcset="resolvedWebp" type="image/webp">
-    <img
-      :src="src"
-      :alt="alt"
-      :loading="loading"
-      :fetchpriority="fetchpriority"
-      :decoding="decoding"
-      :width="width"
-      :height="height"
-    >
-  </picture>
   <img
-    v-else
-    :src="src"
+    :src="displaySrc"
     :alt="alt"
     :loading="loading"
     :fetchpriority="fetchpriority"
@@ -52,12 +42,6 @@ const resolvedWebp = computed(() => {
 
 <style scoped>
 .optim-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.optim-img img {
   display: block;
   width: 100%;
   height: 100%;

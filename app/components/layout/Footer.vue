@@ -102,7 +102,16 @@
           <h4 class="footer-title">{{ $t('footer.findUs') }}</h4>
           <p v-if="displayAddress" class="footer-address pre-line">{{ displayAddress }}</p>
           <div v-if="mapEmbedUrl" class="map-wrapper">
+            <button
+              v-if="!mapVisible"
+              type="button"
+              class="map-placeholder"
+              @click="mapVisible = true"
+            >
+              {{ $t('footer.viewMap') }}
+            </button>
             <iframe
+              v-else
               :src="mapEmbedUrl"
               width="100%"
               height="200"
@@ -141,6 +150,7 @@ const {
 } = useContactLinks()
 
 const currentYear = new Date().getFullYear()
+const mapVisible = ref(false)
 
 const displayAddress = computed(() =>
   getLocalizedProfileText(contactProfile.value, 'address', locale.value),
@@ -351,6 +361,26 @@ const mapEmbedUrl = computed(() =>
 
     iframe {
       display: block;
+    }
+
+    .map-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 200px;
+      padding: @spacing-md;
+      background: rgba(255, 255, 255, 0.06);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background @transition-fast;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
     }
   }
 }

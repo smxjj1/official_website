@@ -366,10 +366,16 @@
     "searchPlaceholder": "搜尋文章…",
     "loading": "載入中…",
     "empty": "暫無部落格文章，請稍後再來查看。",
+    "pillarSectionTitle": "從這裡開始：支柱指南",
+    "pillarSectionDesc": "涵蓋完整主題的樞紐頁面。先讀支柱，再探索下方相關專題。",
+    "clusterSectionTitle": "專題指南",
+    "readPillar": "閱讀完整指南",
     "categories": {
-      "parentingTips": "育兒技巧",
-      "productGuide": "選購指南",
-      "safetyCare": "安全護理"
+      "pillar": "支柱指南",
+      "buying-guide": "選購指南",
+      "how-to": "使用教程",
+      "problem-solving": "問題解決",
+      "b2b": "B2B / 批發"
     }
   },
   "blogDetail": {
@@ -377,6 +383,7 @@
     "tags": "標籤",
     "readTime": "分鐘閱讀",
     "relatedArticles": "相關文章",
+    "clusterArticles": "本支柱下的專題文章",
     "needHelp": "需要客製方案？",
     "needHelpDesc": "告訴我們您的需求，我們的團隊將協助您找到合適的產品。",
     "contactUs": "聯繫我們",

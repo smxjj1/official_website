@@ -1,11 +1,10 @@
-/**
- * 从 analytics CMS 拉取博客；API 不可用或无数据时回退到本地 app/data/blog
+﻿/**
+ * 浠?analytics CMS 鎷夊彇鍗氬锛汚PI 涓嶅彲鐢ㄦ垨鏃犳暟鎹椂鍥為€€鍒版湰鍦?app/data/blog
  */
 import type { BlogArticle } from '~/data/blog/types'
 import {
   getBlogData,
   getBlogArticleBySlug,
-  getRelatedArticles,
 } from '~/data/blog'
 
 export type { BlogArticle }
@@ -63,6 +62,41 @@ function normalizeArticle(raw: BlogArticle, mediaBase: string): BlogArticle {
   }
 }
 
+function pickRelatedArticles(
+  article: BlogArticle,
+  list: BlogArticle[],
+  limit = 6,
+): BlogArticle[] {
+  const others = list.filter(a => a.slug !== article.slug)
+  if (!others.length)
+    return []
+
+  const dedupe = (items: BlogArticle[]) => {
+    const seen = new Set<string>()
+    return items.filter((item) => {
+      if (seen.has(item.slug))
+        return false
+      seen.add(item.slug)
+      return true
+    })
+  }
+
+  // Pillar锛氳嚜鍔ㄥ垪鍑哄悇 Cluster锛堥潪 pillar锛夛紝鍐嶈ˉ鍏朵粬 Pillar
+  if (article.category === 'pillar') {
+    const clusters = others.filter(a => a.category !== 'pillar')
+    const otherPillars = others.filter(a => a.category === 'pillar')
+    return dedupe([...clusters, ...otherPillars]).slice(0, limit)
+  }
+
+  // Cluster / 鏅€氭枃锛氬悓鍒嗙被 鈫?Pillar 鍥為摼 鈫?鍏朵粬
+  const sameCategory = others.filter(a => a.category === article.category)
+  const pillars = others.filter(a => a.category === 'pillar')
+  const rest = others.filter(
+    a => a.category !== article.category && a.category !== 'pillar',
+  )
+  return dedupe([...sameCategory, ...pillars, ...rest]).slice(0, limit)
+}
+
 export function useBlog() {
   const config = useRuntimeConfig()
   const siteKey = (config.public.cmsSiteKey as string) || 'oyababies.com'
@@ -72,6 +106,7 @@ export function useBlog() {
   async function fetchBlogList(locale: string, category?: string): Promise<BlogArticle[]> {
     const mappedLocale = normalizeLocale(locale)
 
+    // CMS 鎴愬姛鍝嶅簲锛堝惈绌哄垪琛級浠?CMS 涓哄噯锛氬悗鍙伴殣钘?涓嬫灦鍚庡墠鍙板簲涓嶆樉绀猴紝涓嶅啀鍥為€€鏈湴闈欐€佺
     if (cmsApi && siteKey) {
       try {
         const params = new URLSearchParams({
@@ -82,8 +117,8 @@ export function useBlog() {
           params.set('category', category)
 
         const res = await $fetch<PublicBlogResponse>(`${cmsApi}/blog?${params.toString()}`)
-        const list = Array.isArray(res.data) ? res.data : []
-        if (res.success && list.length > 0) {
+        if (res.success) {
+          const list = Array.isArray(res.data) ? res.data : []
           return list.map(item => normalizeArticle(item, mediaBase))
         }
       }
@@ -114,11 +149,16 @@ export function useBlog() {
         if (res.success && res.data && !Array.isArray(res.data)) {
           return normalizeArticle(res.data, mediaBase)
         }
+        // CMS 鏄庣‘鏃犳鏂囷紙鎴栨湭鍙戝竷锛夆啋 涓嶅洖閫€鏈湴
+        return null
       }
       catch (err: unknown) {
         const status = (err as { statusCode?: number; status?: number })?.statusCode
           ?? (err as { status?: number })?.status
-        if (status !== 404 && import.meta.dev)
+        // 404 = 鍚庡彴宸查殣钘?涓嶅瓨鍦紝涓嶅洖閫€鏈湴
+        if (status === 404)
+          return null
+        if (import.meta.dev)
           console.error('[useBlog] fetchBlogBySlug failed, fallback to local', err)
       }
     }
@@ -129,7 +169,7 @@ export function useBlog() {
   async function fetchBlogDetail(
     slug: string,
     locale: string,
-    relatedLimit = 3,
+    relatedLimit = 6,
   ): Promise<{ article: BlogArticle | null; relatedArticles: BlogArticle[] }> {
     const mappedLocale = normalizeLocale(locale)
     const article = await fetchBlogBySlug(slug, mappedLocale)
@@ -139,16 +179,17 @@ export function useBlog() {
     }
 
     const list = await fetchBlogList(mappedLocale)
-    const fromCms = list.filter(
-      a => a.category === article.category && a.slug !== article.slug,
-    ).slice(0, relatedLimit)
+    const related = pickRelatedArticles(article, list, relatedLimit)
+    if (related.length > 0)
+      return { article, relatedArticles: related }
 
-    if (fromCms.length > 0)
-      return { article, relatedArticles: fromCms }
-
-    return {
+    // API 鍒楄〃涓虹┖鏃讹紝鐢ㄦ湰鍦?helper锛堝悓鏍疯蛋澧炲己閫昏緫锛?    return {
       article,
-      relatedArticles: getRelatedArticles(slug, article.category, mappedLocale, relatedLimit),
+      relatedArticles: pickRelatedArticles(
+        article,
+        getBlogData(mappedLocale),
+        relatedLimit,
+      ),
     }
   }
 
@@ -156,5 +197,6 @@ export function useBlog() {
     fetchBlogList,
     fetchBlogBySlug,
     fetchBlogDetail,
+    pickRelatedArticles,
   }
 }

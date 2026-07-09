@@ -9,62 +9,107 @@
 
     <section class="blog-section">
       <div class="blog-container">
-        <div class="filter-bar">
-          <nav class="category-tabs" aria-label="Blog categories">
-            <button
-              v-for="category in categories"
-              :key="category"
-              type="button"
-              class="tab-btn"
-              :class="{ active: activeCategory === category }"
-              @click="activeCategory = category"
-            >
-              {{ category === 'all' ? $t('blogPage.all') : categoryLabel(category) }}
-            </button>
-          </nav>
-          <div class="search-wrap">
-            <input
-              v-model="searchQuery"
-              type="search"
-              class="search-input"
-              :placeholder="String($t('blogPage.searchPlaceholder'))"
-              aria-label="Search blog"
-            >
-          </div>
-        </div>
-
         <div v-if="isLoading" class="state-message">
           {{ $t('blogPage.loading') }}
         </div>
-        <div v-else-if="filteredArticles.length === 0" class="state-message">
-          {{ $t('blogPage.empty') }}
-        </div>
-        <div v-else class="articles-grid">
-          <article
-            v-for="article in filteredArticles"
-            :key="article.slug"
-            class="article-card"
-          >
-            <div v-if="article.coverImage" class="card-image">
-              <img :src="article.coverImage" :alt="article.title" loading="lazy">
+
+        <template v-else>
+          <!-- Pillar Hub -->
+          <section v-if="showPillarSection" class="pillar-section" aria-label="Pillar guides">
+            <div class="section-header">
+              <h2 class="section-title">{{ $t('blogPage.pillarSectionTitle') }}</h2>
+              <p class="section-desc">{{ $t('blogPage.pillarSectionDesc') }}</p>
             </div>
-            <div class="card-body">
-              <span class="card-category">{{ categoryLabel(article.category) }}</span>
-              <h2 class="card-title">
-                <NuxtLink :to="getLocalePath(`/blog/${article.slug}`)">
-                  {{ article.title }}
-                </NuxtLink>
-              </h2>
-              <time class="card-date" :datetime="article.publishDate">
-                {{ formatDate(article.publishDate) }}
-              </time>
-              <p class="card-summary">{{ article.summary }}</p>
-              <ul v-if="article.tags?.length" class="card-tags">
-                <li v-for="tag in article.tags.slice(0, 3)" :key="tag">{{ tag }}</li>
-              </ul>
+
+            <div class="pillar-grid">
+              <article
+                v-for="article in filteredPillars"
+                :key="article.slug"
+                class="pillar-card"
+              >
+                <div v-if="article.coverImage" class="pillar-card-image">
+                  <img :src="article.coverImage" :alt="article.title" loading="lazy">
+                </div>
+                <div class="pillar-card-body">
+                  <span class="pillar-badge">{{ categoryLabel('pillar') }}</span>
+                  <h3 class="pillar-card-title">
+                    <NuxtLink :to="getLocalePath(`/blog/${article.slug}`)">
+                      {{ article.title }}
+                    </NuxtLink>
+                  </h3>
+                  <p class="pillar-card-summary">{{ article.summary }}</p>
+                  <NuxtLink
+                    :to="getLocalePath(`/blog/${article.slug}`)"
+                    class="pillar-cta"
+                  >
+                    {{ $t('blogPage.readPillar') }}
+                  </NuxtLink>
+                </div>
+              </article>
             </div>
-          </article>
-        </div>
+          </section>
+
+          <!-- Cluster Section -->
+          <section class="cluster-section" aria-label="Topic guides">
+            <div class="section-header">
+              <h2 class="section-title">{{ $t('blogPage.clusterSectionTitle') }}</h2>
+            </div>
+
+            <div class="filter-bar">
+              <nav class="category-tabs" aria-label="Blog categories">
+                <button
+                  v-for="category in clusterTabs"
+                  :key="category"
+                  type="button"
+                  class="tab-btn"
+                  :class="{ active: activeCategory === category }"
+                  @click="activeCategory = category"
+                >
+                  {{ category === 'all' ? $t('blogPage.all') : categoryLabel(category) }}
+                </button>
+              </nav>
+              <div class="search-wrap">
+                <input
+                  v-model="searchQuery"
+                  type="search"
+                  class="search-input"
+                  :placeholder="String($t('blogPage.searchPlaceholder'))"
+                  aria-label="Search blog"
+                >
+              </div>
+            </div>
+
+            <div v-if="filteredClusters.length === 0" class="state-message">
+              {{ $t('blogPage.empty') }}
+            </div>
+            <div v-else class="articles-grid">
+              <article
+                v-for="article in filteredClusters"
+                :key="article.slug"
+                class="article-card"
+              >
+                <div v-if="article.coverImage" class="card-image">
+                  <img :src="article.coverImage" :alt="article.title" loading="lazy">
+                </div>
+                <div class="card-body">
+                  <span class="card-category">{{ categoryLabel(article.category) }}</span>
+                  <h3 class="card-title">
+                    <NuxtLink :to="getLocalePath(`/blog/${article.slug}`)">
+                      {{ article.title }}
+                    </NuxtLink>
+                  </h3>
+                  <time class="card-date" :datetime="article.publishDate">
+                    {{ formatDate(article.publishDate) }}
+                  </time>
+                  <p class="card-summary">{{ article.summary }}</p>
+                  <ul v-if="article.tags?.length" class="card-tags">
+                    <li v-for="tag in article.tags.slice(0, 3)" :key="tag">{{ tag }}</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </section>
+        </template>
       </div>
     </section>
   </div>
@@ -96,23 +141,49 @@ const { data: blogData, pending: isLoading } = await useAsyncData(
 
 const allArticles = computed(() => blogData.value || [])
 
-const categories = computed(() => {
-  const unique = [...new Set(allArticles.value.map(a => a.category).filter(Boolean))]
-  return ['all', ...unique]
+const pillarArticles = computed(() =>
+  allArticles.value.filter(a => a.category === 'pillar'),
+)
+
+const clusterArticles = computed(() =>
+  allArticles.value.filter(a => a.category !== 'pillar'),
+)
+
+const clusterTabs = computed(() => {
+  const order = ['buying-guide', 'how-to', 'problem-solving', 'b2b']
+  const unique = [...new Set(clusterArticles.value.map(a => a.category).filter(Boolean))]
+  const sorted = [
+    ...order.filter(key => unique.includes(key)),
+    ...unique.filter(key => !order.includes(key)),
+  ]
+  return ['all', ...sorted]
 })
 
-const filteredArticles = computed(() => {
-  let list = [...allArticles.value]
+function matchesSearch(article: { title: string; summary: string; tags: string[] }, q: string) {
+  return (
+    article.title.toLowerCase().includes(q)
+    || article.summary.toLowerCase().includes(q)
+    || article.tags.some(tag => tag.toLowerCase().includes(q))
+  )
+}
+
+const filteredPillars = computed(() => {
+  const q = searchQuery.value.trim().toLowerCase()
+  if (!q)
+    return pillarArticles.value
+  return pillarArticles.value.filter(a => matchesSearch(a, q))
+})
+
+const showPillarSection = computed(() => filteredPillars.value.length > 0)
+
+const filteredClusters = computed(() => {
+  let list = [...clusterArticles.value]
   if (activeCategory.value !== 'all') {
     list = list.filter(a => a.category === activeCategory.value)
   }
   const q = searchQuery.value.trim().toLowerCase()
   if (q) {
-    list = list.filter(a =>
-      a.title.toLowerCase().includes(q)
-      || a.summary.toLowerCase().includes(q)
-      || a.tags.some(tag => tag.toLowerCase().includes(q)),
-    )
+    list = list.filter(a => matchesSearch(a, q))
   }
   return list
 })
@@ -176,6 +247,133 @@ function formatDate(dateStr: string) {
 .blog-container {
   max-width: 1100px;
   margin: 0 auto;
+}
+
+.section-header {
+  margin-bottom: 24px;
+}
+
+.section-title {
+  margin: 0 0 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.section-desc {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.pillar-section {
+  margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #99f6e4;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  &:hover {
+    border-color: #0f766e;
+    box-shadow: 0 10px 28px rgba(15, 118, 110, 0.14);
+  }
+}
+
+.pillar-card-image {
+  aspect-ratio: 16 / 9;
+  background: #f1f5f9;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+}
+
+.pillar-card:hover .pillar-card-image img {
+  transform: scale(1.03);
+}
+
+.pillar-card-body {
+  padding: 24px 26px 28px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pillar-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #0f766e;
+  background: rgba(15, 118, 110, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.pillar-card-title {
+  margin: 0 0 12px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.3;
+
+  a {
+    color: #0f172a;
+    text-decoration: none;
+
+    &:hover {
+      color: #0f766e;
+    }
+  }
+}
+
+.pillar-card-summary {
+  margin: 0 0 20px;
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.65;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pillar-cta {
+  display: inline-flex;
+  align-self: flex-start;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #0f766e;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+
+  &:hover {
+    border-bottom-color: #0f766e;
+  }
 }
 
 .filter-bar {
@@ -331,6 +529,7 @@ function formatDate(dateStr: string) {
 }
 
 @media (max-width: 768px) {
+  .pillar-grid,
   .articles-grid {
     grid-template-columns: 1fr;
   }
@@ -343,6 +542,10 @@ function formatDate(dateStr: string) {
   .search-wrap {
     flex: 1;
     min-width: 0;
+  }
+
+  .pillar-card-title {
+    font-size: 1.2rem;
   }
 }
 </style>

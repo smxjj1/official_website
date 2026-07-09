@@ -50,7 +50,9 @@
         </section>
 
         <section v-if="relatedArticles.length" class="related-section">
-          <h2>{{ $t('blogDetail.relatedArticles') }}</h2>
+          <h2>
+            {{ article?.category === 'pillar' ? $t('blogDetail.clusterArticles') : $t('blogDetail.relatedArticles') }}
+          </h2>
           <div class="related-grid">
             <NuxtLink
               v-for="related in relatedArticles"
@@ -85,7 +87,7 @@ const slug = computed(() => String(route.params.slug || ''))
 
 const { data: articleData, pending: isLoading } = await useAsyncData(
   () => `oya-blog-detail-${slug.value}-${locale.value}`,
-  () => fetchBlogDetail(slug.value, locale.value, 3),
+  () => fetchBlogDetail(slug.value, locale.value, 8),
   {
     server: true,
     watch: [slug, locale],

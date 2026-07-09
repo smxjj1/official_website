@@ -366,10 +366,16 @@
     "searchPlaceholder": "搜索文章…",
     "loading": "加载中…",
     "empty": "暂无博客文章，请稍后再来查看。",
+    "pillarSectionTitle": "从这里开始：支柱指南",
+    "pillarSectionDesc": "覆盖完整主题的枢纽页面。先读支柱，再探索下方相关专题。",
+    "clusterSectionTitle": "专题指南",
+    "readPillar": "阅读完整指南",
     "categories": {
-      "parentingTips": "育儿技巧",
-      "productGuide": "选购指南",
-      "safetyCare": "安全护理"
+      "pillar": "支柱指南",
+      "buying-guide": "选购指南",
+      "how-to": "使用教程",
+      "problem-solving": "问题解决",
+      "b2b": "B2B / 批发"
     }
   },
   "blogDetail": {
@@ -377,6 +383,7 @@
     "tags": "标签",
     "readTime": "分钟阅读",
     "relatedArticles": "相关文章",
+    "clusterArticles": "本支柱下的专题文章",
     "needHelp": "需要定制方案？",
     "needHelpDesc": "告诉我们您的需求，我们的团队将协助您找到合适的产品。",
     "contactUs": "联系我们",

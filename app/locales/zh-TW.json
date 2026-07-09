@@ -11,7 +11,8 @@
     "milkPowderBox": "奶粉盒",
     "accessories": "配件",
     "contact": "聯繫我們",
-    "news": "新聞中心"
+    "news": "新聞中心",
+    "blog": "部落格"
   },
   "home": {
     "heroTitle": "優質嬰童產品 成就幸福家庭",
@@ -355,5 +356,32 @@
     "empty": "暫無新聞，請稍後再來查看。",
     "views": "{count} 次瀏覽",
     "download": "下載附件"
+  },
+  "blogPage": {
+    "pageTitle": "部落格",
+    "pageDesc": "關於嬰童產品選購、安全與護理的實用指南。",
+    "metaTitle": "部落格",
+    "metaDescription": "歐亞塑料工廠分享嬰童餵養、安全與產品護理相關實用內容。",
+    "all": "全部",
+    "searchPlaceholder": "搜尋文章…",
+    "loading": "載入中…",
+    "empty": "暫無部落格文章，請稍後再來查看。",
+    "categories": {
+      "parentingTips": "育兒技巧",
+      "productGuide": "選購指南",
+      "safetyCare": "安全護理"
+    }
+  },
+  "blogDetail": {
+    "home": "首頁",
+    "tags": "標籤",
+    "readTime": "分鐘閱讀",
+    "relatedArticles": "相關文章",
+    "needHelp": "需要客製方案？",
+    "needHelpDesc": "告訴我們您的需求，我們的團隊將協助您找到合適的產品。",
+    "contactUs": "聯繫我們",
+    "articleNotFound": "文章未找到",
+    "loadingArticle": "文章載入中…",
+    "backToBlog": "返回部落格"
   }
 }

@@ -8,6 +8,26 @@ import {
   STATIC_SITEMAP_PATHS,
 } from '../../../shared/seo/rendering'
 
+async function fetchBlogSlugs(siteKey: string, cmsApi: string, locale: string): Promise<string[]> {
+  try {
+    const params = new URLSearchParams({ site_key: siteKey, locale })
+    const res = await fetch(`${cmsApi.replace(/\/$/, '')}/blog?${params.toString()}`)
+    if (!res.ok)
+      return []
+    const json = await res.json() as { success?: boolean; data?: { slug?: string }[] }
+    if (!json.success || !Array.isArray(json.data))
+      return []
+    return [...new Set(
+      json.data
+        .map(item => item.slug?.trim())
+        .filter((slug): slug is string => !!slug),
+    )]
+  }
+  catch {
+    return []
+  }
+}
+
 export default defineSitemapEventHandler(async () => {
   const config = useRuntimeConfig()
   const siteUrl = String(config.public.siteUrl || 'https://oyababies.com')
@@ -17,12 +37,12 @@ export default defineSitemapEventHandler(async () => {
   const categorySlugs = await fetchCategorySlugs({ siteKey, cmsApi })
   const urls: SitemapUrlInput[] = []
 
-  for (const { prefix } of SITE_LOCALES) {
+  for (const { prefix, code } of SITE_LOCALES) {
     for (const page of STATIC_SITEMAP_PATHS) {
       urls.push({
         loc: localePath(prefix, page),
         alternatives: buildHreflangAlternatives(page, siteUrl),
-        changefreq: page === '/news' ? 'weekly' : 'monthly',
+        changefreq: page === '/news' || page === '/blog' ? 'weekly' : 'monthly',
         priority: page === '/' ? 1 : 0.8,
       })
     }
@@ -33,6 +53,17 @@ export default defineSitemapEventHandler(async () => {
         alternatives: buildHreflangAlternatives(`/${slug}`, siteUrl),
         changefreq: 'weekly',
         priority: 0.9,
+      })
+    }
+
+    const blogSlugs = await fetchBlogSlugs(siteKey, cmsApi, code)
+    for (const slug of blogSlugs) {
+      const path = `/blog/${slug}`
+      urls.push({
+        loc: localePath(prefix, path),
+        alternatives: buildHreflangAlternatives(path, siteUrl),
+        changefreq: 'weekly',
+        priority: 0.7,
       })
     }
   }

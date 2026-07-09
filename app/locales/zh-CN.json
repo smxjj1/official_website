@@ -11,7 +11,8 @@
     "milkPowderBox": "奶粉盒",
     "accessories": "配件",
     "contact": "联系我们",
-    "news": "新闻中心"
+    "news": "新闻中心",
+    "blog": "博客"
   },
   "home": {
     "heroTitle": "优质婴童产品 成就幸福家庭",
@@ -355,5 +356,32 @@
     "empty": "暂无新闻，请稍后再来查看。",
     "views": "{count} 次浏览",
     "download": "下载附件"
+  },
+  "blogPage": {
+    "pageTitle": "博客",
+    "pageDesc": "关于婴童产品选购、安全与护理的实用指南。",
+    "metaTitle": "博客",
+    "metaDescription": "欧亚塑料工厂分享婴童喂养、安全与产品护理相关实用内容。",
+    "all": "全部",
+    "searchPlaceholder": "搜索文章…",
+    "loading": "加载中…",
+    "empty": "暂无博客文章，请稍后再来查看。",
+    "categories": {
+      "parentingTips": "育儿技巧",
+      "productGuide": "选购指南",
+      "safetyCare": "安全护理"
+    }
+  },
+  "blogDetail": {
+    "home": "首页",
+    "tags": "标签",
+    "readTime": "分钟阅读",
+    "relatedArticles": "相关文章",
+    "needHelp": "需要定制方案？",
+    "needHelpDesc": "告诉我们您的需求，我们的团队将协助您找到合适的产品。",
+    "contactUs": "联系我们",
+    "articleNotFound": "文章未找到",
+    "loadingArticle": "文章加载中…",
+    "backToBlog": "返回博客"
   }
 }

@@ -104,6 +104,14 @@
             {{ $t('nav.about') }}
           </NuxtLink>
           <NuxtLink
+            :to="getLocalePath('/blog')"
+            class="nav-link"
+            :class="{ active: isActive('/blog') }"
+            @click="closeMenu"
+          >
+            {{ $t('nav.blog') }}
+          </NuxtLink>
+          <NuxtLink
             :to="getLocalePath('/news')"
             class="nav-link"
             :class="{ active: isActive('/news') }"

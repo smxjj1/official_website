@@ -1,5 +1,5 @@
 ﻿/**
- * 浠?analytics CMS 鎷夊彇鍗氬锛汚PI 涓嶅彲鐢ㄦ垨鏃犳暟鎹椂鍥為€€鍒版湰鍦?app/data/blog
+ * 从 analytics CMS 拉取博客；API 不可用或无数据时回退到本地 app/data/blog
  */
 import type { BlogArticle } from '~/data/blog/types'
 import {
@@ -81,14 +81,14 @@ function pickRelatedArticles(
     })
   }
 
-  // Pillar锛氳嚜鍔ㄥ垪鍑哄悇 Cluster锛堥潪 pillar锛夛紝鍐嶈ˉ鍏朵粬 Pillar
+  // Pillar：自动列出各 Cluster（非 pillar），再补其他 Pillar
   if (article.category === 'pillar') {
     const clusters = others.filter(a => a.category !== 'pillar')
     const otherPillars = others.filter(a => a.category === 'pillar')
     return dedupe([...clusters, ...otherPillars]).slice(0, limit)
   }
 
-  // Cluster / 鏅€氭枃锛氬悓鍒嗙被 鈫?Pillar 鍥為摼 鈫?鍏朵粬
+  // Cluster / 普通文：同分类 → Pillar 回链 → 其他
   const sameCategory = others.filter(a => a.category === article.category)
   const pillars = others.filter(a => a.category === 'pillar')
   const rest = others.filter(
@@ -106,7 +106,7 @@ export function useBlog() {
   async function fetchBlogList(locale: string, category?: string): Promise<BlogArticle[]> {
     const mappedLocale = normalizeLocale(locale)
 
-    // CMS 鎴愬姛鍝嶅簲锛堝惈绌哄垪琛級浠?CMS 涓哄噯锛氬悗鍙伴殣钘?涓嬫灦鍚庡墠鍙板簲涓嶆樉绀猴紝涓嶅啀鍥為€€鏈湴闈欐€佺
+    // CMS 成功响应（含空列表）以 CMS 为准：后台隐藏/下架后前台应不显示，不再回退本地静态稿
     if (cmsApi && siteKey) {
       try {
         const params = new URLSearchParams({
@@ -149,13 +149,13 @@ export function useBlog() {
         if (res.success && res.data && !Array.isArray(res.data)) {
           return normalizeArticle(res.data, mediaBase)
         }
-        // CMS 鏄庣‘鏃犳鏂囷紙鎴栨湭鍙戝竷锛夆啋 涓嶅洖閫€鏈湴
+        // CMS 明确无此文（或未发布）→ 不回退本地
         return null
       }
       catch (err: unknown) {
         const status = (err as { statusCode?: number; status?: number })?.statusCode
           ?? (err as { status?: number })?.status
-        // 404 = 鍚庡彴宸查殣钘?涓嶅瓨鍦紝涓嶅洖閫€鏈湴
+        // 404 = 后台已隐藏/不存在，不回退本地
         if (status === 404)
           return null
         if (import.meta.dev)
@@ -183,7 +183,8 @@ export function useBlog() {
     if (related.length > 0)
       return { article, relatedArticles: related }
 
-    // API 鍒楄〃涓虹┖鏃讹紝鐢ㄦ湰鍦?helper锛堝悓鏍疯蛋澧炲己閫昏緫锛?    return {
+    // API 列表为空时，用本地 helper（同样走增强逻辑）
+    return {
       article,
       relatedArticles: pickRelatedArticles(
         article,

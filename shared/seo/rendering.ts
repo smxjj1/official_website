@@ -12,7 +12,7 @@ export const SITE_LOCALES = [
   { code: 'zh-TW', prefix: 'zh-TW', hreflang: 'zh-TW' },
 ] as const
 
-export const STATIC_SITEMAP_PATHS = ['/', '/about-us', '/contact-us', '/news'] as const
+export const STATIC_SITEMAP_PATHS = ['/', '/about-us', '/contact-us', '/news', '/blog'] as const
 
 export interface CategorySlugSource {
   siteKey?: string
@@ -86,6 +86,8 @@ export function buildHybridRouteRules(categorySlugs: string[]) {
       rules[localePath(prefix, slug)] = { isr: PRODUCT_ISR_SECONDS }
     }
     rules[localePath(prefix, '/news')] = { isr: BLOG_ISR_SECONDS }
+    rules[localePath(prefix, '/blog')] = { isr: BLOG_ISR_SECONDS }
+    rules[localePath(prefix, '/blog/**')] = { isr: BLOG_ISR_SECONDS }
   }
 
   return rules

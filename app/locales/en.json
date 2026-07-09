@@ -11,7 +11,8 @@
     "milkPowderBox": "Milk Powder Box",
     "accessories": "Accessories",
     "contact": "Contact Us",
-    "news": "News"
+    "news": "News",
+    "blog": "Blog"
   },
   "home": {
     "heroTitle": "Quality Baby Products for Happy Families",
@@ -356,5 +357,39 @@
     "empty": "No news articles yet. Please check back soon.",
     "views": "{count} views",
     "download": "Download"
+  },
+  "blogPage": {
+    "pageTitle": "Blog",
+    "pageDesc": "Guides and insights for safer, smarter baby products.",
+    "metaTitle": "Blog",
+    "metaDescription": "Practical guides and insights on baby feeding, safety, and product care from Oya Plastic Factory.",
+    "all": "All",
+    "searchPlaceholder": "Search articles…",
+    "loading": "Loading…",
+    "empty": "No blog articles yet. Please check back soon.",
+    "pillarSectionTitle": "Start Here: Pillar Guides",
+    "pillarSectionDesc": "Hub pages that map the full topic. Jump in, then explore related guides below.",
+    "clusterSectionTitle": "Topic Guides",
+    "readPillar": "Read the full guide",
+    "categories": {
+      "pillar": "Pillar Guide",
+      "buying-guide": "Buying Guide",
+      "how-to": "How-To",
+      "problem-solving": "Problem Solving",
+      "b2b": "B2B / Wholesale"
+    }
+  },
+  "blogDetail": {
+    "home": "Home",
+    "tags": "Tags",
+    "readTime": "min read",
+    "relatedArticles": "Related Articles",
+    "clusterArticles": "More Guides in This Hub",
+    "needHelp": "Need a custom solution?",
+    "needHelpDesc": "Tell us your requirements and our team will help you find the right products.",
+    "contactUs": "Contact Us",
+    "articleNotFound": "Article not found",
+    "loadingArticle": "Loading article…",
+    "backToBlog": "Back to Blog"
   }
 }

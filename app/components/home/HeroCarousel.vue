@@ -18,8 +18,8 @@
             :webp-src="slide.webpSrc"
             :alt="slide.title"
             class="slide-bg"
-            width="828"
-            height="552"
+            width="1980"
+            height="800"
             :loading="index === currentIndex ? 'eager' : 'lazy'"
             :fetchpriority="index === currentIndex ? 'high' : 'auto'"
           />

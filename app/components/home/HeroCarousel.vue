@@ -239,13 +239,21 @@ onUnmounted(() => {
 .carousel-slide {
   position: relative;
   min-width: 100%;
-  min-height: 70vh;
+  /* 按原图约 1980x800 比例限高，避免 70vh 过大拉伸发糊 */
+  height: min(64vh, 680px, calc(100vw * 800 / 1980));
+  min-height: 380px;
   display: flex;
   align-items: center;
   justify-content: center;
 
   @media (max-width: @breakpoint-tablet) {
-    min-height: 60vh;
+    height: min(52vh, 480px, calc(100vw * 800 / 1980));
+    min-height: 320px;
+  }
+
+  @media (max-width: @breakpoint-mobile) {
+    height: max(280px, calc(100vw * 800 / 1980));
+    min-height: 280px;
   }
 }
 

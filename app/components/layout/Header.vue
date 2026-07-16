@@ -247,22 +247,32 @@ onUnmounted(() => {
   background: @section-background;
   border-bottom: 1px solid @border-light;
   font-size: 0.75rem;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .top-info-inner {
   max-width: @breakpoint-wide;
+  height: 100%;
   margin: 0 auto;
-  padding: 6px @spacing-md;
+  padding: 0 @spacing-md;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: @spacing-md;
+  flex-wrap: nowrap;
 }
 
 .contact-info {
   display: flex;
   align-items: center;
   gap: @spacing-lg;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  min-width: 0;
+  overflow: hidden;
 
   @media (max-width: @breakpoint-mobile) {
     gap: @spacing-sm;
@@ -276,8 +286,9 @@ onUnmounted(() => {
   color: @text-light-accessible;
   text-decoration: none;
   transition: color @transition-fast;
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 0;
+  height: 40px;
+  white-space: nowrap;
 
   @media (min-width: (@breakpoint-mobile + 1)) {
     min-width: 0;

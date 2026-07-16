@@ -25,11 +25,11 @@ const contactPath = computed(() => getLocalePath('/contact-us'))
 
 .main {
   flex: 1;
-  /* top bar ~32px + main nav 60px */
-  padding-top: 92px;
+  /* 顶栏锁定 40px + 主导航 60px，避免 fixed header 遮挡轮播 */
+  padding-top: 100px;
 
   @media (max-width: 992px) {
-    padding-top: 88px;
+    padding-top: 100px;
   }
 }
 </style>

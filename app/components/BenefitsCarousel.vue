@@ -9,63 +9,65 @@
       />
 
       <!-- Slide Viewport -->
-      <div class="carousel-viewport">
-        <!-- Slides -->
-        <div
-          v-for="(slide, index) in slides"
-          v-show="currentSlide === index"
-          :key="index"
-          class="carousel-slide"
-          :class="{ active: currentSlide === index }"
-        >
-          <!-- Image Side -->
-          <div class="slide-image">
-            <OptimImg
-              v-if="currentSlide === index"
-              :src="slide.image"
-              :webp-src="slide.webpSrc"
-              :alt="slide.title"
-              width="828"
-              height="335"
-              loading="lazy"
-            />
-          </div>
+      <div class="carousel-stage">
+        <div class="carousel-viewport">
+          <!-- Slides -->
+          <div
+            v-for="(slide, index) in slides"
+            v-show="currentSlide === index"
+            :key="index"
+            class="carousel-slide"
+            :class="{ active: currentSlide === index }"
+          >
+            <!-- Image Side -->
+            <div class="slide-image">
+              <OptimImg
+                v-if="currentSlide === index"
+                :src="slide.image"
+                :webp-src="slide.webpSrc"
+                :alt="slide.title"
+                width="828"
+                height="335"
+                loading="lazy"
+              />
+            </div>
 
-          <!-- Content Side -->
-          <div class="slide-content">
-            <span class="slide-badge">{{ slide.badge }}</span>
-            <h2 class="slide-title">{{ slide.title }}</h2>
-            <p class="slide-description">{{ slide.description }}</p>
-            <ul class="slide-features">
-              <li v-for="(feature, i) in slide.features" :key="i">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
+            <!-- Content Side -->
+            <div class="slide-content">
+              <span class="slide-badge">{{ slide.badge }}</span>
+              <h2 class="slide-title">{{ slide.title }}</h2>
+              <p class="slide-description">{{ slide.description }}</p>
+              <ul class="slide-features">
+                <li v-for="(feature, i) in slide.features" :key="i">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                  </svg>
+                  <span>{{ feature }}</span>
+                </li>
+              </ul>
+              <NuxtLink :to="slide.link" class="slide-cta">
+                {{ slide.ctaText }}
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12 5 19 12 12 19"/>
                 </svg>
-                <span>{{ feature }}</span>
-              </li>
-            </ul>
-            <NuxtLink :to="slide.link" class="slide-cta">
-              {{ slide.ctaText }}
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </NuxtLink>
+              </NuxtLink>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Navigation Arrows -->
-      <button class="carousel-arrow prev" @click="prevSlide" aria-label="Previous">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"/>
-        </svg>
-      </button>
-      <button class="carousel-arrow next" @click="nextSlide" aria-label="Next">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"/>
-        </svg>
-      </button>
+        <!-- Navigation Arrows -->
+        <button class="carousel-arrow prev" @click="prevSlide" aria-label="Previous">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="carousel-arrow next" @click="nextSlide" aria-label="Next">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </button>
+      </div>
 
       <!-- Dots Indicators -->
       <div class="carousel-dots">
@@ -111,7 +113,7 @@ const slides = computed(() => [
     features: $t('benefits.safetyFirst.features') as string[],
     image: getImageSources(1).src,
     webpSrc: getImageSources(1).webpSrc,
-    link: getLocalePath('/baby-feeding-bottles'),
+    link: getLocalePath('/about-us'),
     ctaText: $t('benefits.safetyFirst.ctaText') as string,
   },
   {
@@ -121,7 +123,7 @@ const slides = computed(() => [
     features: $t('benefits.smartDesign.features') as string[],
     image: getImageSources(2).src,
     webpSrc: getImageSources(2).webpSrc,
-    link: getLocalePath('/baby-sippy-cups'),
+    link: getLocalePath('/baby-feeding-bottles'),
     ctaText: $t('benefits.smartDesign.ctaText') as string,
   },
   {
@@ -131,7 +133,7 @@ const slides = computed(() => [
     features: $t('benefits.qualityBuild.features') as string[],
     image: getImageSources(3).src,
     webpSrc: getImageSources(3).webpSrc,
-    link: getLocalePath('/baby-tableware'),
+    link: getLocalePath('/contact-us'),
     ctaText: $t('benefits.qualityBuild.ctaText') as string,
   },
   {
@@ -141,7 +143,7 @@ const slides = computed(() => [
     features: $t('benefits.completeRange.features') as string[],
     image: getImageSources(4).src,
     webpSrc: getImageSources(4).webpSrc,
-    link: getLocalePath('/baby-feeding-bottles'),
+    link: getLocalePath('/contact-us'),
     ctaText: $t('benefits.completeRange.ctaText') as string,
   },
 ])
@@ -202,47 +204,49 @@ onUnmounted(() => {
   }
 }
 
-// Viewport - contains all slides with overflow hidden
-.carousel-viewport {
+// Stage wraps viewport + arrows so arrows center against slide content only
+.carousel-stage {
   position: relative;
   width: 100%;
-  min-height: 500px;
+  padding: 0 52px;
 
   @media (max-width: @breakpoint-tablet) {
-    min-height: auto;
+    padding: 0;
   }
 }
 
-// Individual slides - only the active slide is visible in layout
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+.carousel-viewport {
+  position: relative;
   width: 100%;
-  height: 100%;
+}
+
+.carousel-slide {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: @spacing-xxl;
-  align-items: center;
-  z-index: 1;
+  align-items: start;
+  width: 100%;
 
+  // Active slide stays in normal flow so height expands with content
   &.active {
+    position: relative;
     z-index: 10;
   }
 
   &:not(.active) {
+    position: absolute;
+    top: 0;
+    left: 0;
     visibility: hidden;
     pointer-events: none;
+    z-index: 1;
   }
 
   @media (max-width: @breakpoint-tablet) {
     grid-template-columns: 1fr;
     gap: @spacing-xl;
-    position: relative;
-    height: auto;
-    // On mobile, all slides take normal flow but only active is visible
+
     &:not(.active) {
-      position: absolute;
       height: 0;
       overflow: hidden;
       padding: 0;
@@ -252,7 +256,7 @@ onUnmounted(() => {
 }
 
 .slide-image {
-  aspect-ratio: 99 / 40;
+  aspect-ratio: 16 / 10;
   border-radius: @radius-lg;
   overflow: hidden;
   background: @background-color;
@@ -266,17 +270,17 @@ onUnmounted(() => {
   }
 
   @media (max-width: @breakpoint-tablet) {
-    aspect-ratio: 99 / 40;
-    max-height: none;
+    aspect-ratio: 16 / 10;
 
     :deep(.optim-img) {
-      object-fit: contain;
+      object-fit: cover;
     }
   }
 }
 
 .slide-content {
-  padding: @spacing-lg 0;
+  padding: @spacing-md 0 0;
+  min-width: 0;
 
   @media (max-width: @breakpoint-tablet) {
     text-align: center;
@@ -295,52 +299,57 @@ onUnmounted(() => {
   letter-spacing: 0.1em;
   border-radius: @radius-sm;
   margin-bottom: @spacing-md;
+  max-width: 100%;
+  line-height: 1.4;
 }
 
 .slide-title {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   color: @text-color;
   margin: 0 0 @spacing-md;
-  line-height: 1.2;
+  line-height: 1.25;
   letter-spacing: -0.02em;
 
   @media (max-width: @breakpoint-tablet) {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 }
 
 .slide-description {
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: @text-light-accessible;
   line-height: 1.7;
   margin: 0 0 @spacing-lg;
 
   @media (max-width: @breakpoint-tablet) {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 
 .slide-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 @spacing-lg;
+  margin: 0 0 @spacing-md;
 
   li {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: @spacing-sm;
     margin-bottom: @spacing-sm;
     color: @text-color;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
 
     @media (max-width: @breakpoint-tablet) {
       justify-content: center;
+      text-align: left;
     }
 
     svg {
       color: @primary-color-dark;
       flex-shrink: 0;
+      margin-top: 2px;
     }
   }
 }
@@ -356,6 +365,8 @@ onUnmounted(() => {
   text-decoration: none;
   border-radius: @radius-sm;
   transition: background @transition-fast, transform @transition-fast;
+  position: relative;
+  z-index: 2;
 
   &:hover {
     background: lighten(@primary-color-dark, 8%);
@@ -375,7 +386,7 @@ onUnmounted(() => {
   }
 }
 
-// Navigation Arrows
+// Navigation Arrows — centered within slide stage only
 .carousel-arrow {
   position: absolute;
   top: 50%;
@@ -426,14 +437,15 @@ onUnmounted(() => {
   }
 }
 
-// Dots
+// Dots sit clearly below the slide stage
 .carousel-dots {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: @spacing-sm;
-  margin-top: @spacing-xl;
+  margin-top: @spacing-md;
   position: relative;
-  z-index: 20;
+  z-index: 1;
 }
 
 .dot {

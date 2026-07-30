@@ -39,8 +39,8 @@ const CATEGORY_DESC_KEYS: Record<string, string> = {
   'accessories': 'products.accessories.description',
 }
 
-const LAYOUT_TYPES = ['left', 'right', 'left', 'center', 'right', 'left']
-const GRID_STYLES = ['a', 'b', 'a', 'c', 'b', 'a']
+const LAYOUT_TYPES = ['left', 'right', 'left', 'right', 'left', 'right']
+const GRID_STYLES = ['a', 'b', 'a', 'b', 'a', 'b']
 
 export function useHomePage() {
   const { $t, getLocalePath } = useSiteLocale()

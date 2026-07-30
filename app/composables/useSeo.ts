@@ -86,7 +86,7 @@ export function useProductCategorySeo(category: ProductCategory) {
   })
 }
 
-import heroWebp from '~/assets/images/home/BenefitsCarousel/1.webp'
+import heroWebp from '~/assets/images/home/hero/1.webp'
 
 export function useHomeSeo() {
   const config = useRuntimeConfig()

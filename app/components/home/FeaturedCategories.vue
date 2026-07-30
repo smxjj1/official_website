@@ -37,7 +37,7 @@
       <div class="image-side">
         <div class="image-grid" :class="`grid-${getGridStyle(index)}`">
           <div
-            v-for="(image, imgIndex) in category.images.slice(0, 5)"
+            v-for="(image, imgIndex) in category.images.slice(0, 6)"
             :key="imgIndex"
             class="image-card"
           >
@@ -245,32 +245,18 @@ onUnmounted(() => {
 
 .image-grid {
   display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: @spacing-md;
 
-  &.grid-a {
-    grid-template-columns: repeat(2, 1fr);
-    .image-card:first-child { grid-row: span 2; }
-  }
-
-  &.grid-b {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(2, 1fr);
-  }
-
+  // Uniform 2x3 six-grid for all category sections
+  &.grid-a,
+  &.grid-b,
   &.grid-c {
-    grid-template-columns: repeat(4, 1fr);
-
-    @media (max-width: @breakpoint-tablet) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(2, 1fr);
   }
 
   @media (max-width: @breakpoint-tablet) {
-    &.grid-a,
-    &.grid-b {
-      grid-template-columns: repeat(2, 1fr);
-      .image-card:first-child { grid-row: auto; }
-    }
+    gap: @spacing-sm;
   }
 }
 

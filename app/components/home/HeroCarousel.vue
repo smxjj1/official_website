@@ -86,24 +86,16 @@ const heroImages = import.meta.glob(
   '~/assets/images/home/hero/*.webp',
   { eager: true, query: '?url', import: 'default' },
 )
-const fallbackImages = import.meta.glob(
-  '~/assets/images/home/BenefitsCarousel/*.webp',
-  { eager: true, query: '?url', import: 'default' },
-)
 
 function getImageSources(index: number): { src: string, webpSrc?: string } {
   let webp = ''
 
-  for (const collection of [heroImages, fallbackImages]) {
-    for (const path in collection) {
-      const filename = path.split('/').pop() ?? ''
-      if (!filename.startsWith(String(index)) && !filename.startsWith(`hero-${index}`))
-        continue
-      webp = collection[path] as string
-      break
-    }
-    if (webp)
-      break
+  for (const path in heroImages) {
+    const filename = path.split('/').pop() ?? ''
+    if (!filename.startsWith(String(index)) && !filename.startsWith(`hero-${index}`))
+      continue
+    webp = heroImages[path] as string
+    break
   }
 
   return {

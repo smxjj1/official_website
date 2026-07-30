@@ -64,8 +64,8 @@
     },
     "categories": {
       "subtitleTag": "Product Catalog",
-      "title": "Complete Baby Products & Accessories Collection",
-      "subtitle": "Our range covers feeding bottles, sippy cups, tableware, bath products, milk powder containers, and accessories — one-stop sourcing for home and retail.",
+      "title": "Full Baby Products & Accessories Collection",
+      "subtitle": "Offer baby bottles, straw cups, tableware, bathtubs and daily baby supplies that made of PP, Tritan, PPSU, silicone and stainless steel to meet different market and customer customization needs.",
       "viewAllCta": "View All Products"
     },
     "featured": {
@@ -79,12 +79,34 @@
       "subtitle": "Every product reflects our commitment to safe materials, practical design, and durable construction for growing families."
     },
     "trust": {
+      "tag": "Our Strength",
+      "title": "Trusted by Partners Worldwide",
+      "subtitle": "From in-house manufacturing to certified quality control, we help global brands build reliable baby product lines with confidence.",
       "stats": [
         { "value": "2000+", "label": "Products" },
         { "value": "20+", "label": "Years Experience" },
         { "value": "60+", "label": "Countries Served" },
         { "value": "ISO9001, BSCI, FAMA", "label": "Certified Quality" }
-      ]
+      ],
+      "highlights": [
+        {
+          "title": "In-House Manufacturing",
+          "text": "Molding, assembly and packaging are completed in our own factory for stable quality and clearer lead times."
+        },
+        {
+          "title": "Multi-Stage Quality Control",
+          "text": "Incoming materials, process inspection and final testing help every shipment meet international safety expectations."
+        },
+        {
+          "title": "Flexible Partnership Models",
+          "text": "Support wholesale, OEM/ODM, private label and long-term supply programs tailored to your market."
+        },
+        {
+          "title": "Responsive Export Support",
+          "text": "Dedicated team support for sampling, documentation, packing and on-time delivery to global destinations."
+        }
+      ],
+      "ctaText": "Talk to Our Team"
     },
     "ctaBottom": {
       "tag": "Get in Touch",
@@ -96,32 +118,32 @@
   },
   "benefits": {
     "safetyFirst": {
-      "badge": "Safety First",
-      "title": "100% Safe Materials",
-      "description": "Every product is crafted with your baby's health as our top priority. We use only certified safe materials.",
-      "features": ["BPA, PVC & Phthalate Free", "Food-Grade Materials", "FDA & EN14350 Certified"],
-      "ctaText": "Explore Safe Products"
+      "badge": "20+ Years",
+      "title": "20+ Years Professional Baby Products Manufacturer",
+      "description": "Specialized in the production of baby feeding products. Integrating R&D, production and sales.",
+      "features": ["Specialized in baby feeding products", "Integrating R&D, production and sales", "Professional manufacturing strength"],
+      "ctaText": "Learn About Us"
     },
     "smartDesign": {
-      "badge": "Smart Design",
-      "title": "Ergonomic & Practical",
-      "description": "Thoughtfully designed products that make parenting easier while ensuring baby's comfort during feeding and play.",
-      "features": ["Easy-Grip Handles", "Anti-Colic Systems", "Dishwasher Safe"],
-      "ctaText": "View Smart Solutions"
+      "badge": "Full Range",
+      "title": "Full Product Range & Multiple Safe Materials",
+      "description": "Offer baby bottles, drinking cups, tableware, bathtubs and daily baby supplies that made of PP, Tritan, PPSU, silicone and stainless steel to meet different market and customer customization needs.",
+      "features": ["Baby bottles, cups, tableware & bathtubs", "PP, Tritan, PPSU, silicone & stainless steel", "Customization for different markets"],
+      "ctaText": "Browse Products"
     },
     "qualityBuild": {
-      "badge": "Quality Build",
-      "title": "Built to Last",
-      "description": "Premium materials and rigorous testing ensure our products grow with your family, lasting through multiple children.",
-      "features": ["Durable Construction", "Heat Resistant", "Long-lasting Colors"],
-      "ctaText": "See Quality Products"
+      "badge": "20+ Years OEM & ODM",
+      "title": "Powerful OEM & ODM Customization Ability",
+      "description": "We provide one-stop customized services for global clients.",
+      "features": ["Custom Molds", "Custom Logos", "Custom Colors", "Custom Packaging", "Private Label"],
+      "ctaText": "Request Customization"
     },
     "completeRange": {
-      "badge": "Complete Range",
-      "title": "Everything You Need",
-      "description": "From feeding to bath time, our comprehensive product line covers all your baby's needs with consistent quality.",
-      "features": ["Full Product Range", "Compatible Systems", "Growing with Baby"],
-      "ctaText": "Browse All Products"
+      "badge": "5000+ OEM Clients · 60+ Countries",
+      "title": "Global Export Experience & Reliable Cooperation Strength",
+      "description": "Our products have been exported to over 60 countries across Europe, America and Southeast Asia with stable supply capacity, on-time delivery and trusted cooperation.",
+      "features": ["Working with 5000+ OEM clients", "Exported to 60+ countries", "Stable supply & on-time delivery"],
+      "ctaText": "Contact Us"
     }
   },
   "about": {

@@ -1,6 +1,12 @@
 <template>
   <section class="trust-section">
     <div class="trust-container">
+      <div class="trust-header">
+        <span class="trust-tag">{{ $t('home.trust.tag') }}</span>
+        <h2 class="trust-title">{{ $t('home.trust.title') }}</h2>
+        <p class="trust-subtitle">{{ $t('home.trust.subtitle') }}</p>
+      </div>
+
       <div class="stats-bar">
         <div v-for="(stat, index) in stats" :key="index" class="stat-item">
           <span class="stat-value" :class="{ 'stat-value--certs': index === 3 }">{{ stat.value }}</span>
@@ -8,49 +14,29 @@
         </div>
       </div>
 
-      <h2 class="features-title">{{ $t('home.whyChoose') }}</h2>
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
-            </div>
-            <h3 class="feature-title">{{ $t('home.safetyFirst') }}</h3>
-          </div>
-          <p class="feature-text">{{ $t('home.safetyFirstText') }}</p>
+      <div class="highlights-grid">
+        <div v-for="(item, index) in highlights" :key="index" class="highlight-card">
+          <span class="highlight-index">{{ String(index + 1).padStart(2, '0') }}</span>
+          <h3 class="highlight-title">{{ item.title }}</h3>
+          <p class="highlight-text">{{ item.text }}</p>
         </div>
-        <div class="feature">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-            </div>
-            <h3 class="feature-title">{{ $t('home.thoughtfulDesign') }}</h3>
-          </div>
-          <p class="feature-text">{{ $t('home.thoughtfulDesignText') }}</p>
-        </div>
-        <div class="feature">
-          <div class="feature-header">
-            <div class="feature-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-            </div>
-            <h3 class="feature-title">{{ $t('home.builtToLast') }}</h3>
-          </div>
-          <p class="feature-text">{{ $t('home.builtToLastText') }}</p>
-        </div>
+      </div>
+
+      <div class="trust-cta-wrap">
+        <NuxtLink :to="getLocalePath('/contact-us')" class="trust-cta">
+          {{ $t('home.trust.ctaText') }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="5" y1="12" x2="19" y2="12" />
+            <polyline points="12 5 19 12 12 19" />
+          </svg>
+        </NuxtLink>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-const { $t } = useSiteLocale()
+const { $t, getLocalePath } = useSiteLocale()
 
 const stats = computed(() => {
   const rawStats = $t('home.trust.stats')
@@ -61,17 +47,27 @@ const stats = computed(() => {
     label: stat.label as string,
   }))
 })
+
+const highlights = computed(() => {
+  const raw = $t('home.trust.highlights')
+  if (!Array.isArray(raw)) return []
+
+  return raw.map((item: any) => ({
+    title: item.title as string,
+    text: item.text as string,
+  }))
+})
 </script>
 
 <style lang="less" scoped>
 @import '~/assets/css/variables.less';
 
 .trust-section {
-  padding: 100px 0;
+  padding: 96px 0;
   background: @primary-color-dark;
 
   @media (max-width: @breakpoint-tablet) {
-    padding: 60px 0;
+    padding: 72px 0;
   }
 }
 
@@ -85,109 +81,203 @@ const stats = computed(() => {
   }
 }
 
+.trust-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto @spacing-xxl;
+
+  @media (max-width: @breakpoint-tablet) {
+    margin-bottom: @spacing-xl;
+  }
+}
+
+.trust-tag {
+  display: inline-block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: @spacing-md;
+}
+
+.trust-title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 @spacing-md;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+
+  @media (max-width: @breakpoint-tablet) {
+    font-size: 1.75rem;
+  }
+}
+
+.trust-subtitle {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.88);
+}
+
 .stats-bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: @spacing-lg;
+  gap: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: @radius-md;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
   margin-bottom: @spacing-xxl;
-  padding-bottom: @spacing-xxl;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 
   @media (max-width: @breakpoint-tablet) {
     grid-template-columns: repeat(2, 1fr);
-    gap: @spacing-md;
     margin-bottom: @spacing-xl;
-    padding-bottom: @spacing-xl;
   }
 }
 
 .stat-item {
   text-align: center;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: end;
+  justify-items: center;
+  min-height: 8.5rem;
+  padding: @spacing-xl @spacing-md;
+  position: relative;
+
+  &:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 0;
+    width: 1px;
+    height: 60%;
+    background: rgba(255, 255, 255, 0.18);
+  }
+
+  @media (max-width: @breakpoint-tablet) {
+    min-height: 7rem;
+    padding: @spacing-lg @spacing-md;
+
+    &:nth-child(2n)::after {
+      display: none;
+    }
+
+    &:nth-child(-n+2) {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+    }
+  }
 }
 
 .stat-value {
-  display: block;
-  font-size: 2.25rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 2.75rem;
   font-weight: 700;
   color: white;
-  line-height: 1.2;
+  line-height: 1.15;
+  width: 100%;
 
   @media (max-width: @breakpoint-tablet) {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   &--certs {
-    font-size: 1.125rem;
-    line-height: 1.35;
+    font-size: 1.5rem;
+    line-height: 1.25;
     letter-spacing: 0.01em;
+    max-width: 14em;
 
     @media (max-width: @breakpoint-tablet) {
-      font-size: 0.9375rem;
+      font-size: 1.125rem;
     }
   }
 }
 
 .stat-label {
   display: block;
-  font-size: 0.875rem;
+  font-size: 0.9375rem;
   color: rgba(255, 255, 255, 0.92);
-  margin-top: @spacing-xs;
+  margin-top: @spacing-sm;
+  line-height: 1.3;
 }
 
-.features-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: white;
-  text-align: center;
-  margin: 0 0 @spacing-xxl;
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: @spacing-lg;
+  margin-bottom: @spacing-xxl;
 
-  @media (max-width: @breakpoint-tablet) {
-    font-size: 1.5rem;
+  @media (max-width: @breakpoint-desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: @breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: @spacing-md;
     margin-bottom: @spacing-xl;
   }
 }
 
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: @spacing-xl;
+.highlight-card {
+  padding: @spacing-lg;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: @radius-md;
+  background: rgba(255, 255, 255, 0.05);
+  transition: background @transition-fast, transform @transition-fast;
 
-  @media (max-width: @breakpoint-tablet) {
-    grid-template-columns: 1fr;
-    gap: @spacing-lg;
+  &:hover {
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-2px);
   }
 }
 
-.feature {
-  text-align: center;
-  padding: @spacing-lg;
-}
-
-.feature-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: @spacing-sm;
+.highlight-index {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: @spacing-sm;
 }
 
-.feature-icon {
+.highlight-title {
+  margin: 0 0 @spacing-sm;
+  font-size: 1.125rem;
+  font-weight: 700;
   color: white;
-  opacity: 0.9;
-  flex-shrink: 0;
+  line-height: 1.35;
 }
 
-.feature-title {
-  font-size: 1.25rem;
+.highlight-text {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.trust-cta-wrap {
+  text-align: center;
+}
+
+.trust-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: @spacing-sm;
+  padding: @spacing-sm @spacing-xl;
+  background: white;
+  color: @primary-color-dark;
   font-weight: 600;
-  color: white;
-  margin: 0;
-}
+  text-decoration: none;
+  border-radius: @radius-sm;
+  transition: transform @transition-fast, box-shadow @transition-fast;
 
-.feature-text {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.92);
-  line-height: 1.6;
-  margin: 0;
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  }
 }
 </style>

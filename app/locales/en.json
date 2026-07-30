@@ -120,28 +120,28 @@
     "safetyFirst": {
       "badge": "20+ Years",
       "title": "20+ Years Professional Baby Products Manufacturer",
-      "description": "Specialized in the production of baby feeding products. Integrating R&D, production and sales.",
+      "description": "",
       "features": ["Specialized in baby feeding products", "Integrating R&D, production and sales", "Professional manufacturing strength"],
       "ctaText": "Learn About Us"
     },
     "smartDesign": {
       "badge": "Full Range",
       "title": "Full Product Range & Multiple Safe Materials",
-      "description": "Offer baby bottles, drinking cups, tableware, bathtubs and daily baby supplies that made of PP, Tritan, PPSU, silicone and stainless steel to meet different market and customer customization needs.",
+      "description": "",
       "features": ["Baby bottles, cups, tableware & bathtubs", "PP, Tritan, PPSU, silicone & stainless steel", "Customization for different markets"],
       "ctaText": "Browse Products"
     },
     "qualityBuild": {
       "badge": "20+ Years OEM & ODM",
       "title": "Powerful OEM & ODM Customization Ability",
-      "description": "We provide one-stop customized services for global clients.",
-      "features": ["Custom Molds", "Custom Logos", "Custom Colors", "Custom Packaging", "Private Label"],
+      "description": "",
+      "features": ["Custom Molds & Logos", "Custom Colors & Packaging", "Private Label"],
       "ctaText": "Request Customization"
     },
     "completeRange": {
       "badge": "5000+ OEM Clients · 60+ Countries",
       "title": "Global Export Experience & Reliable Cooperation Strength",
-      "description": "Our products have been exported to over 60 countries across Europe, America and Southeast Asia with stable supply capacity, on-time delivery and trusted cooperation.",
+      "description": "",
       "features": ["Working with 5000+ OEM clients", "Exported to 60+ countries", "Stable supply & on-time delivery"],
       "ctaText": "Contact Us"
     }

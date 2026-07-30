@@ -36,7 +36,7 @@
             <div class="slide-content">
               <span class="slide-badge">{{ slide.badge }}</span>
               <h2 class="slide-title">{{ slide.title }}</h2>
-              <p class="slide-description">{{ slide.description }}</p>
+              <p v-if="slide.description" class="slide-description">{{ slide.description }}</p>
               <ul class="slide-features">
                 <li v-for="(feature, i) in slide.features" :key="i">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

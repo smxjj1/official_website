@@ -119,28 +119,28 @@
     "safetyFirst": {
       "badge": "20+ 年经验",
       "title": "20余年专业婴童用品制造商",
-      "description": "专注婴幼儿喂养用品生产，集研发、生产、销售于一体。",
+      "description": "",
       "features": ["专注婴幼儿喂养用品生产", "集研发、生产、销售于一体", "专业制造实力"],
       "ctaText": "了解我们"
     },
     "smartDesign": {
       "badge": "全品类",
       "title": "全品类覆盖 · 多种安全材质",
-      "description": "提供奶瓶、水杯、餐具、浴盆及婴幼儿日用品，采用 PP、Tritan、PPSU、硅胶和不锈钢材质，满足不同市场与客户的定制需求。",
+      "description": "",
       "features": ["奶瓶、水杯、餐具、浴盆等", "PP / Tritan / PPSU / 硅胶 / 不锈钢", "满足不同市场与客户定制"],
       "ctaText": "浏览产品"
     },
     "qualityBuild": {
       "badge": "20+ 年 OEM & ODM",
       "title": "强大的 OEM & ODM 定制能力",
-      "description": "为全球客户提供一站式定制服务。",
-      "features": ["模具定制", "Logo 定制", "颜色定制", "包装定制", "自有品牌 Private Label"],
+      "description": "",
+      "features": ["模具与 Logo 定制", "颜色与包装定制", "自有品牌 Private Label"],
       "ctaText": "咨询定制"
     },
     "completeRange": {
       "badge": "5000+ OEM 客户 · 60+ 国家",
       "title": "全球出口经验与可靠合作实力",
-      "description": "产品已出口至欧洲、美洲及东南亚等 60 多个国家，供应稳定、交期准时、合作可靠。",
+      "description": "",
       "features": ["服务 5000+ OEM 客户", "出口 60+ 国家", "稳定供应 · 准时交付"],
       "ctaText": "联系我们"
     }

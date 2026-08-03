@@ -1,7 +1,7 @@
 <template>
   <div class="layout">
     <LayoutHeader />
-    <main class="main">
+    <main class="main" :class="{ 'has-top-bar': hasTopBar }">
       <slot />
     </main>
     <LayoutFooter />
@@ -11,7 +11,9 @@
 
 <script setup lang="ts">
 const { getLocalePath } = useSiteLocale()
+const { contactLinks, socialLinks } = useContactLinks()
 const contactPath = computed(() => getLocalePath('/contact-us'))
+const hasTopBar = computed(() => contactLinks.value.length > 0 || socialLinks.value.length > 0)
 </script>
 
 <style lang="less" scoped>
@@ -25,11 +27,11 @@ const contactPath = computed(() => getLocalePath('/contact-us'))
 
 .main {
   flex: 1;
-  /* 顶栏锁定 40px + 主导航 60px，避免 fixed header 遮挡轮播 */
-  padding-top: 100px;
+  /* 主导航 60px + border；有顶部联系栏时再加 40px */
+  padding-top: 61px;
 
-  @media (max-width: 992px) {
-    padding-top: 100px;
+  &.has-top-bar {
+    padding-top: 101px;
   }
 }
 </style>

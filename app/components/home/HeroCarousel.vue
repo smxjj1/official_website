@@ -1,5 +1,6 @@
 <template>
   <section class="hero-carousel">
+    <h1 v-if="!slides[0]?.title" class="sr-only">{{ $t('siteName') }}</h1>
     <div
       ref="containerRef"
       class="carousel-container"
@@ -11,23 +12,30 @@
           v-for="(slide, index) in slides"
           :key="index"
           class="carousel-slide"
+          :class="{ 'is-image-only': !slide.title }"
         >
+          <NuxtLink
+            v-if="!slide.title"
+            :to="slide.primaryLink"
+            class="slide-hit-area"
+            :aria-label="slide.alt"
+          />
           <OptimImg
             v-if="slide.image && shouldLoadSlideImage(index)"
             :src="slide.image"
             :webp-src="slide.webpSrc"
-            :alt="slide.title"
+            :alt="slide.title || slide.alt"
             class="slide-bg"
             width="1980"
             height="800"
             :loading="index === currentIndex ? 'eager' : 'lazy'"
             :fetchpriority="index === currentIndex ? 'high' : 'auto'"
           />
-          <div class="slide-overlay" />
-          <div class="slide-content">
+          <div v-if="slide.title" class="slide-overlay" />
+          <div v-if="slide.title" class="slide-content">
             <component :is="index === 0 ? 'h1' : 'h2'" class="slide-title">{{ slide.title }}</component>
-            <p class="slide-subtitle">{{ slide.subtitle }}</p>
-            <div class="slide-cta-group">
+            <p v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</p>
+            <div v-if="slide.primaryCta" class="slide-cta-group">
               <NuxtLink :to="slide.primaryLink" class="slide-cta primary">
                 {{ slide.primaryCta }}
               </NuxtLink>
@@ -53,17 +61,6 @@
           <polyline points="9 18 15 12 9 6" />
         </svg>
       </button>
-
-      <div class="carousel-indicators">
-        <button
-          v-for="(_, index) in slides"
-          :key="index"
-          class="indicator"
-          :class="{ active: currentIndex === index }"
-          :aria-label="`Go to slide ${index + 1}`"
-          @click="goToSlide(index)"
-        />
-      </div>
     </div>
   </section>
 </template>
@@ -76,6 +73,7 @@ interface HeroSlide {
   primaryLink: string
   secondaryCta?: string
   secondaryLink?: string
+  alt: string
   image: string
   webpSrc?: string
 }
@@ -123,11 +121,11 @@ function shouldLoadSlideImage(index: number) {
 }
 
 const slideLinks = [
-  { primary: '/baby-feeding-bottles', secondary: '/contact-us' },
-  { primary: '/baby-feeding-bottles', secondary: '' },
-  { primary: '/baby-sippy-cups', secondary: '' },
-  { primary: '/about-us', secondary: '' },
-  { primary: '/contact-us', secondary: '' },
+  { primary: '/baby-sippy-cups', alt: 'Baby sippy cups' },
+  { primary: '/baby-bath-potty', alt: 'Baby bath and potty' },
+  { primary: '/baby-feeding-bottles', alt: 'Baby feeding bottles' },
+  { primary: '/baby-tableware', alt: 'Baby tableware' },
+  { primary: '/contact-us', alt: 'Partner With Us' },
 ]
 
 const slides = computed<HeroSlide[]>(() => {
@@ -137,13 +135,15 @@ const slides = computed<HeroSlide[]>(() => {
   return rawSlides
     .map((slide: any, index: number) => {
       const sources = getImageSources(index + 1)
+      const link = slideLinks[index]
       return {
-        title: slide.title as string,
-        subtitle: slide.subtitle as string,
-        primaryCta: slide.primaryCta as string,
-        primaryLink: getLocalePath(slideLinks[index]?.primary || '/baby-feeding-bottles'),
-        secondaryCta: index === 0 ? (slide.secondaryCta as string) : undefined,
-        secondaryLink: index === 0 ? getLocalePath('/contact-us') : undefined,
+        title: (slide.title as string) || '',
+        subtitle: (slide.subtitle as string) || '',
+        primaryCta: (slide.primaryCta as string) || '',
+        primaryLink: getLocalePath(link?.primary || '/baby-feeding-bottles'),
+        secondaryCta: slide.secondaryCta || undefined,
+        secondaryLink: slide.secondaryCta ? getLocalePath('/contact-us') : undefined,
+        alt: link?.alt || (slide.title as string) || 'Product highlight',
         image: sources.src,
         webpSrc: sources.webpSrc,
       }
@@ -176,10 +176,6 @@ const nextSlide = () => {
 const prevSlide = () => {
   if (!slides.value.length) return
   currentIndex.value = currentIndex.value === 0 ? slides.value.length - 1 : currentIndex.value - 1
-}
-
-const goToSlide = (index: number) => {
-  currentIndex.value = index
 }
 
 const pauseAutoPlay = () => {
@@ -215,6 +211,18 @@ onUnmounted(() => {
 
 .hero-carousel {
   background: @primary-color;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .carousel-container {
@@ -255,6 +263,12 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.slide-hit-area {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
 }
 
 .slide-overlay {
@@ -345,57 +359,28 @@ onUnmounted(() => {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  padding: @spacing-sm;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background @transition-fast;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.35);
-  }
-
-  &.prev { left: @spacing-md; }
-  &.next { right: @spacing-md; }
-}
-
-.carousel-indicators {
-  position: absolute;
-  bottom: @spacing-lg;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: @spacing-xs;
-  z-index: 10;
-}
-
-.indicator {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 44px;
   height: 44px;
   padding: 0;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(74, 64, 58, 0.12);
+  color: #4a403a;
   border-radius: 50%;
-  border: none;
-  background: transparent;
   cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: background @transition-fast, box-shadow @transition-fast, transform @transition-fast;
 
-  &::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.35);
-    transition: background @transition-fast, transform @transition-fast;
+  &:hover {
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+    transform: translateY(-50%) scale(1.05);
   }
 
-  &.active::before {
-    background: @card-background;
-    transform: scale(1.15);
-  }
+  &.prev { left: @spacing-md; }
+  &.next { right: @spacing-md; }
 }
 </style>

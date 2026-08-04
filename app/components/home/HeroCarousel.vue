@@ -210,7 +210,8 @@ onUnmounted(() => {
 @import '~/assets/css/variables.less';
 
 .hero-carousel {
-  background: @primary-color;
+  /* 与横幅 letterbox 同色，避免切页时露出品牌红底 */
+  background: #f7f3ee;
   /* 贴紧导航，避免亚像素缝隙 */
   margin-top: -1px;
 }
@@ -247,6 +248,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #f7f3ee;
 
   /* 平板/手机：按横幅比例完整展示，避免 cover 裁掉左右文案与产品 */
   @media (max-width: @breakpoint-tablet) {
@@ -267,6 +269,39 @@ onUnmounted(() => {
   @media (max-width: @breakpoint-tablet) {
     object-fit: contain;
     background: #f7f3ee;
+  }
+}
+
+/* 有 HTML 叠层的最后一页：背景铺满，文案在框内紧凑排布 */
+.carousel-slide:not(.is-image-only) {
+  @media (max-width: @breakpoint-tablet) {
+    .slide-bg {
+      object-fit: cover;
+    }
+
+    .slide-content {
+      padding: 0.55rem 2.75rem;
+    }
+
+    .slide-title {
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .slide-subtitle {
+      font-size: 0.72rem;
+      margin-bottom: 0.45rem;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .slide-cta {
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+    }
   }
 }
 

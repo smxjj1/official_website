@@ -51,9 +51,7 @@ watch([navPending, productsPending, category, product, productSlug], async () =>
   if (navPending.value || productsPending.value)
     return
 
-  if (!category.value) {
-    throw createError({ statusCode: 404, statusMessage: 'Category not found' })
-  }
+  // 分类导航偶发未就绪时，只要产品能命中仍展示详情（避免误 404）
   if (!product.value) {
     throw createError({ statusCode: 404, statusMessage: 'Product not found' })
   }

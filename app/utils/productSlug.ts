@@ -84,7 +84,12 @@ export function findProductByRouteSlug<T extends ProductSlugSource>(
   if (exact)
     return exact
 
-  return list.find((p) => {
+  // 按 itemNo 长度降序，优先匹配更长型号（避免 XTQ6351 抢先匹配 XTQ6351-PP）
+  const ranked = [...list].sort(
+    (a, b) => normalizeItemNo(b.itemNo || '').length - normalizeItemNo(a.itemNo || '').length,
+  )
+
+  return ranked.find((p) => {
     const no = normalizeItemNo(p.itemNo || '')
     if (!no)
       return false

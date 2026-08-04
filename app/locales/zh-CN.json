@@ -244,6 +244,7 @@
     "moq": "起订量",
     "hsCode": "海关编码",
     "contactInquiry": "咨询产品",
+    "backToCategory": "返回分类",
     "comingSoon": "敬请期待",
     "comingSoonText": "该品类产品即将上线，请稍后再来查看。"
   },

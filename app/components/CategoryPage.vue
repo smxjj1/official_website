@@ -1,4 +1,4 @@
-<template>
+﻿<template>
   <div class="category-page">
     <!-- Hero Section -->
     <section class="category-hero">
@@ -48,11 +48,11 @@
 
               <!-- Product Grid -->
               <div class="product-grid">
-                <div
+                <NuxtLink
                   v-for="product in group.products"
                   :key="product.id"
+                  :to="getLocalePath(buildProductPath(product.categorySlug, product.itemNo, product.name))"
                   class="product-card"
-                  @click="openDetail(product)"
                 >
                   <div class="card-image">
                     <OptimImg
@@ -73,7 +73,7 @@
                     </div>
                     <p class="card-item-no">{{ product.itemNo }}</p>
                   </div>
-                </div>
+                </NuxtLink>
               </div>
             </div>
           </template>
@@ -107,133 +107,19 @@
         </svg>
       </button>
     </Transition>
-
-    <!-- Product Detail Modal -->
-    <Teleport to="body">
-      <Transition name="modal">
-        <div v-if="detailOpen" class="modal-overlay" @click.self="closeDetail">
-          <div class="modal-content">
-            <button class="modal-close" @click="closeDetail" aria-label="Close">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
-
-            <div class="modal-body">
-              <!-- Image Gallery -->
-              <div class="detail-gallery">
-                <div class="gallery-main">
-                  <img
-                    v-if="currentProduct?.gallery.length"
-                    :src="currentProduct.gallery[galleryIndex]"
-                    :alt="currentProduct.name"
-                  >
-                  <div v-else class="gallery-placeholder">
-                    <span>{{ currentProduct?.itemNo?.charAt(0) }}</span>
-                  </div>
-                </div>
-                <div v-if="currentProduct?.gallery.length > 1" class="gallery-thumbs">
-                  <button
-                    v-for="(img, i) in currentProduct.gallery"
-                    :key="i"
-                    class="thumb"
-                    :class="{ active: galleryIndex === i }"
-                    @click="galleryIndex = i"
-                  >
-                    <OptimImg :src="img" :alt="`View ${i + 1}`" loading="lazy" />
-                  </button>
-                </div>
-              </div>
-
-              <!-- Product Info -->
-              <div class="detail-info">
-                <h2 class="detail-name">{{ currentProduct?.name }}</h2>
-                <p class="detail-item-no">{{ $t('products.itemNo', { itemNo: currentProduct?.itemNo }) }}</p>
-
-                <div v-if="currentProduct?.description" class="detail-desc">
-                  <h4>{{ $t('products.description') }}</h4>
-                  <p>{{ currentProduct.description }}</p>
-                </div>
-
-                <!-- Specs Table -->
-                <div class="detail-specs">
-                  <h4>{{ $t('products.specifications') }}</h4>
-                  <table class="specs-table">
-                    <tbody>
-                      <tr v-if="currentProduct?.capacity">
-                        <td>{{ $t('products.capacity') }}</td>
-                        <td>{{ currentProduct.capacity }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.material">
-                        <td>{{ $t('products.material') }}</td>
-                        <td>{{ currentProduct.material }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.pcsPerCtn">
-                        <td>{{ $t('products.pcsPerCtn') }}</td>
-                        <td>{{ currentProduct.specs.pcsPerCtn }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.ctnSize">
-                        <td>{{ $t('products.ctnSize') }}</td>
-                        <td>{{ currentProduct.specs.ctnSize }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.nw">
-                        <td>{{ $t('products.nw') }}</td>
-                        <td>{{ currentProduct.specs.nw }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.gw">
-                        <td>{{ $t('products.gw') }}</td>
-                        <td>{{ currentProduct.specs.gw }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.pcs20gp">
-                        <td>{{ $t('products.pcs20gp') }}</td>
-                        <td>{{ currentProduct.specs.pcs20gp.toLocaleString() }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.pcs40hq">
-                        <td>{{ $t('products.pcs40hq') }}</td>
-                        <td>{{ currentProduct.specs.pcs40hq.toLocaleString() }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.moq">
-                        <td>{{ $t('products.moq') }}</td>
-                        <td>{{ currentProduct.specs.moq.toLocaleString() }}</td>
-                      </tr>
-                      <tr v-if="currentProduct?.specs.hsCode">
-                        <td>{{ $t('products.hsCode') }}</td>
-                        <td>{{ currentProduct.specs.hsCode }}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-
-                <div class="detail-actions">
-                  <button type="button" class="detail-add-list" @click="handleAddToList">
-                    {{ $t('inquiryList.addToList') }}
-                  </button>
-                  <NuxtLink
-                    v-if="currentProduct"
-                    :to="{ path: getLocalePath('/contact-us'), query: { products: currentProduct.itemNo } }"
-                    class="detail-cta"
-                  >
-                    {{ $t('products.contactInquiry') }}
-                  </NuxtLink>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Transition>
-    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
 import { normalizeSubcategoryKey, sortSubcategoryKeys } from '~/utils/productCategory'
+import { buildProductPath } from '~/utils/productSlug'
 import { useProductCatalog } from '~/composables/useProducts'
 
 const props = defineProps<{
   categorySlug: string
   pageTitle: string
   pageDescription: string
-  /** CMS 子分类白名单顺序（可选） */
+  /** CMS 瀛愬垎绫荤櫧鍚嶅崟椤哄簭锛堝彲閫夛級 */
   subcategoryOrder?: string[]
 }>()
 
@@ -242,7 +128,6 @@ definePageMeta({
 })
 
 const { $t, getLocalePath } = useSiteLocale()
-const { add, showFeedback } = useInquiryList()
 
 const categorySlugRef = toRef(props, 'categorySlug')
 const { products: allProducts, totalProducts, categories: catalogCategories } = useProductCatalog(categorySlugRef)
@@ -310,7 +195,7 @@ const getSubcategoryKey = (subcategory: string): string => {
   return keyMap[subcategory] || ''
 }
 
-/** 子分类展示名：优先 i18n，否则用 CMS 原始名称 */
+/** 瀛愬垎绫诲睍绀哄悕锛氫紭鍏?i18n锛屽惁鍒欑敤 CMS 鍘熷鍚嶇О */
 const getSubcategoryDisplay = (subcategory: string): string => {
   if (subcategory === 'General') {
     return $t('products.subcategories.general') as string
@@ -351,18 +236,9 @@ const groupedProducts = computed(() => {
   }))
 })
 
-const detailOpen = ref(false)
-const currentProduct = ref<Product | null>(null)
-const galleryIndex = ref(0)
 const activeAnchor = ref(0)
-const scrollBarWidth = ref(0)
 const showBackToTop = ref(false)
 let scrollObserver: IntersectionObserver | null = null
-
-// Calculate scrollbar width
-const getScrollBarWidth = () => {
-  return window.innerWidth - document.documentElement.clientWidth
-}
 
 // Scroll to anchor
 const scrollToAnchor = (index: number) => {
@@ -427,67 +303,15 @@ const setupScrollObserver = () => {
   })
 }
 
-const openDetail = (product: Product) => {
-  currentProduct.value = product
-  galleryIndex.value = 0
-  detailOpen.value = true
-
-  // Use margin-left to compensate for scrollbar removal
-  scrollBarWidth.value = getScrollBarWidth()
-  document.body.style.marginLeft = `${scrollBarWidth.value}px`
-  document.body.style.overflow = 'hidden'
-}
-
-const closeDetail = () => {
-  detailOpen.value = false
-  document.body.style.marginLeft = ''
-  document.body.style.overflow = ''
-}
-
-const handleAddToList = () => {
-  const product = currentProduct.value
-  if (!product) return
-
-  const result = add({
-    itemNo: product.itemNo,
-    name: product.name,
-    categorySlug: product.categorySlug,
-    mainImage: product.mainImage,
-  })
-
-  if (result.ok) {
-    showFeedback(String($t('inquiryList.added')))
-    return
-  }
-  if (result.reason === 'duplicate') {
-    showFeedback(String($t('inquiryList.alreadyInList')))
-    return
-  }
-  if (result.reason === 'limit') {
-    showFeedback(String($t('inquiryList.limitReached')))
-  }
-}
-
-const handleKeydown = (e: KeyboardEvent) => {
-  if (e.key === 'Escape' && detailOpen.value) {
-    closeDetail()
-  }
-}
-
 onMounted(() => {
-  window.addEventListener('keydown', handleKeydown)
   window.addEventListener('scroll', handleScroll, { passive: true })
-  // Setup scroll observer for auto-highlighting anchors
   nextTick(() => {
     setupScrollObserver()
   })
 })
 
 onUnmounted(() => {
-  window.removeEventListener('keydown', handleKeydown)
   window.removeEventListener('scroll', handleScroll)
-  document.body.style.marginLeft = ''
-  document.body.style.overflow = ''
   if (scrollObserver) {
     scrollObserver.disconnect()
   }
@@ -675,6 +499,9 @@ onUnmounted(() => {
   border-radius: @radius-md;
   overflow: hidden;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: block;
   transition: transform @transition-fast, box-shadow @transition-fast;
 
   &:hover {
@@ -819,250 +646,5 @@ onUnmounted(() => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-}
-
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: @spacing-md;
-}
-
-.modal-content {
-  background: @card-background;
-  border-radius: @radius-lg;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow: hidden;
-  position: relative;
-}
-
-.modal-close {
-  position: absolute;
-  top: @spacing-md;
-  right: @spacing-md;
-  background: @background-color;
-  border: none;
-  color: @text-color;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 10;
-
-  &:hover {
-    background: @devide-background;
-  }
-}
-
-.modal-body {
-  display: flex;
-  gap: @spacing-lg;
-  padding: @spacing-lg;
-  max-height: 90vh;
-  overflow-y: auto;
-
-  @media (max-width: @breakpoint-tablet) {
-    flex-direction: column;
-  }
-}
-
-.detail-gallery {
-  flex: 1;
-  min-width: 300px;
-
-  @media (max-width: @breakpoint-tablet) {
-    min-width: auto;
-  }
-}
-
-.gallery-main {
-  aspect-ratio: 1;
-  border-radius: @radius-md;
-  overflow: hidden;
-  background: @background-color;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-}
-
-.gallery-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: @devide-background;
-
-  span {
-    font-size: 4rem;
-    font-weight: 700;
-    color: @primary-color;
-    opacity: 0.3;
-  }
-}
-
-.gallery-thumbs {
-  display: flex;
-  gap: @spacing-sm;
-  margin-top: @spacing-md;
-  justify-content: center;
-}
-
-.thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: @radius-sm;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid transparent;
-  background: @background-color;
-  padding: 0;
-
-  &.active {
-    border-color: @primary-color;
-  }
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.detail-info {
-  flex: 1.2;
-  display: flex;
-  flex-direction: column;
-}
-
-.detail-name {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: @text-color;
-  margin: 0 0 @spacing-sm;
-  line-height: 1.3;
-}
-
-.detail-item-no {
-  font-size: 0.9rem;
-  color: @secondary-color;
-  margin: 0 0 @spacing-md;
-}
-
-.detail-desc {
-  margin-bottom: @spacing-md;
-
-  h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: @text-color;
-    margin: 0 0 @spacing-xs;
-  }
-
-  p {
-    font-size: 0.85rem;
-    color: @text-light;
-    line-height: 1.6;
-    margin: 0;
-  }
-}
-
-.detail-specs {
-  margin-bottom: @spacing-lg;
-
-  h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: @text-color;
-    margin: 0 0 @spacing-sm;
-  }
-}
-
-.specs-table {
-  width: 100%;
-  border-collapse: collapse;
-
-  td {
-    padding: @spacing-xs @spacing-sm;
-    font-size: 0.85rem;
-    border-bottom: 1px solid @border-color;
-
-    &:first-child {
-      color: @text-light;
-      width: 120px;
-    }
-
-    &:last-child {
-      color: @text-color;
-    }
-  }
-}
-
-.detail-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: @spacing-sm;
-  margin-top: @spacing-md;
-}
-
-.detail-add-list {
-  padding: @spacing-sm @spacing-lg;
-  background: transparent;
-  border: 2px solid @primary-color;
-  color: @primary-color;
-  font-weight: 600;
-  border-radius: @radius-sm;
-  cursor: pointer;
-  transition: background @transition-fast, color @transition-fast;
-
-  &:hover {
-    background: @primary-color;
-    color: @card-background;
-  }
-}
-
-.detail-cta {
-  display: inline-block;
-  padding: @spacing-sm @spacing-lg;
-  background: @primary-color;
-  color: @card-background;
-  font-weight: 600;
-  text-decoration: none;
-  border-radius: @radius-sm;
-  transition: background @transition-fast;
-
-  &:hover {
-    background: lighten(@primary-color, 8%);
-  }
-}
-
-.modal-enter-active,
-.modal-leave-active {
-  transition: opacity 0.3s ease;
-
-  .modal-content {
-    transition: transform 0.3s ease;
-  }
-}
-
-.modal-enter-from,
-.modal-leave-to {
-  opacity: 0;
-
-  .modal-content {
-    transform: scale(0.95);
-  }
 }
 </style>

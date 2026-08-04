@@ -7,6 +7,7 @@ import {
   SITE_LOCALES,
   STATIC_SITEMAP_PATHS,
 } from '../../../shared/seo/rendering'
+import { buildProductPath } from '../../../shared/seo/productSlug'
 
 async function fetchBlogSlugs(siteKey: string, cmsApi: string, locale: string): Promise<string[]> {
   try {
@@ -28,6 +29,31 @@ async function fetchBlogSlugs(siteKey: string, cmsApi: string, locale: string): 
   }
 }
 
+async function fetchProductPaths(siteKey: string, cmsApi: string): Promise<string[]> {
+  try {
+    const res = await fetch(`${cmsApi.replace(/\/$/, '')}/products?site_key=${encodeURIComponent(siteKey)}`)
+    if (!res.ok)
+      return []
+    const json = await res.json() as {
+      products?: { itemNo?: string; name?: string; categorySlug?: string }[]
+    }
+    const paths: string[] = []
+    for (const product of json.products || []) {
+      const path = buildProductPath(
+        product.categorySlug || '',
+        product.itemNo || '',
+        product.name || '',
+      )
+      if (path)
+        paths.push(path)
+    }
+    return [...new Set(paths)]
+  }
+  catch {
+    return []
+  }
+}
+
 export default defineSitemapEventHandler(async () => {
   const config = useRuntimeConfig()
   const siteUrl = String(config.public.siteUrl || 'https://oyababies.com')
@@ -35,6 +61,7 @@ export default defineSitemapEventHandler(async () => {
   const cmsApi = String(config.public.cmsApi || 'https://analytics.oyababies.com/api/public')
 
   const categorySlugs = await fetchCategorySlugs({ siteKey, cmsApi })
+  const productPaths = await fetchProductPaths(siteKey, cmsApi)
   const urls: SitemapUrlInput[] = []
 
   for (const { prefix, code } of SITE_LOCALES) {
@@ -53,6 +80,15 @@ export default defineSitemapEventHandler(async () => {
         alternatives: buildHreflangAlternatives(`/${slug}`, siteUrl),
         changefreq: 'weekly',
         priority: 0.9,
+      })
+    }
+
+    for (const path of productPaths) {
+      urls.push({
+        loc: localePath(prefix, path),
+        alternatives: buildHreflangAlternatives(path, siteUrl),
+        changefreq: 'weekly',
+        priority: 0.7,
       })
     }
 

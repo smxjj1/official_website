@@ -256,7 +256,8 @@ onUnmounted(() => {
 }
 
 .slide-image {
-  aspect-ratio: 16 / 10;
+  /* 与 BenefitsCarousel 横幅图比例一致（约 1920×776），避免 16:10 裁切左右 */
+  aspect-ratio: 1920 / 776;
   border-radius: @radius-lg;
   overflow: hidden;
   background: @background-color;
@@ -270,10 +271,11 @@ onUnmounted(() => {
   }
 
   @media (max-width: @breakpoint-tablet) {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1920 / 776;
 
     :deep(.optim-img) {
-      object-fit: cover;
+      object-fit: contain;
+      background: @background-color;
     }
   }
 }

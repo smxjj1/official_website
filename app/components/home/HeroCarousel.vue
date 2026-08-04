@@ -211,6 +211,8 @@ onUnmounted(() => {
 
 .hero-carousel {
   background: @primary-color;
+  /* 贴紧导航，避免亚像素缝隙 */
+  margin-top: -1px;
 }
 
 .sr-only {
@@ -246,14 +248,11 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
 
+  /* 平板/手机：按横幅比例完整展示，避免 cover 裁掉左右文案与产品 */
   @media (max-width: @breakpoint-tablet) {
-    height: min(52vh, 480px, calc(100vw * 800 / 1980));
-    min-height: 320px;
-  }
-
-  @media (max-width: @breakpoint-mobile) {
-    height: max(280px, calc(100vw * 800 / 1980));
-    min-height: 280px;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 1920 / 828;
   }
 }
 
@@ -263,6 +262,12 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+
+  @media (max-width: @breakpoint-tablet) {
+    object-fit: contain;
+    background: #f7f3ee;
+  }
 }
 
 .slide-hit-area {

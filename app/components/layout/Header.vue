@@ -42,7 +42,13 @@
     </div>
 
     <!-- Main navbar -->
-    <div class="header-main" :class="{ 'header-main--shadow': showNavShadow }">
+    <div
+      class="header-main"
+      :class="{
+        'header-main--shadow': showNavShadow,
+        'header-main--flush': isHomePage && !isScrolled,
+      }"
+    >
       <div class="header-container">
         <NuxtLink :to="getLocalePath('/')" class="logo" @click="closeMenu">
           <span class="logo-text">{{ $t('siteName') }}</span>
@@ -361,10 +367,15 @@ onUnmounted(() => {
 .header-main {
   background: @card-background;
   border-bottom: 1px solid @border-color;
-  transition: box-shadow @transition-normal;
+  transition: box-shadow @transition-normal, border-color @transition-normal;
 
   &.header-main--shadow {
     box-shadow: 0 2px 12px rgba(74, 64, 58, 0.06);
+  }
+
+  /* 首页未滚动时去掉底边线，避免与轮播图之间出现白缝 */
+  &.header-main--flush {
+    border-bottom-color: transparent;
   }
 }
 

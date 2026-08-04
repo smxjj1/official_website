@@ -52,14 +52,29 @@ async function walk(dir) {
     const outPath = fullPath.replace(/\.(png|jpe?g)$/i, '.webp')
     const meta = await sharp(fullPath).metadata()
     const width = maxWidthFor(fullPath)
-
-    const width = maxWidthFor(fullPath)
     const isHero = fullPath.replace(/\\/g, '/').includes('/hero/')
       || fullPath.replace(/\\/g, '/').includes('BenefitsCarousel')
 
+    // Prefer higher-res source when both .jpg and .png exist for the same stem
+    // (chat-compressed PNGs are often much smaller than the original JPG).
+    const normalized = fullPath.replace(/\\/g, '/')
+    if (ext === '.png') {
+      const jpgSibling = fullPath.replace(/\.png$/i, '.jpg')
+      try {
+        const jpgMeta = await sharp(jpgSibling).metadata()
+        if ((jpgMeta.width || 0) > (meta.width || 0)) {
+          console.log(`skip ${entry.name} (prefer higher-res .jpg ${jpgMeta.width}px > ${meta.width}px)`)
+          continue
+        }
+      }
+      catch {
+        // no jpg sibling
+      }
+    }
+
     await sharp(fullPath)
       .resize({ width, withoutEnlargement: true })
-      .webp({ quality: isHero ? 82 : 75, effort: 4 })
+      .webp({ quality: isHero ? 85 : 75, effort: 4 })
       .toFile(outPath)
 
     const originalSize = (await stat(fullPath)).size

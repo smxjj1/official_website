@@ -81,6 +81,14 @@ export default defineNuxtConfig({
       '/_nuxt/**': {
         headers: { 'cache-control': 'public, max-age=31536000, immutable' },
       },
+      // 本地开发：同源代理 CMS，避免浏览器直连 analytics 触发 CORS
+      ...(process.env.NODE_ENV === 'development'
+        ? {
+            '/api/cms/**': {
+              proxy: 'https://analytics.oyababies.com/api/public/**',
+            },
+          }
+        : {}),
     },
   },
 

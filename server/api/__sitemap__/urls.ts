@@ -7,7 +7,7 @@ import {
   SITE_LOCALES,
   STATIC_SITEMAP_PATHS,
 } from '../../../shared/seo/rendering'
-import { buildProductPath } from '../../../shared/seo/productSlug'
+import { buildProductPath } from '~/utils/productSlug'
 
 async function fetchBlogSlugs(siteKey: string, cmsApi: string, locale: string): Promise<string[]> {
   try {

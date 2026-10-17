@@ -71,9 +71,7 @@
     "statsBar": [
       { "value": "20+", "label": "Years of Manufacturing" },
       { "value": "20,000㎡", "label": "Factory Area" },
-      { "value": "60+", "label": "Export Countries" },
-      { "value": "ISO 9001", "label": "Quality Management" },
-      { "value": "BSCI", "label": "Factory Compliance" }
+      { "value": "60+", "label": "Export Countries" }
     ],
     "categories": {
       "subtitleTag": "Product Catalog",
@@ -130,24 +128,57 @@
       ],
       "ctaTitle": "Have a Product Idea?",
       "ctaText": "Tell us your concept, and our team will support design, sampling and mass production.",
+      "ctaItems": [
+        {
+          "title": "Have a Product Idea?",
+          "text": "Tell us your concept, and our team will support design, sampling and mass production."
+        },
+        {
+          "title": "Looking for OEM & ODM?",
+          "text": "From feeding bottles and sippy cups to tableware and accessories, we tailor manufacturing to your brand specs."
+        },
+        {
+          "title": "Need Mold & Tooling Support?",
+          "text": "Based in Huangyan, China’s Mold Capital, we develop and adjust molds for stable, repeatable production."
+        },
+        {
+          "title": "Want Reliable Delivery?",
+          "text": "In-house molding, assembly, QC and packaging help keep quality consistent from sample to shipment."
+        }
+      ],
       "ctaButton": "Start Your Project"
     },
     "materials": {
       "subtitleTag": "Material Expertise",
       "title": "Multi-Material Expertise",
-      "subtitle": "Food-grade PP, PPSU, Tritan and silicone options for safe baby feeding products.",
-      "items": [
-        { "name": "PP", "traits": "Heat resistant · BPA-free · Everyday feeding" },
-        { "name": "PPSU", "traits": "High durability · Premium clarity · Hot fill ready" },
-        { "name": "Tritan", "traits": "Impact resistant · BPA-free · Crystal clear" },
-        { "name": "Silicone", "traits": "Soft touch · Food-grade · Baby-safe" }
+      "subtitle": "With expertise in PP, PPSU, Tritan and silicone materials, we offer reliable OEM & ODM solutions for global baby brands.",
+      "highlights": [
+        "Food-Grade Raw Material",
+        "BPA FREE",
+        "OEM & ODM Ready",
+        "Stainless Steel Options"
       ],
+      "items": [
+        { "name": "PP", "traits": "Heat resistant · BPA-free · Everyday feeding bottles and cups" },
+        { "name": "PPSU", "traits": "High durability · Premium clarity · Hot-fill ready for premium lines" },
+        { "name": "Tritan", "traits": "Impact resistant · BPA-free · Crystal clear for modern designs" },
+        { "name": "Silicone", "traits": "Soft touch · Food-grade · Safe for teethers, tableware and seals" }
+      ],
+      "note": "Based in Huangyan, China’s Mold Capital, we combine material expertise with mold technology to support feeding bottles, sippy cups, tableware, bathtubs, teethers and accessories.",
       "ctaButton": "Talk to Our Product Development Team"
     },
     "factory": {
       "subtitleTag": "Inside Oya Factory",
       "title": "In-House Manufacturing Capability",
-      "subtitle": "Integrated molding, assembly, warehousing and testing help us keep stable production, consistent quality and reliable delivery.",
+      "subtitle": "Integrated molding, assembly, warehousing and testing help us keep stable production, consistent quality and reliable delivery for OEM and ODM projects.",
+      "workshops": [
+        "Injection Molding Workshop",
+        "Mold Center",
+        "Bottle Forming & Blow Molding",
+        "Printing Workshop",
+        "Packing Workshop",
+        "Food-Grade / BPA FREE"
+      ],
       "stats": [
         { "value": "70K", "label": "Sets Daily Capacity" },
         { "value": "15", "label": "Injection Machines" },
@@ -161,25 +192,47 @@
     "quality": {
       "subtitleTag": "Quality Assurance",
       "title": "Quality Control: The Foundation of Our Business",
-      "subtitle": "ISO 9001 certified and BSCI compliant, with food-grade safety standards for global markets.",
-      "certs": ["ISO 9001", "BSCI", "FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "subtitle": "ISO 9001 Certified, BSCI Compliant, with Food-Grade Safety Standards for global markets.",
+      "pillars": [
+        { "value": "ISO 9001 Certified", "label": "Quality Management System", "logo": "iso" },
+        { "value": "BSCI Compliant", "label": "Business Social Compliance", "logo": "bsci" },
+        { "value": "Food-Grade Safety Standards", "label": "Safe materials for infant products", "logo": "" }
+      ],
+      "complianceTitle": "Global Compliance",
+      "certs": ["FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "docsTitle": "Certificates & Reports",
       "steps": [
-        { "title": "IQC", "text": "Inspect raw materials, components, and packaging materials before production starts." },
-        { "title": "IPQC", "text": "Monitor key production stages to identify issues early and maintain process stability." },
-        { "title": "FQC", "text": "Check product appearance, function, assembly, and packaging before goods are released." },
-        { "title": "OQC", "text": "Confirm finished goods, cartons, labels, and order requirements before shipment." }
+        { "no": "01", "title": "IQC", "text": "Inspect raw materials, components, and packaging materials before production starts." },
+        { "no": "02", "title": "IPQC", "text": "Monitor key production stages to identify issues early and maintain process stability." },
+        { "no": "03", "title": "FQC", "text": "Check product appearance, function, assembly, and packaging before goods are released." },
+        { "no": "04", "title": "OQC", "text": "Confirm finished goods, cartons, labels, and order requirements before shipment." }
       ]
     },
     "global": {
       "subtitleTag": "Global Partnership",
       "title": "Trusted by Partners Worldwide",
-      "subtitle": "Oya provides professional manufacturing solutions for international customers with quality products, flexible customization and reliable service.",
+      "subtitle": "Oya provides professional manufacturing solutions for international customers. We support long-term cooperation through quality products, flexible customization and reliable service.",
+      "marketsTitle": "Export Markets",
+      "markets": [
+        { "value": "60+", "label": "Countries & Regions" },
+        { "value": "EU", "label": "Europe" },
+        { "value": "NA", "label": "North America" },
+        { "value": "SEA", "label": "Southeast Asia & Oceania" }
+      ],
+      "partnersTitle": "Our Global Partners",
       "partners": [
         { "title": "Baby Brands", "text": "Leading industry specialists" },
         { "title": "Retail Chains", "text": "Global distributors & supermarket" },
         { "title": "E-commerce", "text": "Online marketplaces" },
         { "title": "Distributors", "text": "Long-term supply partners" }
-      ]
+      ],
+      "strengths": [
+        "Quality products for international markets",
+        "Flexible OEM & ODM customization",
+        "Reliable service and long-term cooperation",
+        "Familiar with logistics and regional compliance"
+      ],
+      "ctaButton": "Become Our Partner"
     },
     "ctaBottom": {
       "tag": "Partner With Oya",

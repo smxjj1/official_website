@@ -71,6 +71,9 @@ const items = computed(() => {
   border: 1px solid @border-color;
   border-radius: @radius-md;
   padding: @spacing-lg @spacing-md;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .why-index {
@@ -94,5 +97,6 @@ const items = computed(() => {
   font-size: 0.9rem;
   color: @text-light-accessible;
   line-height: 1.6;
+  flex: 1;
 }
 </style>

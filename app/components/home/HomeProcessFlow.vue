@@ -28,8 +28,12 @@
             loading="lazy"
           />
           <div class="cta-body">
-            <h3>{{ $t('home.process.ctaTitle') }}</h3>
-            <p>{{ $t('home.process.ctaText') }}</p>
+            <ul class="cta-points">
+              <li v-for="(item, index) in ctaItems" :key="index" class="cta-point">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.text }}</p>
+              </li>
+            </ul>
             <NuxtLink :to="getLocalePath('/contact-us')" class="cta-btn">
               {{ $t('home.process.ctaButton') }}
             </NuxtLink>
@@ -61,6 +65,20 @@ const steps = computed(() => {
     text: String(item.text || ''),
   }))
 })
+
+const ctaItems = computed(() => {
+  const raw = $t('home.process.ctaItems')
+  if (Array.isArray(raw) && raw.length) {
+    return raw.map((item: any) => ({
+      title: String(item.title || ''),
+      text: String(item.text || ''),
+    }))
+  }
+  return [{
+    title: String($t('home.process.ctaTitle') || ''),
+    text: String($t('home.process.ctaText') || ''),
+  }]
+})
 </script>
 
 <style lang="less" scoped>
@@ -89,7 +107,7 @@ const steps = computed(() => {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
   gap: @spacing-xl;
-  align-items: start;
+  align-items: stretch;
 
   @media (max-width: @breakpoint-tablet) {
     grid-template-columns: 1fr;
@@ -138,6 +156,9 @@ const steps = computed(() => {
   border: 1px solid @border-color;
   border-radius: @radius-md;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .cta-image {
@@ -145,21 +166,50 @@ const steps = computed(() => {
   height: 180px;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
 }
 
 .cta-body {
   padding: @spacing-lg;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.cta-body h3 {
-  margin: 0 0 @spacing-sm;
+.cta-body .cta-btn {
+  margin-top: auto;
+}
+
+.cta-points {
+  list-style: none;
+  margin: 0 0 @spacing-lg;
+  padding: 0;
+  display: grid;
+  gap: @spacing-md;
+  flex: 1;
+}
+
+.cta-point {
+  padding-bottom: @spacing-md;
+  border-bottom: 1px solid @border-color;
+
+  &:last-child {
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+}
+
+.cta-point h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.05rem;
   color: @text-color;
 }
 
-.cta-body p {
-  margin: 0 0 @spacing-lg;
+.cta-point p {
+  margin: 0;
+  font-size: 0.9rem;
   color: @text-light-accessible;
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .cta-btn {
@@ -170,6 +220,7 @@ const steps = computed(() => {
   text-decoration: none;
   border-radius: @radius-sm;
   font-weight: 600;
+  align-self: flex-start;
 
   &:hover {
     background: lighten(@primary-color-dark, 6%);

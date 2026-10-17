@@ -70,9 +70,7 @@
     "statsBar": [
       { "value": "20+", "label": "年制造经验" },
       { "value": "20,000㎡", "label": "厂房面积" },
-      { "value": "60+", "label": "出口国家" },
-      { "value": "ISO 9001", "label": "质量管理" },
-      { "value": "BSCI", "label": "工厂合规" }
+      { "value": "60+", "label": "出口国家" }
     ],
     "categories": {
       "subtitleTag": "产品目录",
@@ -129,24 +127,57 @@
       ],
       "ctaTitle": "已有产品想法？",
       "ctaText": "告诉我们您的创意，团队将支持设计、打样与量产。",
+      "ctaItems": [
+        {
+          "title": "已有产品想法？",
+          "text": "告诉我们您的创意，团队将支持设计、打样与量产。"
+        },
+        {
+          "title": "寻找 OEM & ODM？",
+          "text": "从奶瓶、吸管杯到餐具与配件，按品牌规格定制制造方案。"
+        },
+        {
+          "title": "需要开模与工装支持？",
+          "text": "扎根中国模具之都黄岩，开发与调整模具，保障稳定可复现生产。"
+        },
+        {
+          "title": "追求可靠交付？",
+          "text": "自主注塑、组装、质检与包装，从打样到出货保持品质一致。"
+        }
+      ],
       "ctaButton": "开启合作项目"
     },
     "materials": {
       "subtitleTag": "材料能力",
       "title": "多材料专业能力",
-      "subtitle": "食品级 PP、PPSU、Tritan 与硅胶方案，打造安全婴童喂养产品。",
-      "items": [
-        { "name": "PP", "traits": "耐热 · BPA-free · 日常喂养" },
-        { "name": "PPSU", "traits": "高耐用 · 高透 · 适合热灌" },
-        { "name": "Tritan", "traits": "抗冲击 · BPA-free · 高清透" },
-        { "name": "Silicone", "traits": "柔触 · 食品级 · 婴童安全" }
+      "subtitle": "深耕 PP、PPSU、Tritan 与硅胶材料，为全球婴童品牌提供可靠 OEM & ODM 方案。",
+      "highlights": [
+        "食品级原料",
+        "BPA FREE",
+        "OEM & ODM 适配",
+        "不锈钢可选"
       ],
+      "items": [
+        { "name": "PP", "traits": "耐热 · BPA-free · 适日常奶瓶与水杯" },
+        { "name": "PPSU", "traits": "高耐用 · 高透 · 适合热灌高端线" },
+        { "name": "Tritan", "traits": "抗冲击 · BPA-free · 现代设计高清透" },
+        { "name": "Silicone", "traits": "柔触 · 食品级 · 牙胶/餐具/密封件" }
+      ],
+      "note": "扎根中国“模具之都”黄岩，结合材料能力与模具技术，覆盖奶瓶、吸管杯、餐具、浴盆、牙胶及配件。",
       "ctaButton": "联系产品开发团队"
     },
     "factory": {
       "subtitleTag": "走进 Oya 工厂",
       "title": "自主制造能力",
-      "subtitle": "注塑、组装、仓储与检测一体化，保障稳定生产、一致品质与可靠交付。",
+      "subtitle": "注塑、组装、仓储与检测一体化，为 OEM / ODM 项目保障稳定生产、一致品质与可靠交付。",
+      "workshops": [
+        "注塑车间",
+        "模具中心",
+        "吹瓶成型",
+        "印刷车间",
+        "包装车间",
+        "食品级 / BPA FREE"
+      ],
       "stats": [
         { "value": "70K", "label": "日产能（套）" },
         { "value": "15", "label": "注塑机" },
@@ -161,24 +192,46 @@
       "subtitleTag": "品质保障",
       "title": "质量控制：业务根基",
       "subtitle": "ISO 9001 认证、BSCI 合规，并以食品级安全标准服务全球市场。",
-      "certs": ["ISO 9001", "BSCI", "FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "pillars": [
+        { "value": "ISO 9001 认证", "label": "质量管理体系", "logo": "iso" },
+        { "value": "BSCI 合规", "label": "商业社会合规倡议", "logo": "bsci" },
+        { "value": "食品级安全标准", "label": "婴童产品安全材料", "logo": "" }
+      ],
+      "complianceTitle": "全球合规",
+      "certs": ["FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "docsTitle": "证书与报告",
       "steps": [
-        { "title": "IQC", "text": "生产前检验原材料、零部件与包装材料。" },
-        { "title": "IPQC", "text": "监控关键工序，及早发现问题并保持过程稳定。" },
-        { "title": "FQC", "text": "放行前检查外观、功能、组装与包装。" },
-        { "title": "OQC", "text": "出货前确认成品、纸箱、标签与订单要求。" }
+        { "no": "01", "title": "IQC", "text": "生产前检验原材料、零部件与包装材料。" },
+        { "no": "02", "title": "IPQC", "text": "监控关键工序，及早发现问题并保持过程稳定。" },
+        { "no": "03", "title": "FQC", "text": "放行前检查外观、功能、组装与包装。" },
+        { "no": "04", "title": "OQC", "text": "出货前确认成品、纸箱、标签与订单要求。" }
       ]
     },
     "global": {
       "subtitleTag": "全球合作",
       "title": "全球伙伴信赖之选",
-      "subtitle": "Oya 为国际客户提供专业制造方案，以品质、灵活定制与可靠服务支持长期合作。",
+      "subtitle": "Oya 为国际客户提供专业制造方案，以优质产品、灵活定制与可靠服务支持长期合作。",
+      "marketsTitle": "出口市场",
+      "markets": [
+        { "value": "60+", "label": "国家与地区" },
+        { "value": "EU", "label": "欧洲" },
+        { "value": "NA", "label": "北美" },
+        { "value": "SEA", "label": "东南亚与大洋洲" }
+      ],
+      "partnersTitle": "全球合作伙伴",
       "partners": [
         { "title": "婴童品牌", "text": "行业专业品牌客户" },
         { "title": "零售连锁", "text": "全球分销与商超渠道" },
         { "title": "电商平台", "text": "线上市场合作伙伴" },
         { "title": "经销商", "text": "长期供货伙伴" }
-      ]
+      ],
+      "strengths": [
+        "面向国际市场的品质产品",
+        "灵活的 OEM & ODM 定制",
+        "可靠服务与长期合作",
+        "熟悉物流与区域合规要求"
+      ],
+      "ctaButton": "成为我们的伙伴"
     },
     "ctaBottom": {
       "tag": "与 Oya 合作",

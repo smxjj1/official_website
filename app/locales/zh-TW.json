@@ -70,9 +70,7 @@
     "statsBar": [
       { "value": "20+", "label": "年製造經驗" },
       { "value": "20,000㎡", "label": "廠房面積" },
-      { "value": "60+", "label": "出口國家" },
-      { "value": "ISO 9001", "label": "品質管理" },
-      { "value": "BSCI", "label": "工廠合規" }
+      { "value": "60+", "label": "出口國家" }
     ],
     "categories": {
       "subtitleTag": "產品目錄",
@@ -129,29 +127,62 @@
       ],
       "ctaTitle": "已有產品想法？",
       "ctaText": "告訴我們您的創意，團隊將支援設計、打樣與量產。",
+      "ctaItems": [
+        {
+          "title": "已有產品想法？",
+          "text": "告訴我們您的創意，團隊將支援設計、打樣與量產。"
+        },
+        {
+          "title": "尋找 OEM & ODM？",
+          "text": "從奶瓶、吸管杯到餐具與配件，依品牌規格客製製造方案。"
+        },
+        {
+          "title": "需要開模與工裝支援？",
+          "text": "扎根中國模具之都黃岩，開發與調整模具，保障穩定可復現生產。"
+        },
+        {
+          "title": "追求可靠交付？",
+          "text": "自主射出、組裝、質檢與包裝，從打樣到出貨保持品質一致。"
+        }
+      ],
       "ctaButton": "開啟合作專案"
     },
     "materials": {
       "subtitleTag": "材料能力",
       "title": "多材料專業能力",
-      "subtitle": "食品級 PP、PPSU、Tritan 與矽膠方案，打造安全嬰童餵養產品。",
-      "items": [
-        { "name": "PP", "traits": "耐熱 · BPA-free · 日常餵養" },
-        { "name": "PPSU", "traits": "高耐用 · 高透 · 適合熱灌" },
-        { "name": "Tritan", "traits": "抗衝擊 · BPA-free · 高清透" },
-        { "name": "Silicone", "traits": "柔觸 · 食品級 · 嬰童安全" }
+      "subtitle": "深耕 PP、PPSU、Tritan 與矽膠材料，為全球嬰童品牌提供可靠 OEM & ODM 方案。",
+      "highlights": [
+        "食品級原料",
+        "BPA FREE",
+        "OEM & ODM 適配",
+        "不鏽鋼可選"
       ],
+      "items": [
+        { "name": "PP", "traits": "耐熱 · BPA-free · 適日常奶瓶與水杯" },
+        { "name": "PPSU", "traits": "高耐用 · 高透 · 適合熱灌高端線" },
+        { "name": "Tritan", "traits": "抗衝擊 · BPA-free · 現代設計高清透" },
+        { "name": "Silicone", "traits": "柔觸 · 食品級 · 牙膠/餐具/密封件" }
+      ],
+      "note": "扎根中國「模具之都」黃岩，結合材料能力與模具技術，覆蓋奶瓶、吸管杯、餐具、浴盆、牙膠及配件。",
       "ctaButton": "聯繫產品開發團隊"
     },
     "factory": {
       "subtitleTag": "走進 Oya 工廠",
       "title": "自主製造能力",
-      "subtitle": "注塑、組裝、倉儲與檢測一體化，保障穩定生產、一致品質與可靠交付。",
+      "subtitle": "射出、組裝、倉儲與檢測一體化，為 OEM / ODM 專案保障穩定生產、一致品質與可靠交付。",
+      "workshops": [
+        "射出車間",
+        "模具中心",
+        "吹瓶成型",
+        "印刷車間",
+        "包裝車間",
+        "食品級 / BPA FREE"
+      ],
       "stats": [
         { "value": "70K", "label": "日產能（套）" },
-        { "value": "15", "label": "注塑機" },
+        { "value": "15", "label": "射出機" },
         { "value": "20,000+㎡", "label": "廠房面積" },
-        { "value": "7", "label": "自動化裝配線" },
+        { "value": "7", "label": "自動化組裝線" },
         { "value": "85", "label": "專業員工" },
         { "value": "60+", "label": "出口市場" }
       ],
@@ -161,24 +192,46 @@
       "subtitleTag": "品質保障",
       "title": "品質控制：業務根基",
       "subtitle": "ISO 9001 認證、BSCI 合規，並以食品級安全標準服務全球市場。",
-      "certs": ["ISO 9001", "BSCI", "FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "pillars": [
+        { "value": "ISO 9001 認證", "label": "品質管理體系", "logo": "iso" },
+        { "value": "BSCI 合規", "label": "商業社會合規倡議", "logo": "bsci" },
+        { "value": "食品級安全標準", "label": "嬰童產品安全材料", "logo": "" }
+      ],
+      "complianceTitle": "全球合規",
+      "certs": ["FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "docsTitle": "證書與報告",
       "steps": [
-        { "title": "IQC", "text": "生產前檢驗原材料、零部件與包裝材料。" },
-        { "title": "IPQC", "text": "監控關鍵工序，及早發現問題並保持過程穩定。" },
-        { "title": "FQC", "text": "放行前檢查外觀、功能、組裝與包裝。" },
-        { "title": "OQC", "text": "出貨前確認成品、紙箱、標籤與訂單要求。" }
+        { "no": "01", "title": "IQC", "text": "生產前檢驗原材料、零部件與包裝材料。" },
+        { "no": "02", "title": "IPQC", "text": "監控關鍵工序，及早發現問題並保持過程穩定。" },
+        { "no": "03", "title": "FQC", "text": "放行前檢查外觀、功能、組裝與包裝。" },
+        { "no": "04", "title": "OQC", "text": "出貨前確認成品、紙箱、標籤與訂單要求。" }
       ]
     },
     "global": {
       "subtitleTag": "全球合作",
       "title": "全球夥伴信賴之選",
-      "subtitle": "Oya 為國際客戶提供專業製造方案，以品質、靈活客製與可靠服務支援長期合作。",
+      "subtitle": "Oya 為國際客戶提供專業製造方案，以優質產品、靈活客製與可靠服務支援長期合作。",
+      "marketsTitle": "出口市場",
+      "markets": [
+        { "value": "60+", "label": "國家與地區" },
+        { "value": "EU", "label": "歐洲" },
+        { "value": "NA", "label": "北美" },
+        { "value": "SEA", "label": "東南亞與大洋洲" }
+      ],
+      "partnersTitle": "全球合作夥伴",
       "partners": [
         { "title": "嬰童品牌", "text": "行業專業品牌客戶" },
         { "title": "零售連鎖", "text": "全球分銷與商超通路" },
         { "title": "電商平台", "text": "線上市場合作夥伴" },
         { "title": "經銷商", "text": "長期供貨夥伴" }
-      ]
+      ],
+      "strengths": [
+        "面向國際市場的品質產品",
+        "靈活的 OEM & ODM 客製",
+        "可靠服務與長期合作",
+        "熟悉物流與區域合規要求"
+      ],
+      "ctaButton": "成為我們的夥伴"
     },
     "ctaBottom": {
       "tag": "與 Oya 合作",

@@ -36,7 +36,7 @@ const items = computed(() => {
   margin: 0 auto;
   padding: @spacing-xl;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: @spacing-md;
 
   @media (max-width: @breakpoint-tablet) {

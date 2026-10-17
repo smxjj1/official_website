@@ -7,26 +7,30 @@
           :title="$t('home.materials.title')"
           :description="$t('home.materials.subtitle')"
         />
+        <div class="chip-row">
+          <span v-for="(tag, index) in materialHighlights" :key="index" class="chip">{{ tag }}</span>
+        </div>
         <div class="materials-grid">
           <article
-            v-for="(item, index) in materials"
+            v-for="item in materials"
             :key="item.name"
             class="material-card"
           >
-            <OptimImg
-              v-if="materialImages[index]"
-              :src="materialImages[index]"
-              :webp-src="materialImages[index]"
-              :alt="item.name"
-              class="material-img"
-              loading="lazy"
-            />
+            <div v-if="item.image" class="material-media">
+              <OptimImg
+                :src="item.image"
+                :webp-src="item.image"
+                :alt="item.name"
+                loading="lazy"
+              />
+            </div>
             <div class="material-body">
               <h3>{{ item.name }}</h3>
               <p>{{ item.traits }}</p>
             </div>
           </article>
         </div>
+        <p class="col-note">{{ $t('home.materials.note') }}</p>
         <NuxtLink :to="getLocalePath('/contact-us')" class="mf-link">
           {{ $t('home.materials.ctaButton') }}
         </NuxtLink>
@@ -38,6 +42,9 @@
           :title="$t('home.factory.title')"
           :description="$t('home.factory.subtitle')"
         />
+        <div class="chip-row">
+          <span v-for="(shop, index) in factoryWorkshops" :key="index" class="chip">{{ shop }}</span>
+        </div>
         <div class="factory-grid">
           <OptimImg
             v-for="(img, index) in factoryImages"
@@ -67,7 +74,7 @@
 const { $t, getLocalePath } = useSiteLocale()
 
 const materialGlob = import.meta.glob(
-  '~/assets/images/home/materials/*.webp',
+  '~/assets/images/home/materials/material-*.webp',
   { eager: true, query: '?url', import: 'default' },
 )
 const factoryGlob = import.meta.glob(
@@ -75,16 +82,43 @@ const factoryGlob = import.meta.glob(
   { eager: true, query: '?url', import: 'default' },
 )
 
-const materialImages = computed(() => Object.values(materialGlob) as string[])
+const materialImageMap = computed(() => {
+  const map: Record<string, string> = {}
+  for (const [path, url] of Object.entries(materialGlob)) {
+    const file = path.split('/').pop()?.toLowerCase() || ''
+    const key = file.replace(/^material-/, '').replace(/\.webp$/, '')
+    if (key) map[key] = url as string
+  }
+  return map
+})
+
 const factoryImages = computed(() => (Object.values(factoryGlob) as string[]).slice(0, 6))
+
+function materialImageKey(name: string) {
+  return name.trim().toLowerCase().replace(/\s+/g, '')
+}
 
 const materials = computed(() => {
   const raw = $t('home.materials.items')
   if (!Array.isArray(raw)) return []
-  return raw.map((item: any) => ({
-    name: String(item.name || ''),
-    traits: String(item.traits || ''),
-  }))
+  return raw.map((item: any) => {
+    const name = String(item.name || '')
+    return {
+      name,
+      traits: String(item.traits || ''),
+      image: materialImageMap.value[materialImageKey(name)] || '',
+    }
+  })
+})
+
+const materialHighlights = computed(() => {
+  const raw = $t('home.materials.highlights')
+  return Array.isArray(raw) ? raw.map(String) : []
+})
+
+const factoryWorkshops = computed(() => {
+  const raw = $t('home.factory.workshops')
+  return Array.isArray(raw) ? raw.map(String) : []
 })
 
 const factoryStats = computed(() => {
@@ -116,6 +150,7 @@ const factoryStats = computed(() => {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: @spacing-xxl;
+  align-items: stretch;
 
   @media (max-width: @breakpoint-tablet) {
     grid-template-columns: 1fr;
@@ -124,35 +159,86 @@ const factoryStats = computed(() => {
   }
 }
 
+.materials-col,
+.factory-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: @spacing-md;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid @border-color;
+  background: @section-background;
+  color: @primary-color-dark;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.col-note {
+  margin: 0 0 @spacing-md;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: @text-light-accessible;
+}
+
 .materials-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: @spacing-md;
   margin-bottom: @spacing-lg;
+  flex: 1;
+  align-content: start;
 }
 
 .material-card {
   border: 1px solid @border-color;
   border-radius: @radius-md;
   overflow: hidden;
-  background: @background-color;
+  background: @card-background;
+  display: flex;
+  flex-direction: column;
+  transition: border-color @transition-fast, box-shadow @transition-fast;
+
+  &:hover {
+    border-color: fade(@primary-color, 45%);
+    box-shadow: 0 8px 24px rgba(42, 34, 28, 0.06);
+  }
 }
 
-.material-img {
+.material-media {
   width: 100%;
-  height: 110px;
-  object-fit: cover;
-  display: block;
+  aspect-ratio: 4 / 3;
   background: @section-background;
+  overflow: hidden;
+
+  :deep(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
 }
 
 .material-body {
-  padding: @spacing-sm @spacing-md @spacing-md;
+  padding: @spacing-md;
+  flex: 1;
 }
 
 .material-body h3 {
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.35rem;
   color: @primary-color-dark;
+  font-size: 1.05rem;
 }
 
 .material-body p {
@@ -167,6 +253,8 @@ const factoryStats = computed(() => {
   grid-template-columns: repeat(3, 1fr);
   gap: @spacing-sm;
   margin-bottom: @spacing-md;
+  flex: 1;
+  align-content: start;
 
   @media (max-width: @breakpoint-mobile) {
     grid-template-columns: 1fr 1fr;
@@ -218,6 +306,8 @@ const factoryStats = computed(() => {
   font-weight: 600;
   color: @primary-color-dark;
   text-decoration: none;
+  margin-top: auto;
+  padding-top: @spacing-md;
 
   &:hover {
     color: @primary-color;

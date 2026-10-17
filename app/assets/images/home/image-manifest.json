@@ -1,0 +1,202 @@
+[
+  {
+    "source": "image1.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image1.webp",
+    "relative": "home/factory/oya-ppt-image1.webp",
+    "bytes": 182636,
+    "module": "factory"
+  },
+  {
+    "source": "image10.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image10.webp",
+    "relative": "home/factory/oya-ppt-image10.webp",
+    "bytes": 320892,
+    "module": "factory"
+  },
+  {
+    "source": "image11.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image11.webp",
+    "relative": "home/factory/oya-ppt-image11.webp",
+    "bytes": 202958,
+    "module": "factory"
+  },
+  {
+    "source": "image12.png",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image12.webp",
+    "relative": "home/factory/oya-ppt-image12.webp",
+    "bytes": 119106,
+    "module": "factory"
+  },
+  {
+    "source": "image13.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image13.webp",
+    "relative": "home/factory/oya-ppt-image13.webp",
+    "bytes": 86100,
+    "module": "factory"
+  },
+  {
+    "source": "image14.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image14.webp",
+    "relative": "home/factory/oya-ppt-image14.webp",
+    "bytes": 116670,
+    "module": "factory"
+  },
+  {
+    "source": "image15.jpeg",
+    "folder": "materials",
+    "output": "~/assets/images/home/materials/oya-ppt-image15.webp",
+    "relative": "home/materials/oya-ppt-image15.webp",
+    "bytes": 32098,
+    "module": "materials"
+  },
+  {
+    "source": "image16.jpeg",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-ppt-image16.webp",
+    "relative": "home/process/oya-ppt-image16.webp",
+    "bytes": 46972,
+    "module": "process"
+  },
+  {
+    "source": "image17.jpeg",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-ppt-image17.webp",
+    "relative": "home/process/oya-ppt-image17.webp",
+    "bytes": 47150,
+    "module": "process"
+  },
+  {
+    "source": "image18.jpeg",
+    "folder": "ref-misc",
+    "output": "~/assets/images/home/ref-misc/oya-ppt-image18.webp",
+    "relative": "home/ref-misc/oya-ppt-image18.webp",
+    "bytes": 4042,
+    "module": "ref-misc"
+  },
+  {
+    "source": "image19.jpeg",
+    "folder": "ref-misc",
+    "output": "~/assets/images/home/ref-misc/oya-ppt-image19.webp",
+    "relative": "home/ref-misc/oya-ppt-image19.webp",
+    "bytes": 4632,
+    "module": "ref-misc"
+  },
+  {
+    "source": "image20.png",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image20.webp",
+    "relative": "home/factory/oya-ppt-image20.webp",
+    "bytes": 63600,
+    "module": "factory"
+  },
+  {
+    "source": "image47.jpeg",
+    "folder": "materials",
+    "output": "~/assets/images/home/materials/oya-ppt-image47.webp",
+    "relative": "home/materials/oya-ppt-image47.webp",
+    "bytes": 11544,
+    "module": "materials"
+  },
+  {
+    "source": "image48.jpeg",
+    "folder": "materials",
+    "output": "~/assets/images/home/materials/oya-ppt-image48.webp",
+    "relative": "home/materials/oya-ppt-image48.webp",
+    "bytes": 23124,
+    "module": "materials"
+  },
+  {
+    "source": "image49.png",
+    "folder": "quality",
+    "output": "~/assets/images/home/quality/oya-ppt-image49.webp",
+    "relative": "home/quality/oya-ppt-image49.webp",
+    "bytes": 63750,
+    "module": "quality"
+  },
+  {
+    "source": "image50.png",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-ppt-image50.webp",
+    "relative": "home/process/oya-ppt-image50.webp",
+    "bytes": 49362,
+    "module": "process"
+  },
+  {
+    "source": "image51.png",
+    "folder": "quality",
+    "output": "~/assets/images/home/quality/oya-ppt-image51.webp",
+    "relative": "home/quality/oya-ppt-image51.webp",
+    "bytes": 86310,
+    "module": "quality"
+  },
+  {
+    "source": "image58.jpeg",
+    "folder": "materials",
+    "output": "~/assets/images/home/materials/oya-ppt-image58.webp",
+    "relative": "home/materials/oya-ppt-image58.webp",
+    "bytes": 26456,
+    "module": "materials"
+  },
+  {
+    "source": "image63.jpeg",
+    "folder": "global",
+    "output": "~/assets/images/home/global/oya-ppt-image63.webp",
+    "relative": "home/global/oya-ppt-image63.webp",
+    "bytes": 118604,
+    "module": "global"
+  },
+  {
+    "source": "image72.png",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image72.webp",
+    "relative": "home/factory/oya-ppt-image72.webp",
+    "bytes": 162770,
+    "module": "factory"
+  },
+  {
+    "source": "image8.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-ppt-image8.webp",
+    "relative": "home/factory/oya-ppt-image8.webp",
+    "bytes": 255166,
+    "module": "factory"
+  },
+  {
+    "source": "image9.jpeg",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-ppt-image9.webp",
+    "relative": "home/process/oya-ppt-image9.webp",
+    "bytes": 82954,
+    "module": "process"
+  },
+  {
+    "source": "image1.jpeg",
+    "folder": "factory",
+    "output": "~/assets/images/home/factory/oya-doc-image1.webp",
+    "relative": "home/factory/oya-doc-image1.webp",
+    "bytes": 100682,
+    "module": "factory"
+  },
+  {
+    "source": "image2.jpeg",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-doc-image2.webp",
+    "relative": "home/process/oya-doc-image2.webp",
+    "bytes": 58928,
+    "module": "process"
+  },
+  {
+    "source": "image3.png",
+    "folder": "process",
+    "output": "~/assets/images/home/process/oya-doc-image3.webp",
+    "relative": "home/process/oya-doc-image3.webp",
+    "bytes": 91044,
+    "module": "process"
+  }
+]

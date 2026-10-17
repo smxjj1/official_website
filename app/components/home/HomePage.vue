@@ -1,10 +1,12 @@
 <template>
   <div class="home-page">
     <HomeHeroCarousel />
+    <LazyHomeStatsBar />
     <LazyHomeCategoryGrid />
-    <LazyHomeFeaturedCategories />
-    <LazyBenefitsCarousel />
-    <LazyHomeTrustSection />
+    <LazyHomeWhyChoose />
+    <LazyHomeProcessFlow />
+    <LazyHomeMaterialsFactory />
+    <LazyHomeQualityGlobal />
     <LazyHomeFAQ />
     <section class="final-cta">
       <div class="cta-bg">
@@ -13,7 +15,7 @@
           <h2 class="cta-title">{{ $t('home.ctaBottom.title') }}</h2>
           <p class="cta-text">{{ $t('home.ctaBottom.description') }}</p>
           <div class="cta-buttons">
-            <NuxtLink :to="getLocalePath('/baby-feeding-bottles')" class="cta-button primary">
+            <NuxtLink :to="getLocalePath('/contact-us')" class="cta-button primary">
               {{ $t('home.ctaBottom.primaryCta') }}
             </NuxtLink>
             <NuxtLink :to="getLocalePath('/contact-us')" class="cta-button secondary">
@@ -43,7 +45,7 @@ useHomeSeo()
 .final-cta {
   .cta-bg {
     position: relative;
-    padding: 100px 0;
+    padding: 88px 0;
     background: linear-gradient(135deg, darken(@text-color, 8%) 0%, #2a221c 100%);
     overflow: hidden;
 
@@ -56,14 +58,14 @@ useHomeSeo()
     }
 
     @media (max-width: @breakpoint-tablet) {
-      padding: 72px 0;
+      padding: 64px 0;
     }
   }
 }
 
 .cta-container {
   position: relative;
-  max-width: 720px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 @spacing-xl;
   text-align: center;
@@ -87,31 +89,22 @@ useHomeSeo()
 }
 
 .cta-title {
-  font-size: 2.75rem;
+  font-size: 2.35rem;
   font-weight: 700;
   color: white;
   margin: 0 0 @spacing-lg;
   line-height: 1.25;
 
   @media (max-width: @breakpoint-tablet) {
-    font-size: 2rem;
-  }
-
-  @media (max-width: @breakpoint-mobile) {
-    font-size: 1.625rem;
+    font-size: 1.75rem;
   }
 }
 
 .cta-text {
-  font-size: 1.125rem;
+  font-size: 1.05rem;
   color: rgba(255, 255, 255, 0.82);
   line-height: 1.75;
-  margin: 0 0 @spacing-xxl;
-
-  @media (max-width: @breakpoint-tablet) {
-    font-size: 1rem;
-    margin-bottom: @spacing-xl;
-  }
+  margin: 0 0 @spacing-xl;
 }
 
 .cta-buttons {

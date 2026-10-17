@@ -35,6 +35,7 @@
           <div v-if="slide.title" class="slide-content">
             <component :is="index === 0 ? 'h1' : 'h2'" class="slide-title">{{ slide.title }}</component>
             <p v-if="slide.subtitle" class="slide-subtitle">{{ slide.subtitle }}</p>
+            <p v-if="slide.meta" class="slide-meta">{{ slide.meta }}</p>
             <div v-if="slide.primaryCta" class="slide-cta-group">
               <NuxtLink :to="slide.primaryLink" class="slide-cta primary">
                 {{ slide.primaryCta }}
@@ -69,6 +70,7 @@
 interface HeroSlide {
   title: string
   subtitle: string
+  meta?: string
   primaryCta: string
   primaryLink: string
   secondaryCta?: string
@@ -121,11 +123,11 @@ function shouldLoadSlideImage(index: number) {
 }
 
 const slideLinks = [
-  { primary: '/baby-sippy-cups', alt: 'Baby sippy cups' },
-  { primary: '/baby-bath-potty', alt: 'Baby bath and potty' },
-  { primary: '/baby-feeding-bottles', alt: 'Baby feeding bottles' },
-  { primary: '/baby-tableware', alt: 'Baby tableware' },
-  { primary: '/contact-us', alt: 'Partner With Us' },
+  { primary: '/baby-feeding-bottles', secondary: '/contact-us', alt: 'Baby Feeding Products Manufacturer' },
+  { primary: '/contact-us', secondary: '/contact-us', alt: 'Build Your Baby Brand with Oya' },
+  { primary: '/baby-feeding-bottles', secondary: '/contact-us', alt: 'Designed for Different Market Needs' },
+  { primary: '/about-us', secondary: '/contact-us', alt: 'Made for Global Baby Markets' },
+  { primary: '/about-us', secondary: '/contact-us', alt: 'In-House Manufacturing Capability' },
 ]
 
 const slides = computed<HeroSlide[]>(() => {
@@ -136,13 +138,15 @@ const slides = computed<HeroSlide[]>(() => {
     .map((slide: any, index: number) => {
       const sources = getImageSources(index + 1)
       const link = slideLinks[index]
+      const secondaryCta = String(slide.secondaryCta || '').trim()
       return {
         title: (slide.title as string) || '',
         subtitle: (slide.subtitle as string) || '',
+        meta: (slide.meta as string) || '',
         primaryCta: (slide.primaryCta as string) || '',
         primaryLink: getLocalePath(link?.primary || '/baby-feeding-bottles'),
-        secondaryCta: slide.secondaryCta || undefined,
-        secondaryLink: slide.secondaryCta ? getLocalePath('/contact-us') : undefined,
+        secondaryCta: secondaryCta || undefined,
+        secondaryLink: secondaryCta ? getLocalePath(link?.secondary || '/contact-us') : undefined,
         alt: link?.alt || (slide.title as string) || 'Product highlight',
         image: sources.src,
         webpSrc: sources.webpSrc,
@@ -348,13 +352,31 @@ onUnmounted(() => {
 
 .slide-subtitle {
   font-size: 1.2rem;
-  margin: 0 auto @spacing-xl;
+  margin: 0 auto @spacing-md;
   max-width: 640px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.9);
 
   @media (max-width: @breakpoint-tablet) {
-    font-size: 1rem;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+  }
+}
+
+.slide-meta {
+  font-size: 0.95rem;
+  margin: 0 auto @spacing-xl;
+  max-width: 720px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+
+  @media (max-width: @breakpoint-tablet) {
+    font-size: 0.72rem;
+    margin-bottom: 0.45rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 }
 

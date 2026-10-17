@@ -35,84 +35,157 @@
     "hero": {
       "slides": [
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": "",
+          "title": "Baby Feeding Products Manufacturer",
+          "subtitle": "OEM & ODM Solutions for Global Baby Brands, Retailers & Distributors",
+          "meta": "20+ Years Experience · 20,000㎡ Factory Area · 60+ Countries Exported · Professional Team Reliable Partner",
+          "primaryCta": "Explore Products",
+          "secondaryCta": "Start Your Project"
+        },
+        {
+          "title": "Build Your Baby Brand with Oya",
+          "subtitle": "Flexible product development and manufacturing support for your next baby product.",
+          "primaryCta": "Tell Us Your Idea",
           "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
+          "title": "Designed for Different Market Needs",
+          "subtitle": "From everyday feeding products to premium baby essentials, we develop solutions for different product concepts and price points.",
+          "primaryCta": "Explore Product Solutions",
+          "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
+          "title": "Made for Global Baby Markets",
+          "subtitle": "Manufacturing experience, quality management and reliable supply for customers worldwide.",
+          "primaryCta": "Meet Oya",
+          "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
-        },
-        {
-          "title": "Partner With Us",
-          "subtitle": "Wholesale, customization, and bulk orders with reliable quality and delivery.",
-          "primaryCta": "Contact Us"
+          "title": "In-House Manufacturing Capability",
+          "subtitle": "Integrated molding, assembly, warehousing and testing help us keep stable production, consistent quality and reliable delivery.",
+          "meta": "70K Sets Daily · 15 Injection Machines · 20,000+㎡ Factory · 7 Automated Assembly Lines",
+          "primaryCta": "Explore Our Factory",
+          "secondaryCta": ""
         }
       ]
     },
+    "statsBar": [
+      { "value": "20+", "label": "Years of Manufacturing" },
+      { "value": "20,000㎡", "label": "Factory Area" },
+      { "value": "60+", "label": "Export Countries" },
+      { "value": "ISO 9001", "label": "Quality Management" },
+      { "value": "BSCI", "label": "Factory Compliance" }
+    ],
     "categories": {
       "subtitleTag": "Product Catalog",
-      "title": "Full Baby Products & Accessories Collection",
-      "subtitle": "Offer baby bottles, straw cups, tableware, bathtubs and daily baby supplies that made of PP, Tritan, PPSU, silicone and stainless steel to meet different market and customer customization needs.",
-      "viewAllCta": "View All Products"
+      "title": "Baby Products We Manufacture",
+      "subtitle": "Feeding bottles, sippy cups, tableware, bathtubs, teethers and accessories in PP, PPSU, Tritan, silicone and stainless steel for OEM & ODM partners worldwide.",
+      "viewAllCta": "View All Products",
+      "materialTags": {
+        "feeding-bottles": "PP · PPSU · Tritan",
+        "water-cups": "PP · Tritan · Silicone",
+        "baby-tableware": "PP · Silicone · Stainless Steel",
+        "bath-potty": "PP · Soft Touch",
+        "milk-container": "PP · Tritan",
+        "accessories": "Teethers · Tools · More"
+      }
     },
-    "featured": {
-      "subtitleTag": "Product Lines",
-      "title": "Explore Every Category in Detail",
-      "subtitle": "From newborn feeding to toddler independence — discover our thoughtfully designed product lines for every stage."
-    },
-    "benefitsSection": {
-      "subtitleTag": "Why Choose Us",
-      "title": "Safety, Design & Quality You Can Trust",
-      "subtitle": "Every product reflects our commitment to safe materials, practical design, and durable construction for growing families."
-    },
-    "trust": {
-      "tag": "Our Strength",
-      "title": "Trusted by Partners Worldwide",
-      "subtitle": "From in-house manufacturing to certified quality control, we help global brands build reliable baby product lines with confidence.",
-      "stats": [
-        { "value": "2000+", "label": "Products" },
-        { "value": "20+", "label": "Years Experience" },
-        { "value": "60+", "label": "Countries Served" },
-        { "value": "ISO9001, BSCI, FAMA", "label": "Certified Quality" }
-      ],
-      "highlights": [
+    "whyChooseSection": {
+      "subtitleTag": "Why Choose Oya",
+      "title": "Why Choose Oya?",
+      "subtitle": "A trusted baby product manufacturing partner with in-house capability, strict quality control and flexible OEM & ODM support.",
+      "items": [
         {
-          "title": "In-House Manufacturing",
-          "text": "Molding, assembly and packaging are completed in our own factory for stable quality and clearer lead times."
+          "title": "20+ Years Manufacturing Experience",
+          "text": "Specialized in baby feeding products. Integrating R&D, production and sales."
         },
         {
-          "title": "Multi-Stage Quality Control",
-          "text": "Incoming materials, process inspection and final testing help every shipment meet international safety expectations."
+          "title": "Strict Quality Control",
+          "text": "Full-step QC ensure product quality. All raw materials are food-grade, BPA-free, compliant with EN14350, FDA, LFGB requirements for infant products."
         },
         {
-          "title": "Flexible Partnership Models",
-          "text": "Support wholesale, OEM/ODM, private label and long-term supply programs tailored to your market."
+          "title": "Flexible OEM & ODM Support",
+          "text": "From custom colors and logo printing to private label packaging and mold development, we support brands from product idea to mass production."
         },
         {
-          "title": "Responsive Export Support",
-          "text": "Dedicated team support for sampling, documentation, packing and on-time delivery to global destinations."
+          "title": "Verified International Factory Certificates",
+          "text": "Holds ISO9001 quality management, BSCI social audit and FAMA Disney audit. We fully support third-party factory audits and provide complete test documents for your market clearance."
+        },
+        {
+          "title": "Rich Global Export Experience",
+          "text": "Exported to 60+ countries across Europe, North America, Southeast Asia and Oceania. Familiar with international logistics, documentation and regional compliance for baby goods."
         }
+      ]
+    },
+    "process": {
+      "subtitleTag": "Manufacturing Process",
+      "title": "From Your Idea to Mass Production",
+      "subtitle": "Clear steps from requirement review to inspection and delivery for stable OEM & ODM projects.",
+      "steps": [
+        { "title": "Requirement Review", "text": "Confirm product details, materials, specifications, packaging, and order requirements." },
+        { "title": "Design & Sampling", "text": "Support product adjustment, sample making, and pre-production confirmation." },
+        { "title": "Mold & Tooling", "text": "Develop or adjust molds to prepare for stable batch production." },
+        { "title": "Trial Production", "text": "Check structure, function, and production feasibility before mass production." },
+        { "title": "Mass Production", "text": "Organize production scheduling, process control, assembly, and packaging." },
+        { "title": "Inspection & Delivery", "text": "Complete quality inspection, warehousing, packaging, and shipment preparation." }
       ],
-      "ctaText": "Talk to Our Team"
+      "ctaTitle": "Have a Product Idea?",
+      "ctaText": "Tell us your concept, and our team will support design, sampling and mass production.",
+      "ctaButton": "Start Your Project"
+    },
+    "materials": {
+      "subtitleTag": "Material Expertise",
+      "title": "Multi-Material Expertise",
+      "subtitle": "Food-grade PP, PPSU, Tritan and silicone options for safe baby feeding products.",
+      "items": [
+        { "name": "PP", "traits": "Heat resistant · BPA-free · Everyday feeding" },
+        { "name": "PPSU", "traits": "High durability · Premium clarity · Hot fill ready" },
+        { "name": "Tritan", "traits": "Impact resistant · BPA-free · Crystal clear" },
+        { "name": "Silicone", "traits": "Soft touch · Food-grade · Baby-safe" }
+      ],
+      "ctaButton": "Talk to Our Product Development Team"
+    },
+    "factory": {
+      "subtitleTag": "Inside Oya Factory",
+      "title": "In-House Manufacturing Capability",
+      "subtitle": "Integrated molding, assembly, warehousing and testing help us keep stable production, consistent quality and reliable delivery.",
+      "stats": [
+        { "value": "70K", "label": "Sets Daily Capacity" },
+        { "value": "15", "label": "Injection Machines" },
+        { "value": "20,000+㎡", "label": "Factory Area" },
+        { "value": "7", "label": "Automated Assembly Lines" },
+        { "value": "85", "label": "Professional Workers" },
+        { "value": "60+", "label": "Export Markets" }
+      ],
+      "ctaButton": "Explore Our Factory"
+    },
+    "quality": {
+      "subtitleTag": "Quality Assurance",
+      "title": "Quality Control: The Foundation of Our Business",
+      "subtitle": "ISO 9001 certified and BSCI compliant, with food-grade safety standards for global markets.",
+      "certs": ["ISO 9001", "BSCI", "FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "steps": [
+        { "title": "IQC", "text": "Inspect raw materials, components, and packaging materials before production starts." },
+        { "title": "IPQC", "text": "Monitor key production stages to identify issues early and maintain process stability." },
+        { "title": "FQC", "text": "Check product appearance, function, assembly, and packaging before goods are released." },
+        { "title": "OQC", "text": "Confirm finished goods, cartons, labels, and order requirements before shipment." }
+      ]
+    },
+    "global": {
+      "subtitleTag": "Global Partnership",
+      "title": "Trusted by Partners Worldwide",
+      "subtitle": "Oya provides professional manufacturing solutions for international customers with quality products, flexible customization and reliable service.",
+      "partners": [
+        { "title": "Baby Brands", "text": "Leading industry specialists" },
+        { "title": "Retail Chains", "text": "Global distributors & supermarket" },
+        { "title": "E-commerce", "text": "Online marketplaces" },
+        { "title": "Distributors", "text": "Long-term supply partners" }
+      ]
     },
     "ctaBottom": {
-      "tag": "Get in Touch",
-      "title": "Looking for a Reliable Baby Products Supplier?",
-      "description": "We provide cost-effective solutions for wholesale, OEM/ODM, and bulk orders — from catalog selection to custom product development.",
-      "primaryCta": "Browse Products",
+      "tag": "Partner With Oya",
+      "title": "Looking for a Reliable Baby Products Manufacturing Partner?",
+      "description": "Looking forward to building long-term cooperation with global partners, creating a brighter and safer future for children around the world.",
+      "primaryCta": "Request a Quote",
       "secondaryCta": "Contact Us"
     }
   },

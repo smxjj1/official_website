@@ -25,6 +25,7 @@
           </div>
           <div class="product-content">
             <h3>{{ category.name }}</h3>
+            <p class="material-tag">{{ getMaterialTag(category.slug) }}</p>
             <p>
               {{ getCategoryProductCount(category.slug) }} {{ $t('home.products') }}
               · {{ getCategoryDescription(category.slug) }}
@@ -51,6 +52,12 @@ const {
   getCategoryDescription,
   getLocalePath,
 } = useHomePage()
+
+const getMaterialTag = (slug: string): string => {
+  const key = `home.categories.materialTags.${slug}`
+  const value = $t(key)
+  return value === key ? '' : String(value)
+}
 </script>
 
 <style lang="less" scoped>
@@ -150,6 +157,15 @@ const {
     color: white;
     margin: 0 0 @spacing-xs;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  }
+
+  .material-tag {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin: 0 0 0.35rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    -webkit-line-clamp: 1;
   }
 
   p {

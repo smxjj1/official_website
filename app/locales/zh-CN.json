@@ -34,84 +34,157 @@
     "hero": {
       "slides": [
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": "",
+          "title": "婴童喂养制品制造商",
+          "subtitle": "面向全球婴童品牌、零售商与经销商的 OEM & ODM 解决方案",
+          "meta": "20+ 年制造经验 · 20,000㎡ 厂房 · 出口 60+ 国家 · 专业团队可靠伙伴",
+          "primaryCta": "浏览产品",
+          "secondaryCta": "开启合作项目"
+        },
+        {
+          "title": "与 Oya 一起打造您的婴童品牌",
+          "subtitle": "为您的下一款婴童产品提供灵活的开发与制造支持。",
+          "primaryCta": "告诉我们您的想法",
           "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
+          "title": "满足不同市场需求的产品设计",
+          "subtitle": "从日常喂养用品到高端婴童必备品，我们为不同产品概念与价格带开发方案。",
+          "primaryCta": "探索产品方案",
+          "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
+          "title": "服务全球婴童市场",
+          "subtitle": "以制造经验、质量管理与稳定供应，服务全球客户。",
+          "primaryCta": "了解 Oya",
+          "secondaryCta": ""
         },
         {
-          "title": "",
-          "subtitle": "",
-          "primaryCta": ""
-        },
-        {
-          "title": "期待与您合作",
-          "subtitle": "批发、定制与大批量订单，稳定品质，准时交付。",
-          "primaryCta": "联系我们"
+          "title": "自有工厂制造能力",
+          "subtitle": "注塑、组装、仓储与检测一体化，保障稳定产能、一致品质与可靠交付。",
+          "meta": "日产能 70K 套 · 15 台注塑机 · 20,000+㎡ 厂房 · 7 条自动化组装线",
+          "primaryCta": "了解我们的工厂",
+          "secondaryCta": ""
         }
       ]
     },
+    "statsBar": [
+      { "value": "20+", "label": "年制造经验" },
+      { "value": "20,000㎡", "label": "厂房面积" },
+      { "value": "60+", "label": "出口国家" },
+      { "value": "ISO 9001", "label": "质量管理" },
+      { "value": "BSCI", "label": "工厂合规" }
+    ],
     "categories": {
       "subtitleTag": "产品目录",
-      "title": "全系列婴童产品与配件",
-      "subtitle": "提供奶瓶、吸管杯、餐具、浴盆及婴幼儿日用品，采用 PP、Tritan、PPSU、硅胶和不锈钢材质，满足不同市场与客户的定制需求。",
-      "viewAllCta": "查看全部产品"
+      "title": "我们生产的婴童产品",
+      "subtitle": "奶瓶、吸管杯、餐具、浴盆、牙胶及配件，覆盖 PP、PPSU、Tritan、硅胶与不锈钢，服务全球 OEM & ODM 合作伙伴。",
+      "viewAllCta": "查看全部产品",
+      "materialTags": {
+        "feeding-bottles": "PP · PPSU · Tritan",
+        "water-cups": "PP · Tritan · 硅胶",
+        "baby-tableware": "PP · 硅胶 · 不锈钢",
+        "bath-potty": "PP · 柔触",
+        "milk-container": "PP · Tritan",
+        "accessories": "牙胶 · 工具 · 更多"
+      }
     },
-    "featured": {
-      "subtitleTag": "产品系列",
-      "title": "深入了解每个品类",
-      "subtitle": "从新生儿喂养到幼儿独立 — 探索我们为每个成长阶段精心设计的产品线。"
-    },
-    "benefitsSection": {
-      "subtitleTag": "选择我们的理由",
-      "title": "安全、设计与品质兼备",
-      "subtitle": "每一款产品都体现我们对安全材质、实用设计与耐用品质的追求。"
-    },
-    "trust": {
-      "tag": "实力保障",
-      "title": "全球合作伙伴的信赖之选",
-      "subtitle": "从自主生产到认证质检，我们助力全球品牌稳健打造婴童产品线，合作更安心。",
-      "stats": [
-        { "value": "2000+", "label": "款产品" },
-        { "value": "20+", "label": "年制造经验" },
-        { "value": "60+", "label": "出口国家" },
-        { "value": "ISO9001, BSCI, FAMA", "label": "质量认证" }
-      ],
-      "highlights": [
+    "whyChooseSection": {
+      "subtitleTag": "为什么选择 Oya",
+      "title": "为什么选择 Oya？",
+      "subtitle": "具备自主制造能力、严格质控与灵活 OEM & ODM 支持的可靠婴童制品合作伙伴。",
+      "items": [
         {
-          "title": "自主生产制造",
-          "text": "注塑、组装与包装均在自有工厂完成，品质更稳定，交期更可控。"
+          "title": "20+ 年制造经验",
+          "text": "专注婴童喂养制品，集研发、生产与销售于一体。"
         },
         {
-          "title": "多环节质量管控",
-          "text": "从原材料入库、过程巡检到成品测试，严格把关，符合国际安全要求。"
+          "title": "严格质量控制",
+          "text": "全流程质检保障品质。原材料均为食品级、BPA-free，符合 EN14350、FDA、LFGB 婴幼儿产品要求。"
         },
         {
-          "title": "灵活合作模式",
-          "text": "支持批发、OEM/ODM、自有品牌及长期供货，按市场灵活定制方案。"
+          "title": "灵活 OEM & ODM 支持",
+          "text": "从定制颜色、LOGO 印刷到私有品牌包装与开模，支持从创意到量产。"
         },
         {
-          "title": "高效出口支持",
-          "text": "专人对接打样、单证、包装与发运，助力准时交付至全球目的地。"
+          "title": "国际工厂认证可核验",
+          "text": "拥有 ISO9001、BSCI 与 FAMA Disney 审核。支持第三方验厂，并提供完整检测文件助力市场准入。"
+        },
+        {
+          "title": "丰富全球出口经验",
+          "text": "产品出口欧洲、北美、东南亚与大洋洲 60+ 国家，熟悉国际物流、单证与区域合规。"
         }
+      ]
+    },
+    "process": {
+      "subtitleTag": "制造流程",
+      "title": "从您的想法到批量生产",
+      "subtitle": "从需求确认到检验出货，步骤清晰，保障 OEM & ODM 项目稳定落地。",
+      "steps": [
+        { "title": "需求评审", "text": "确认产品细节、材料、规格、包装与订单要求。" },
+        { "title": "设计与打样", "text": "支持产品调整、打样与量产前确认。" },
+        { "title": "开模与工装", "text": "开发或调整模具，为稳定批量生产做准备。" },
+        { "title": "试产", "text": "量产前检查结构、功能与生产可行性。" },
+        { "title": "批量生产", "text": "组织排产、过程控制、组装与包装。" },
+        { "title": "检验与交付", "text": "完成质检、入库、包装与出货准备。" }
       ],
-      "ctaText": "联系我们的团队"
+      "ctaTitle": "已有产品想法？",
+      "ctaText": "告诉我们您的创意，团队将支持设计、打样与量产。",
+      "ctaButton": "开启合作项目"
+    },
+    "materials": {
+      "subtitleTag": "材料能力",
+      "title": "多材料专业能力",
+      "subtitle": "食品级 PP、PPSU、Tritan 与硅胶方案，打造安全婴童喂养产品。",
+      "items": [
+        { "name": "PP", "traits": "耐热 · BPA-free · 日常喂养" },
+        { "name": "PPSU", "traits": "高耐用 · 高透 · 适合热灌" },
+        { "name": "Tritan", "traits": "抗冲击 · BPA-free · 高清透" },
+        { "name": "Silicone", "traits": "柔触 · 食品级 · 婴童安全" }
+      ],
+      "ctaButton": "联系产品开发团队"
+    },
+    "factory": {
+      "subtitleTag": "走进 Oya 工厂",
+      "title": "自主制造能力",
+      "subtitle": "注塑、组装、仓储与检测一体化，保障稳定生产、一致品质与可靠交付。",
+      "stats": [
+        { "value": "70K", "label": "日产能（套）" },
+        { "value": "15", "label": "注塑机" },
+        { "value": "20,000+㎡", "label": "厂房面积" },
+        { "value": "7", "label": "自动化装配线" },
+        { "value": "85", "label": "专业员工" },
+        { "value": "60+", "label": "出口市场" }
+      ],
+      "ctaButton": "探索我们的工厂"
+    },
+    "quality": {
+      "subtitleTag": "品质保障",
+      "title": "质量控制：业务根基",
+      "subtitle": "ISO 9001 认证、BSCI 合规，并以食品级安全标准服务全球市场。",
+      "certs": ["ISO 9001", "BSCI", "FDA (U.S.)", "LFGB (EU)", "EN14350", "BPS FREE"],
+      "steps": [
+        { "title": "IQC", "text": "生产前检验原材料、零部件与包装材料。" },
+        { "title": "IPQC", "text": "监控关键工序，及早发现问题并保持过程稳定。" },
+        { "title": "FQC", "text": "放行前检查外观、功能、组装与包装。" },
+        { "title": "OQC", "text": "出货前确认成品、纸箱、标签与订单要求。" }
+      ]
+    },
+    "global": {
+      "subtitleTag": "全球合作",
+      "title": "全球伙伴信赖之选",
+      "subtitle": "Oya 为国际客户提供专业制造方案，以品质、灵活定制与可靠服务支持长期合作。",
+      "partners": [
+        { "title": "婴童品牌", "text": "行业专业品牌客户" },
+        { "title": "零售连锁", "text": "全球分销与商超渠道" },
+        { "title": "电商平台", "text": "线上市场合作伙伴" },
+        { "title": "经销商", "text": "长期供货伙伴" }
+      ]
     },
     "ctaBottom": {
-      "tag": "联系我们",
-      "title": "正在寻找可靠的婴童产品供应商？",
-      "description": "我们提供批发、OEM/ODM 及大批量订单的高性价比方案，从目录选型到定制开发全程支持。",
-      "primaryCta": "浏览产品",
+      "tag": "与 Oya 合作",
+      "title": "正在寻找可靠的婴童制品制造伙伴？",
+      "description": "期待与全球伙伴建立长期合作，为世界儿童创造更安全光明的未来。",
+      "primaryCta": "获取报价",
       "secondaryCta": "联系我们"
     }
   },
